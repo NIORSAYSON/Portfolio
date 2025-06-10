@@ -1,0 +1,19 @@
+import React from "react";
+import type { SVGProps } from "react";
+
+export function MaterialSymbolsLightDownloadSharp(
+  props: SVGProps<SVGSVGElement>
+) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      {...props}>
+      <path
+        fill="#000"
+        d="m12 15.577l-3.539-3.538l.708-.72L11.5 13.65V5h1v8.65l2.33-2.33l.709.719zM5 19v-4.038h1V18h12v-3.038h1V19z"></path>
+    </svg>
+  );
+}
