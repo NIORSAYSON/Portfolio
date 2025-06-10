@@ -18,7 +18,7 @@ export default function Sidebar() {
   const [darkMode, setDarkMode] = useState(false);
   const pathname = usePathname();
   return (
-    <aside className="w-72 bg-white py-6">
+    <aside className="w-72 bg-white py-6 flex flex-col h-100vh">
       <Image
         src="/profile.jpg"
         alt="Profile picture"
@@ -91,8 +91,8 @@ export default function Sidebar() {
           </div>
         </Link>
       </nav>
-      <div>
-        <div className="mt-35 flex-row flex justify-center items-center bg-[#c7c7c772] mx-5 py-2 gap-7 mb-2">
+      <div className="flex flex-col justify-end flex-1">
+        <div className="flex flex-row justify-center items-center bg-[#c7c7c772] mx-5 py-2 gap-7 mb-2">
           <div className="flex items-center text-black text-base">
             <PhMoonStarsLight className="inline-block w-7 h-7 mr-2" />
             <span className="text-black">Dark Mode</span>
