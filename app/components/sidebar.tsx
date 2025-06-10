@@ -12,7 +12,6 @@ import {
   PhFilesThin,
   PhMoonStarsLight,
 } from "../icons";
-import { Inter } from "next/font/google";
 import { usePathname } from "next/navigation";
 
 export default function Sidebar() {
