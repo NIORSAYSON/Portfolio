@@ -15,12 +15,6 @@ import {
 import { Inter } from "next/font/google";
 import { usePathname } from "next/navigation";
 
-const inter = Inter({
-  subsets: ["latin"],
-  weight: "400",
-  variable: "--font-inter",
-});
-
 export default function Sidebar() {
   const [darkMode, setDarkMode] = useState(false);
   const pathname = usePathname();
