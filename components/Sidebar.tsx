@@ -11,14 +11,15 @@ import {
   PhCopyrightThin,
   PhFilesThin,
   PhMoonStarsLight,
-} from "../icons";
+} from "../app/icons";
 import { usePathname } from "next/navigation";
 
 export default function Sidebar() {
   const [darkMode, setDarkMode] = useState(false);
   const pathname = usePathname();
+
   return (
-    <aside className="w-72 bg-white py-6 flex flex-col h-100vh">
+    <aside className="w-72 bg-white py-6 flex flex-col h-full min-h-0 overflow-y-auto drop-shadow-xl">
       <Image
         src="/profile.jpg"
         alt="Profile picture"
@@ -92,7 +93,7 @@ export default function Sidebar() {
         </Link>
       </nav>
       <div className="flex flex-col justify-end flex-1">
-        <div className="flex flex-row justify-center items-center bg-[#c7c7c772] mx-5 py-2 gap-7 mb-2">
+        <div className="flex flex-row justify-center items-center bg-[#c7c7c772] mx-5 py-2 gap-7 mb-2 rounded-md">
           <div className="flex items-center text-black text-base">
             <PhMoonStarsLight className="inline-block w-7 h-7 mr-2" />
             <span className="text-black">Dark Mode</span>
@@ -109,7 +110,7 @@ export default function Sidebar() {
           </label>
         </div>
         <div className="text-black text-[10px] text-center">
-          Designed and Developed by Nestor B. Sayson Jr.
+          Developed by Nestor B. Sayson Jr.
         </div>
         <div className="text-black text-[10px] text-center">
           <PhCopyrightThin className="inline-block w-3 h-3 mr-1" />
