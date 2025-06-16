@@ -105,7 +105,6 @@ export default function HomePage() {
               </motion.h1>
             </div>
           </div>
-
           {/* Projects Section */}
           <div className="bg-white relative md:mx-5 md:rounded-xl md:mb-5 xl:mr-0">
             <div className="ml-5 pt-4 flex flex-row items-center gap-1">
@@ -166,7 +165,7 @@ export default function HomePage() {
         </div>
         <div className="col-span-2 xl:col-span-2 w-full">
           {/* Skills Section */}
-          <div className="bg-white mt-2 relative md:mx-5 md:rounded-xl md:mb-5 xl:mr-0">
+          <div className="bg-white mt-2 md:mt-0 relative md:mx-5 md:rounded-xl md:mb-5">
             <div className="ml-5 pt-4 flex flex-row items-center gap-1">
               <GrommetIconsTechnology className="w-6 h-6 items-center justify-center" />
               <span className="text-lg font-semibold text-black text-center ">
