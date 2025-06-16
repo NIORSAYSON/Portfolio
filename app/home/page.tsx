@@ -270,8 +270,9 @@ export default function HomePage() {
                 </div>
                 <div className="flex justify-center items-center mt-4">
                   <span className="text-black opacity-40 text-xs md:text-sm">
-                    Let’s create something amazing — reach out through any of
-                    the platforms above and let’s start the conversation.
+                    Let&rsquo;s create something amazing &mdash; reach out
+                    through any of the platforms above and let&rsquo;s start the
+                    conversation.
                   </span>
                 </div>
               </div>
