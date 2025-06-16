@@ -256,7 +256,7 @@ export default function HomePage() {
             <div className="ml-5 pt-4 flex flex-row items-center gap-1">
               <MaterialSymbolsLightMailOutline className="w-7 h-7 items-center justify-center" />
               <span className="text-lg font-semibold text-black text-center ">
-                Let's Connect
+                Let&rsquo;s Connect
               </span>
             </div>
             <div className="justify-center items-center text-center mx-5 mt-4 p-3">
