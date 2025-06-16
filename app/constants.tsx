@@ -1,3 +1,9 @@
+export const typewriterTexts = [
+  "A Front-End Developer crafting delightful digital experiences.",
+  "Passionate about building accessible and responsive web apps.",
+  "Turning ideas into interactive user interfaces.",
+];
+
 export const skillIcons1 = [
   { src: "/Skills/NextJS-Dark.svg", title: "Next.js" },
   { src: "/Skills/NodeJS-Dark.svg", title: "Node.js" },
@@ -24,3 +30,20 @@ export const skillIcons2 = [
   { src: "/Skills/LaTeX-Dark.svg", title: "LaTeX" },
   { src: "/Skills/MySQL-Dark.svg", title: "MySQL" },
 ];
+
+export const colorTheme = {
+  light: [
+    "#ebedf0", // level0
+    "#9be9a8", // level1
+    "#40c463", // level2
+    "#30a14e", // level3
+    "#216e39", // level4
+  ],
+  dark: [
+    "#161b22", // level0
+    "#0e4429", // level1
+    "#006d32", // level2
+    "#26a641", // level3
+    "#39d353", // level4
+  ],
+};
