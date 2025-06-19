@@ -1,17 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import GitHubCalendar from "react-github-calendar";
 import { colorTheme } from "@/app/constants";
 import { motion } from "framer-motion";
+import { useTheme } from "next-themes";
 
 export default function ContributionCalendar() {
   const [year, setYear] = useState(2025);
   const username = "NIORSAYSON";
   const years = [2025, 2024, 2023];
+  const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
-    <main className="h-[250px]">
+    <main className="h-[250px] text-text">
       <motion.div
-        className="flex justify-start text-black mt-3 items-center"
+        className="flex justify-start mt-3 items-center"
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}>
@@ -35,7 +42,7 @@ export default function ContributionCalendar() {
         <div className="flex flex-nowrap gap-5 max-w-[300px]">
           <div className="flex flex-col">
             <motion.div
-              className="my-4 text-black items-center justify-center"
+              className="my-4 items-center justify-center"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}>
@@ -48,7 +55,13 @@ export default function ContributionCalendar() {
                 blockRadius={3}
                 blockSize={12}
                 showWeekdayLabels={true}
-                theme={colorTheme}
+                theme={{
+                  light: colorTheme.dark,
+                  dark: colorTheme.light,
+                }}
+                colorScheme={
+                  mounted ? (theme === "dark" ? "dark" : "light") : "light"
+                }
               />
             </motion.div>
           </div>
@@ -69,7 +82,10 @@ export default function ContributionCalendar() {
                 width: 12,
                 height: 12,
                 borderRadius: 3,
-                background: colorTheme.light[level],
+                background:
+                  mounted && theme === "dark"
+                    ? colorTheme.light[level]
+                    : colorTheme.dark[level],
               }}
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}

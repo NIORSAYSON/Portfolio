@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect, useState, useRef } from "react";
 import Sidebar from "./Sidebar";
 import { motion, AnimatePresence } from "framer-motion";
@@ -80,7 +81,7 @@ export default function MobileSidebar({
         )}
       </AnimatePresence>
       {/* Main content area with full background */}
-      <div className="min-h-full bg-[#F5F5F5] flex flex-col">
+      <div className="min-h-full flex flex-col">
         <main className="flex-1">{children}</main>
       </div>
     </>

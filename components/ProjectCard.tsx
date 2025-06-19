@@ -13,7 +13,7 @@ export default function ProjectCard({
   image,
 }: ProjectProps) {
   return (
-    <div className="flex flex-col min-w-[280px] my-5">
+    <div className="flex flex-col min-w-[280px] my-5 text-text">
       <div className="relative w-[280px] h-40 flex items-center justify-center rounded-t-2xl border-x-1 border-t-1 border-gray-400">
         <Image
           src={image}
@@ -24,17 +24,15 @@ export default function ProjectCard({
         />
       </div>
       <div className="w-[280px] h-27 border-1 border-gray-400 flex flex-col items-center">
-        <span className="text-black font-bold text-base px-1 text-center pt-1">
+        <span className="font-bold text-base px-1 text-center pt-1">
           {title}
         </span>
         {subtitle && (
-          <span className="text-black text-sm font-semibold px-1 text-center pb-1">
+          <span className="text-sm font-semibold px-1 text-center pb-1">
             ({subtitle})
           </span>
         )}
-        <span className="text-black text-[11px] text-center px-2">
-          {description}
-        </span>
+        <span className="text-[11px] text-center px-2">{description}</span>
       </div>
     </div>
   );
