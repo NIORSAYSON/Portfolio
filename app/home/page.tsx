@@ -125,37 +125,42 @@ export default function HomePage() {
               </span>
             </div>
             <div className="mx-5">
-              <div className="hide-scrollbar flex h-[320px] w-full items-start justify-start overflow-x-auto">
+              <div className="hide-scrollbar flex h-[360px] w-full items-start justify-start overflow-x-auto">
                 <div className="flex flex-nowrap gap-5 max-w-[300px]">
                   <ProjectCard
                     title="POS System Application"
                     subtitle="Internship Project"
                     image="/Projects/POS.png"
                     description="Developed a tablet-based POS system app using React Native."
+                    link=""
                   />
                   <ProjectCard
                     title="Conversational Agent for CSPC"
                     subtitle="Thesis Project"
-                    image="/Projects/CSPC CA.png"
+                    image="/Projects/Conversational Agent Project.png"
                     description="A chatbot using a pretrained transformer model to answer queries based on CSPC official information."
+                    link="https://huggingface.co/spaces/Nioooor/CSPC_Conversational_Agent"
                   />
                   <ProjectCard
                     title="SIAS Student Portal Redesign"
                     subtitle="Human Computer Interaction Project"
-                    image="/Projects/SIAS Redesign.png"
+                    image="/Projects/SIAS Project.png"
                     description="Redesigned the SIAS Online Portal using Bootstrap to enhance its layout, responsiveness, and user experience."
+                    link="https://niorsayson.github.io/SIAS-Online-Portal-Redesign/"
                   />
                   <ProjectCard
                     title="Cryptographic Application"
                     subtitle="Applied Cryptography Project"
-                    image="/Projects/Cryptographic App.png"
+                    image="/Projects/Cryptographic App Project.png"
                     description="Developed a cryptographic application using Python to encrypt and decrypt messages."
+                    link="https://saysonnior-cs3b.streamlit.app/"
                   />
                   <ProjectCard
                     title="Synthetic Data Simulation"
                     subtitle="Modeling and Simulation Project"
-                    image="/Projects/Modeling and Simulation.png"
+                    image="/Projects/Modeling and Simulation Project.png"
                     description="An app that generates synthetic data for use in modeling, simulation, and analysis."
+                    link="https://synthetic-data-generator-sayson.streamlit.app/Synthetic_Data_Generator"
                   />
                 </div>
               </div>
