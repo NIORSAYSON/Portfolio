@@ -76,9 +76,10 @@ export default function HomePage() {
   return (
     <main className="min-h-screen w-full">
       <div className="grid xl:grid-cols-6 w-full min-h-screen">
+        {/* First Column */}
         <div className="col-span-2 xl:col-span-4 w-full">
           {/* Home Background with typewriter */}
-          <div className="h-[40vh] md:h-[40vh] mt-20 md:mt-0 relative mx-5 mb-5 xl:mr-0">
+          <div className="h-[40vh] md:h-[40vh] mt-20 md:mt-5 relative mx-5 mb-5 xl:mr-0">
             <Image
               src="/Home Background.jpg"
               alt="Home Background"
@@ -167,7 +168,7 @@ export default function HomePage() {
             </div>
           </div>
           {/* Contributions Section */}
-          <div className="bg-sbackground text-text mt-2 relative md:mx-5 md:rounded-xl md:mb-5 xl:mr-0">
+          <div className="bg-sbackground text-text mt-2 relative md:mx-5 md:rounded-xl xl:mb-5 xl:mr-0">
             <div className="ml-5 pt-4 flex flex-row items-center gap-1">
               {mounted && (
                 <CodiconGithubAlt
@@ -184,9 +185,11 @@ export default function HomePage() {
             </div>
           </div>
         </div>
+
+        {/* Second Column */}
         <div className="col-span-2 xl:col-span-2 w-full text-text">
           {/* Skills Section */}
-          <div className="bg-sbackground mt-2 md:mt-0 relative md:mx-5 md:rounded-xl md:mb-5">
+          <div className="bg-sbackground mt-2 md:mt-5 relative md:mx-5 md:rounded-xl md:mb-5">
             <div className="ml-5 pt-4 flex flex-row items-center gap-1">
               {mounted && (
                 <GrommetIconsTechnology
@@ -316,26 +319,23 @@ export default function HomePage() {
               <div className="flex-col ">
                 {mounted && (
                   <div className="flex justify-center items-center flex-wrap gap-2">
-                    <IcBaselineFacebook
-                      className="h-10 w-10"
-                      fill={theme === "dark" ? "#fff" : "#000"}
-                    />
-                    <MdiInstagram
-                      className="h-10 w-10"
-                      fill={theme === "dark" ? "#fff" : "#000"}
-                    />
-                    <BxlGmail
-                      className="h-10 w-10"
-                      fill={theme === "dark" ? "#fff" : "#000"}
-                    />
-                    <MdiLinkedin
-                      className="h-10 w-10"
-                      fill={theme === "dark" ? "#fff" : "#000"}
-                    />
-                    <MdiGithub
-                      className="h-10 w-10"
-                      fill={theme === "dark" ? "#fff" : "#000"}
-                    />
+                    {[
+                      IcBaselineFacebook,
+                      MdiInstagram,
+                      BxlGmail,
+                      MdiLinkedin,
+                      MdiGithub,
+                    ].map((Icon, idx) => (
+                      <button
+                        key={idx}
+                        className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors transform hover:scale-110"
+                        aria-label={`social-icon-${idx}`}>
+                        <Icon
+                          className="h-10 w-10"
+                          fill={theme === "dark" ? "#fff" : "#000"}
+                        />
+                      </button>
+                    ))}
                   </div>
                 )}
                 <div className="flex justify-center items-center mt-4">

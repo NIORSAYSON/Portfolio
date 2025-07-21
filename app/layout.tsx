@@ -39,7 +39,7 @@ export default function RootLayout({
               <Sidebar />
             </aside>
             {/* Main Content for large screens */}
-            <main className="flex-1 md:ml-72 min-h-screen relative md:pt-5">
+            <main className="flex-1 md:ml-72 min-h-screen relative">
               {/* Mobile sidebar and main content */}
               <div className="md:hidden bg-background transition-all duration-300">
                 <MobileSidebar>{children}</MobileSidebar>

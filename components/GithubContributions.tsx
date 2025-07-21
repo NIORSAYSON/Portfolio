@@ -7,7 +7,7 @@ import { useTheme } from "next-themes";
 export default function ContributionCalendar() {
   const [year, setYear] = useState(2025);
   const username = "NIORSAYSON";
-  const years = [2025, 2024, 2023];
+  const years = [2025, 2024, 2023, 2022];
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -17,7 +17,7 @@ export default function ContributionCalendar() {
 
   return (
     <main className="h-[250px] text-text">
-      <motion.div
+      {/* <motion.div
         className="flex justify-start mt-3 items-center"
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -37,35 +37,54 @@ export default function ContributionCalendar() {
             </option>
           ))}
         </motion.select>
-      </motion.div>
-      <div className="flex  hide-scrollbar overflow-x-auto">
-        <div className="flex flex-nowrap gap-5 max-w-[300px]">
-          <div className="flex flex-col">
-            <motion.div
-              className="my-4 items-center justify-center"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 }}>
-              <GitHubCalendar
-                username={username}
-                year={year}
-                maxLevel={4}
-                hideColorLegend={true}
-                blockMargin={3}
-                blockRadius={3}
-                blockSize={12}
-                showWeekdayLabels={true}
-                theme={{
-                  light: colorTheme.dark,
-                  dark: colorTheme.light,
-                }}
-                colorScheme={
-                  mounted ? (theme === "dark" ? "dark" : "light") : "light"
-                }
-              />
-            </motion.div>
+      </motion.div> */}
+      <div className="flex">
+        <div className="hide-scrollbar overflow-x-auto w-full">
+          <div className="flex flex-nowrap gap-5 max-w-[10px]">
+            <div className="flex flex-col">
+              <motion.div
+                className="my-4 items-center justify-center"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.2 }}>
+                <GitHubCalendar
+                  username={username}
+                  year={year}
+                  maxLevel={4}
+                  hideColorLegend={true}
+                  blockMargin={3}
+                  blockRadius={3}
+                  blockSize={12}
+                  showWeekdayLabels={true}
+                  theme={{
+                    light: colorTheme.dark,
+                    dark: colorTheme.light,
+                  }}
+                  colorScheme={
+                    mounted ? (theme === "dark" ? "dark" : "light") : "light"
+                  }
+                />
+              </motion.div>
+            </div>
           </div>
         </div>
+        {/* Year selector */}
+        <ul className="xl:w-80 w-50 flex flex-col justify-center space-y-2 text-sm">
+          {years.map((yr) => (
+            <li key={yr}>
+              <button
+                className={
+                  `w-full text-left px-2 py-1 rounded ` +
+                  (year === yr
+                    ? "bg-[#1B56FD] text-white"
+                    : "text-gray-500 hover:text-gray-700")
+                }
+                onClick={() => setYear(yr)}>
+                {yr}
+              </button>
+            </li>
+          ))}
+        </ul>
       </div>
       <motion.div
         className="flex justify-center gap-2 text-xs text-gray-500"

@@ -39,19 +39,21 @@ export default function Sidebar() {
         Front-End Developer
       </h1>
       <div className="flex justify-center mb-4">
-        <button
-          type="button"
-          className="flex flex-row items-center  text-base px-16 border border-text text-center py-1 rounded-sm hover:bg-gray-100 transition">
-          <span className="mr-1">
-            {mounted && (
+        {mounted && (
+          <button
+            type="button"
+            className={`flex flex-row items-center text-base px-16 border border-text text-center py-1 rounded-sm transition ${
+              theme === "dark" ? "hover:bg-gray-700" : "hover:bg-gray-100"
+            }`}>
+            <span className="mr-1">
               <MaterialSymbolsLightDownloadSharp
                 className="w-5 h-5"
                 fill={theme === "dark" ? "#ffffff" : "#000000"}
               />
-            )}
-          </span>
-          <span>Resume</span>
-        </button>
+            </span>
+            <span>Resume</span>
+          </button>
+        )}
       </div>
       <nav className="flex flex-col gap-1 w-full">
         <Link
