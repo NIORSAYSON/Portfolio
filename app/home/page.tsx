@@ -318,7 +318,7 @@ export default function HomePage() {
             <div className="justify-center items-center text-center mx-5 mt-4 p-3">
               <div className="flex-col ">
                 {mounted && (
-                  <div className="flex justify-center items-center flex-wrap gap-2">
+                  <div className="flex justify-center items-center flex-wrap gap-1">
                     {[
                       IcBaselineFacebook,
                       MdiInstagram,
