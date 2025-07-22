@@ -1,6 +1,6 @@
 "use client";
+import React, { FormEvent, ChangeEvent, useEffect, useState } from "react";
 import { useTheme } from "next-themes";
-import { useEffect, useState, FormEvent } from "react";
 import {
   BxlGmail,
   CircumMail,
@@ -13,7 +13,14 @@ import {
   MynauiLocation,
 } from "../icons";
 
-const initValues = {
+type FormValues = {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+};
+
+const initValues: FormValues = {
   name: "",
   email: "",
   subject: "",
@@ -24,17 +31,16 @@ export default function About() {
   const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
 
-  const [values, setValues] = useState(initValues);
-
+  const [values, setValues] = useState<FormValues>(initValues);
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
   >("idle");
 
-  const handleChange = ({ target }: any) => {
-    setValues((prev) => ({
-      ...prev,
-      [target.name]: target.value,
-    }));
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setValues((prev) => ({ ...prev, [name]: value }));
   };
 
   const onSubmit = async (e: FormEvent) => {
