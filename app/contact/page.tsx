@@ -1,6 +1,6 @@
 "use client";
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { useEffect, useState, FormEvent } from "react";
 import {
   BxlGmail,
   CircumMail,
@@ -13,16 +13,54 @@ import {
   MynauiLocation,
 } from "../icons";
 
+const initValues = {
+  name: "",
+  email: "",
+  subject: "",
+  message: "",
+};
+
 export default function About() {
   const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
+
+  const [values, setValues] = useState(initValues);
+
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
+
+  const handleChange = ({ target }: any) => {
+    setValues((prev) => ({
+      ...prev,
+      [target.name]: target.value,
+    }));
+  };
+
+  const onSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setStatus("loading");
+    try {
+      const res = await fetch("/api/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+      if (!res.ok) throw new Error("Failed to send message");
+      setStatus("success");
+      setValues(initValues);
+    } catch (err) {
+      console.error(err);
+      setStatus("error");
+    }
+  };
 
   useEffect(() => {
     setMounted(true);
   }, []);
   return (
-    <main className="min-h-screen w-full md:pt-5">
-      <div className="bg-sbackground rounded-xl shadow-md overflow-hidden mx-5 mt-20 md:mt-0 text-text">
+    <main className="min-h-screen w-full md:py-5">
+      <div className="bg-sbackground md:rounded-xl shadow-md overflow-hidden md:mx-5 mt-20 md:mt-0 text-text mb-5">
         <div className="ml-5 pt-4 flex flex-row items-center gap-1">
           {mounted && (
             <MaterialSymbolsLightMailOutline
@@ -72,74 +110,105 @@ export default function About() {
           </div>
         </div>
         <div className="items-center justify-center h-150 md:h-85 xl:mx-30 md:mx-10 mx-10 mt-5">
-          <form className="flex flex-col md:flex-row gap-6 py-4">
-            <div className="flex-1 flex flex-col space-y-4">
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block text-[15px] md:text-[16px] font-medium mb-1">
-                  NAME
-                </label>
-                <input
-                  id="name"
-                  type="text"
-                  placeholder="Your name"
-                  className="border border-gray-300 rounded px-3 py-2 w-full"
-                />
+          <form onSubmit={onSubmit} className="flex flex-col gap-6 py-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Input Fields */}
+              <div className="flex-1 flex flex-col space-y-4">
+                <div>
+                  <label
+                    htmlFor="name"
+                    className="block text-[15px] md:text-[16px] font-medium mb-1">
+                    NAME
+                  </label>
+                  <input
+                    required
+                    onChange={handleChange}
+                    name="name"
+                    value={values.name}
+                    id="name"
+                    type="text"
+                    placeholder="Your name"
+                    className="border border-gray-300 rounded px-3 py-2 w-full"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="block text-[15px] md:text-[16px] font-medium mb-1">
+                    EMAIL ADDRESS
+                  </label>
+                  <input
+                    required
+                    onChange={handleChange}
+                    name="email"
+                    value={values.email}
+                    id="email"
+                    type="email"
+                    placeholder="Your email address"
+                    className="border border-gray-300 rounded px-3 py-2 w-full"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="subject"
+                    className="block text-[15px] md:text-[16px] font-medium mb-1">
+                    SUBJECT
+                  </label>
+                  <input
+                    required
+                    onChange={handleChange}
+                    name="subject"
+                    value={values.subject}
+                    id="subject"
+                    type="text"
+                    placeholder="Subject"
+                    className="border border-gray-300 rounded px-3 py-2 w-full"
+                  />
+                </div>
               </div>
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-[15px] md:text-[16px] font-medium mb-1">
-                  EMAIL ADDRESS
-                </label>
-                <input
-                  id="email"
-                  type="email"
-                  placeholder="Your email address"
-                  className="border border-gray-300 rounded px-3 py-2 w-full"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="subject"
-                  className="block text-[15px] md:text-[16px] font-medium mb-1">
-                  SUBJECT
-                </label>
-                <input
-                  id="subject"
-                  type="text"
-                  placeholder="Subject"
-                  className="border border-gray-300 rounded px-3 py-2 w-full"
-                />
+              {/* Message TextArea */}
+              <div className="flex-1">
+                <div>
+                  <label
+                    htmlFor="message"
+                    className="block text-[15px] md:text-[16px] font-medium mb-1">
+                    MESSAGE
+                  </label>
+                  <textarea
+                    required
+                    name="message"
+                    value={values.message}
+                    onChange={handleChange}
+                    id="message"
+                    placeholder="Your message"
+                    rows={6}
+                    className="border border-gray-300 rounded px-3 py-2 w-full h-53 resize-none"
+                  />
+                </div>
               </div>
             </div>
-            <div className="flex-1">
-              <div>
-                <label
-                  htmlFor="message"
-                  className="block text-[15px] md:text-[16px] font-medium mb-1">
-                  MESSAGE
-                </label>
-                <textarea
-                  id="message"
-                  placeholder="Your message"
-                  rows={6}
-                  className="border border-gray-300 rounded px-3 py-2 w-full h-53 resize-none"
-                />
-              </div>
+            {/* Submit Button */}
+            <div className="flex justify-end">
+              <button
+                type="submit"
+                className="bg-[#1B56FD] hover:bg-blue-700 text-white font-medium w-full py-2 rounded">
+                Submit
+              </button>
             </div>
           </form>
-          <div className="flex justify-center items-center overflow-x-auto">
-            <button
-              type="submit"
-              className="bg-[#1B56FD] hover:bg-blue-700 text-white font-medium w-full py-2 rounded self-start md:self-end">
-              Submit
-            </button>
-          </div>
+          {status === "success" && (
+            <p className="mt-2 text-[15px] text-green-600">
+              Your message was sent successfully!
+            </p>
+          )}
+          {status === "error" && (
+            <p className="mt-4 text-red-600">
+              There was an error. Please try again.
+            </p>
+          )}
         </div>
         {mounted && (
-          <div className="flex justify-center items-center flex-wrap gap-2 my-5">
+          <div className="flex justify-center items-center flex-wrap gap-2 my-10">
             {[
               IcBaselineFacebook,
               MdiInstagram,

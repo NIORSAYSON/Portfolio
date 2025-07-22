@@ -17,7 +17,7 @@ export default function Projects() {
   return (
     <main className="min-h-screen w-full">
       {/* Projects Section */}
-      <div className="bg-sbackground rounded-xl shadow-md overflow-hidden mx-5 mt-20 md:mt-5 text-text">
+      <div className="bg-sbackground md:rounded-xl shadow-md overflow-hidden md:mx-5 mt-20 md:mt-5 text-text">
         <div className="ml-5 pt-4 flex flex-row items-center gap-1">
           {mounted && (
             <MdiLightPin
@@ -70,7 +70,7 @@ export default function Projects() {
         </div>
       </div>
       {/* Contributions Section */}
-      <div className="bg-sbackground text-text mt-2 mx-5 relative rounded-xl md:mb-5">
+      <div className="bg-sbackground text-text mt-2 md:mx-5 relative md:rounded-xl md:mb-5 mb-5">
         <div className="ml-5 pt-4 flex flex-row items-center gap-1">
           {mounted && (
             <CodiconGithubAlt

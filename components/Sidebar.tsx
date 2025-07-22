@@ -40,8 +40,8 @@ export default function Sidebar() {
       </h1>
       <div className="flex justify-center mb-4">
         {mounted && (
-          <button
-            type="button"
+          <Link
+            href="/resume"
             className={`flex flex-row items-center text-base px-16 border border-text text-center py-1 rounded-sm transition ${
               theme === "dark" ? "hover:bg-gray-700" : "hover:bg-gray-100"
             }`}>
@@ -52,7 +52,7 @@ export default function Sidebar() {
               />
             </span>
             <span>Resume</span>
-          </button>
+          </Link>
         )}
       </div>
       <nav className="flex flex-col gap-1 w-full">
