@@ -69,12 +69,12 @@ export default function ContributionCalendar() {
           </div>
         </div>
         {/* Year selector */}
-        <ul className="xl:w-80 w-50 flex flex-col justify-center space-y-2 text-sm">
+        <ul className="xl:w-80 w-25 pl-5 flex flex-col justify-center space-y-2 text-sm">
           {years.map((yr) => (
             <li key={yr}>
               <button
                 className={
-                  `w-full text-left px-2 py-1 rounded ` +
+                  `w-full text-left px-4 py-1 rounded ` +
                   (year === yr
                     ? "bg-[#1B56FD] text-white"
                     : "text-gray-500 hover:text-gray-700")

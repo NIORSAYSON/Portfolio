@@ -44,7 +44,15 @@ export default function TopBar({
             )}
           </button>
           <div className="flex-1 items-center justify-end flex">
-            <Image src="/logo.png" alt="Logo" width={40} height={40} />
+            <a href="/">
+              <Image
+                src="/logo.png"
+                alt="Logo"
+                width={40}
+                height={40}
+                style={{ cursor: "pointer" }}
+              />
+            </a>
           </div>
         </motion.div>
       )}

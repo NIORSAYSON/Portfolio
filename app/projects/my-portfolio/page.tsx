@@ -6,10 +6,10 @@ import ProjectOverview from "@/components/ProjectOverview";
 import ProjectsSection from "@/components/ProjectsSection";
 import { projects } from "@/app/constants";
 
-export default function SyntheticDataGenerator() {
+export default function MyPortfolio() {
   const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
-  const current = projects.find((p) => p.slug === "synthetic-data-generator");
+  const current = projects.find((p) => p.slug === "my-portfolio");
   if (!current) return <div>Project not found</div>;
 
   useEffect(() => {

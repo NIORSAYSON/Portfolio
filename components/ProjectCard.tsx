@@ -7,7 +7,8 @@ interface ProjectProps {
   subtitle?: string;
   description: string;
   image: string;
-  link: string;
+  link?: string;
+  slug: string;
 }
 export default function ProjectCard({
   title,
@@ -15,6 +16,7 @@ export default function ProjectCard({
   description,
   image,
   link,
+  slug,
 }: ProjectProps) {
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -25,7 +27,7 @@ export default function ProjectCard({
 
   return (
     <div className="flex flex-col min-w-[280px] my-5 text-text rounded-2xl border-1 border-gray-400">
-      <div className="relative w-[280px] h-40 flex items-center justify-center ">
+      <div className="relative w-[280px] h-40 flex items-center justify-center">
         <Image
           src={image}
           alt="Project Card"
@@ -45,15 +47,40 @@ export default function ProjectCard({
           {description}
         </span>
         {mounted && (
-          <button
-            className={`flex border-1 border-gray-400 bg-background py-1 px-20 rounded-lg mt-2 transition ${
-              theme === "dark"
-                ? "hover:bg-white hover:text-black"
-                : "hover:bg-black hover:text-white"
-            }`}
-            onClick={() => window.open(link, "_blank")}>
-            Live Site
-          </button>
+          <div className="flex text-[12px] gap-2">
+            {link ? (
+              <>
+                <button
+                  className={`border-1 border-gray-400 bg-background mt-2 py-2 px-7 rounded-lg transition ${
+                    theme === "dark"
+                      ? "hover:bg-white hover:text-black"
+                      : "hover:bg-black hover:text-white"
+                  }`}
+                  onClick={() => window.open(link, "_blank")}>
+                  Live Site
+                </button>
+                <button
+                  className={`border-1 border-gray-400 bg-background mt-2 py-2 px-4 rounded-lg transition ${
+                    theme === "dark"
+                      ? "hover:bg-white hover:text-black"
+                      : "hover:bg-black hover:text-white"
+                  }`}
+                  onClick={() => (window.location.href = `/projects/${slug}`)}>
+                  View Project
+                </button>
+              </>
+            ) : (
+              <button
+                className={`border-1 border-gray-400 bg-background py-2 mt-2 px-18 rounded-lg transition ${
+                  theme === "dark"
+                    ? "hover:bg-white hover:text-black"
+                    : "hover:bg-black hover:text-white"
+                }`}
+                onClick={() => (window.location.href = `/projects/${slug}`)}>
+                View Project
+              </button>
+            )}
+          </div>
         )}
       </div>
     </div>

@@ -224,7 +224,9 @@ export default function About() {
             ].map((Icon, idx) => (
               <button
                 key={idx}
-                className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors transform hover:scale-110"
+                className={`p-2 rounded-full transition-colors transform hover:scale-110 ${
+                  theme === "dark" ? "hover:bg-gray-700" : "hover:bg-gray-200"
+                }`}
                 aria-label={`social-icon-${idx}`}
                 onClick={() => {
                   if (idx === 0) {

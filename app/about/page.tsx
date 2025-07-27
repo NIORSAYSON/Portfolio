@@ -6,6 +6,7 @@ import {
   collegeText,
   internshipText,
   juniorHighText,
+  projects,
   seniorHighText,
 } from "@/app/constants";
 import {
@@ -174,39 +175,51 @@ export default function About() {
                     <MingcuteArrowLeftFill className="w-14 h-14" />
                   </button> */}
                   <ProjectCard
-                    title="POS System Application"
-                    subtitle="Internship Project"
-                    image="/Projects/POS.png"
-                    description="Developed a tablet-based POS system app using React Native."
-                    link=""
+                    title={projects[0].title}
+                    subtitle="Personal Project"
+                    image="/Projects/Portfolio.png"
+                    description={projects[0].description}
+                    slug={projects[0].slug}
+                    link="https://niorsayson.vercel.app/"
                   />
                   <ProjectCard
-                    title="Conversational Agent for CSPC"
+                    title={projects[1].title}
+                    subtitle="Internship Project"
+                    image="/Projects/POS.png"
+                    description={projects[1].description}
+                    slug={projects[1].slug}
+                  />
+                  <ProjectCard
+                    title={projects[2].title}
                     subtitle="Thesis Project"
                     image="/Projects/Conversational Agent Project.png"
-                    description="A chatbot using a pretrained transformer model to answer queries based on CSPC official information."
+                    description={projects[2].description}
+                    slug={projects[2].slug}
                     link="https://huggingface.co/spaces/Nioooor/CSPC_Conversational_Agent"
                   />
                   <ProjectCard
-                    title="SIAS Student Portal Redesign"
+                    title={projects[3].title}
                     subtitle="Human Computer Interaction Project"
                     image="/Projects/SIAS Project.png"
-                    description="Redesigned the SIAS Online Portal using Bootstrap to enhance its layout, responsiveness, and user experience."
+                    description={projects[3].description}
+                    slug={projects[3].slug}
                     link="https://niorsayson.github.io/SIAS-Online-Portal-Redesign/"
                   />
                   <ProjectCard
-                    title="Cryptographic Application"
-                    subtitle="Applied Cryptography Project"
-                    image="/Projects/Cryptographic App Project.png"
-                    description="Developed a cryptographic application using Python to encrypt and decrypt messages."
-                    link="https://saysonnior-cs3b.streamlit.app/"
-                  />
-                  <ProjectCard
-                    title="Synthetic Data Simulation"
+                    title={projects[4].title}
                     subtitle="Modeling and Simulation Project"
                     image="/Projects/Modeling and Simulation Project.png"
-                    description="An app that generates synthetic data for use in modeling, simulation, and analysis."
+                    description={projects[4].description}
+                    slug={projects[4].slug}
                     link="https://synthetic-data-generator-sayson.streamlit.app/Synthetic_Data_Generator"
+                  />
+                  <ProjectCard
+                    title={projects[5].title}
+                    subtitle="Applied Cryptography Project"
+                    image="/Projects/Cryptographic App Project.png"
+                    description={projects[5].description}
+                    slug={projects[5].slug}
+                    link="https://saysonnior-cs3b.streamlit.app/"
                   />
                 </div>
               </div>
@@ -294,7 +307,11 @@ export default function About() {
                     ].map((Icon, idx) => (
                       <button
                         key={idx}
-                        className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors transform hover:scale-110"
+                        className={`p-2 rounded-full ${
+                          theme === "dark"
+                            ? "hover:bg-gray-700"
+                            : "hover:bg-gray-200"
+                        } transition-colors transform hover:scale-110`}
                         aria-label={`social-icon-${idx}`}
                         onClick={() => {
                           if (idx === 0) {

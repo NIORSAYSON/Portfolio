@@ -30,7 +30,7 @@ export default function Projects() {
           </span>
         </div>
         <div className="mx-5">
-          <div className="hide-scrollbar flex xl:h-[690px] h-[1130px] w-full items-start justify-start overflow-x-auto">
+          <div className="hide-scrollbar flex h-full w-full items-start justify-start overflow-x-auto">
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-5 px-2 py-5 w-full">
               {projects.map((project) => (
                 <Link
@@ -52,7 +52,7 @@ export default function Projects() {
                       </p>
                     </div>
                     <div className="absolute bottom-0 w-full p-6">
-                      <div className="flex gap-2">
+                      <div className="flex gap-2 flex-wrap">
                         {project.tools.map((tool, idx) => (
                           <span
                             key={idx}

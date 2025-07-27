@@ -4,17 +4,12 @@ import { Roboto } from "next/font/google";
 import Image from "next/image";
 import {
   BiPersonCheck,
-  BxlGmail,
   CarbonMachineLearning,
   CodiconGithubAlt,
   GrommetIconsTechnology,
-  IcBaselineFacebook,
   LineiconsFigma,
   MaterialSymbolsLightMailOutline,
-  MdiGithub,
-  MdiInstagram,
   MdiLightPin,
-  MdiLinkedin,
   PhOpenAiLogo,
   SolarCodeLineDuotone,
 } from "../icons";
@@ -22,10 +17,16 @@ import ProjectCard from "@/components/ProjectCard";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import SkillsTicker from "@/components/SkillsTicker";
-import { skillIcons1, skillIcons2, typewriterTexts } from "../constants";
+import {
+  projects,
+  skillIcons1,
+  skillIcons2,
+  typewriterTexts,
+} from "../constants";
 import Accordion from "@/components/Accordion";
 import ContributionCalendar from "@/components/GithubContributions";
 import { useTheme } from "next-themes";
+import SocialMedia from "@/components/SocialMedia";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -93,7 +94,7 @@ export default function HomePage() {
               style={{
                 boxShadow: "inset 0 -120px 100px 10px rgba(0,0,0,0.5)",
               }}>
-              <div className="text-black rounded px-5 py-3 text-sm md:text-lg font-bold">
+              <div className="text-black rounded px-5 py-3 text-xs md:text-lg font-bold">
                 {day && date ? (
                   <>
                     {day.slice(0, 3)}, {date}
@@ -117,11 +118,11 @@ export default function HomePage() {
             <div className="ml-5 pt-4 flex flex-row items-center gap-1">
               {mounted && (
                 <MdiLightPin
-                  className="w-6 h-6 items-center justify-center"
+                  className="w-7 h-7 items-center justify-center"
                   fill={theme === "dark" ? "#fff" : "#000"}
                 />
               )}
-              <span className="text-lg font-semibold text-center ">
+              <span className="text-[18px] md:text-[20px] font-bold text-center">
                 Projects
               </span>
             </div>
@@ -129,39 +130,51 @@ export default function HomePage() {
               <div className="hide-scrollbar flex h-[360px] w-full items-start justify-start overflow-x-auto">
                 <div className="flex flex-nowrap gap-5 max-w-[300px]">
                   <ProjectCard
-                    title="POS System Application"
-                    subtitle="Internship Project"
-                    image="/Projects/POS.png"
-                    description="Developed a tablet-based POS system app using React Native."
-                    link=""
+                    title={projects[0].title}
+                    subtitle="Personal Project"
+                    image="/Projects/Portfolio.png"
+                    description={projects[0].description}
+                    slug={projects[0].slug}
+                    link="https://niorsayson.vercel.app/"
                   />
                   <ProjectCard
-                    title="Conversational Agent for CSPC"
+                    title={projects[1].title}
+                    subtitle="Internship Project"
+                    image="/Projects/POS.png"
+                    description={projects[1].description}
+                    slug={projects[1].slug}
+                  />
+                  <ProjectCard
+                    title={projects[2].title}
                     subtitle="Thesis Project"
                     image="/Projects/Conversational Agent Project.png"
-                    description="A chatbot using a pretrained transformer model to answer queries based on CSPC official information."
+                    description={projects[2].description}
+                    slug={projects[2].slug}
                     link="https://huggingface.co/spaces/Nioooor/CSPC_Conversational_Agent"
                   />
                   <ProjectCard
-                    title="SIAS Student Portal Redesign"
+                    title={projects[3].title}
                     subtitle="Human Computer Interaction Project"
                     image="/Projects/SIAS Project.png"
-                    description="Redesigned the SIAS Online Portal using Bootstrap to enhance its layout, responsiveness, and user experience."
+                    description={projects[3].description}
+                    slug={projects[3].slug}
                     link="https://niorsayson.github.io/SIAS-Online-Portal-Redesign/"
                   />
                   <ProjectCard
-                    title="Cryptographic Application"
-                    subtitle="Applied Cryptography Project"
-                    image="/Projects/Cryptographic App Project.png"
-                    description="Developed a cryptographic application using Python to encrypt and decrypt messages."
-                    link="https://saysonnior-cs3b.streamlit.app/"
-                  />
-                  <ProjectCard
-                    title="Synthetic Data Simulation"
+                    title={projects[4].title}
                     subtitle="Modeling and Simulation Project"
                     image="/Projects/Modeling and Simulation Project.png"
-                    description="An app that generates synthetic data for use in modeling, simulation, and analysis."
+                    description={projects[4].description}
+                    slug={projects[4].slug}
                     link="https://synthetic-data-generator-sayson.streamlit.app/Synthetic_Data_Generator"
+                  />
+                  <ProjectCard
+                    title={projects[5].title}
+                    subtitle="Applied Cryptography Project"
+                    image="/Projects/Cryptographic App Project.png"
+                    description={projects[5].description}
+                    slug={projects[5].slug}
+                    link="https://saysonnior-cs3b.streamlit.app/"
                   />
                 </div>
               </div>
@@ -172,11 +185,11 @@ export default function HomePage() {
             <div className="ml-5 pt-4 flex flex-row items-center gap-1">
               {mounted && (
                 <CodiconGithubAlt
-                  className="w-6 h-6 items-center justify-center"
+                  className="w-7 h-7 items-center justify-center"
                   fill={theme === "dark" ? "#fff" : "#000"}
                 />
               )}
-              <span className="text-lg font-semibold text-center ">
+              <span className="text-[18px] md:text-[20px] font-bold text-center">
                 GitHub Contributions
               </span>
             </div>
@@ -193,13 +206,15 @@ export default function HomePage() {
             <div className="ml-5 pt-4 flex flex-row items-center gap-1">
               {mounted && (
                 <GrommetIconsTechnology
-                  className="w-6 h-6 items-center justify-center"
+                  className="w-7 h-7 items-center justify-center"
                   fill={theme === "dark" ? "#fff" : "#000"}
                 />
               )}
-              <span className="text-lg font-semibold text-center ">Skills</span>
+              <span className="text-[18px] md:text-[20px] font-bold text-center">
+                Skills
+              </span>
             </div>
-            <div className="mx-5">
+            <div className="mx-5 my-3">
               <div className="w-full h-[200px] overflow-hidden MyGradient">
                 <SkillsTicker images={skillIcons1} from={0} to={"-100%"} />
                 <SkillsTicker images={skillIcons2} from={"-100%"} to={0} />
@@ -211,11 +226,11 @@ export default function HomePage() {
             <div className="ml-5 pt-4 flex flex-row items-center gap-1">
               {mounted && (
                 <BiPersonCheck
-                  className="w-6 h-6 items-center justify-center mr-1"
+                  className="w-7 h-7 items-center justify-center mr-1"
                   fill={theme === "dark" ? "#fff" : "#000"}
                 />
               )}
-              <span className="text-lg font-semibold text-center ">
+              <span className="text-[18px] md:text-[20px] font-bold text-center">
                 Expertise
               </span>
             </div>
@@ -307,37 +322,17 @@ export default function HomePage() {
             <div className="ml-5 pt-4 flex flex-row items-center gap-1">
               {mounted && (
                 <MaterialSymbolsLightMailOutline
-                  className="w-7 h-7 items-center justify-center"
+                  className="w-8 h-8 items-center justify-center"
                   fill={theme === "dark" ? "#fff" : "#000"}
                 />
               )}
-              <span className="text-lg font-semibold text-center ">
+              <span className="text-[18px] md:text-[20px] font-bold text-center">
                 Let&rsquo;s Connect
               </span>
             </div>
             <div className="justify-center items-center text-center mx-5 mt-4 p-3">
               <div className="flex-col ">
-                {mounted && (
-                  <div className="flex justify-center items-center flex-wrap gap-1">
-                    {[
-                      IcBaselineFacebook,
-                      MdiInstagram,
-                      BxlGmail,
-                      MdiLinkedin,
-                      MdiGithub,
-                    ].map((Icon, idx) => (
-                      <button
-                        key={idx}
-                        className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors transform hover:scale-110"
-                        aria-label={`social-icon-${idx}`}>
-                        <Icon
-                          className="h-10 w-10"
-                          fill={theme === "dark" ? "#fff" : "#000"}
-                        />
-                      </button>
-                    ))}
-                  </div>
-                )}
+                {mounted && <SocialMedia />}
                 <div className="flex justify-center items-center mt-4">
                   <span className="opacity-40 text-xs md:text-sm">
                     Let&rsquo;s create something amazing &mdash; reach out
