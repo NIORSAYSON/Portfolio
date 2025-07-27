@@ -12,7 +12,7 @@ interface ProjectOverviewProps {
   };
   projectTools: string[];
   projectImages: string[];
-  page?: string; // used for navigation
+  // page?: string; // used for navigation
 }
 
 export default function ProjectOverview({
@@ -21,8 +21,8 @@ export default function ProjectOverview({
   projectLink,
   projectTools,
   projectImages,
-  page,
-}: ProjectOverviewProps) {
+}: // page,
+ProjectOverviewProps) {
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
 

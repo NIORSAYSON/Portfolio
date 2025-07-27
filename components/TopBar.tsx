@@ -3,6 +3,7 @@ import { JamMenu } from "../app/icons";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 interface TopBarProps {
   showMenuButton: boolean;
@@ -44,7 +45,7 @@ export default function TopBar({
             )}
           </button>
           <div className="flex-1 items-center justify-end flex">
-            <a href="/">
+            <Link href="/">
               <Image
                 src="/logo.png"
                 alt="Logo"
@@ -52,7 +53,7 @@ export default function TopBar({
                 height={40}
                 style={{ cursor: "pointer" }}
               />
-            </a>
+            </Link>
           </div>
         </motion.div>
       )}

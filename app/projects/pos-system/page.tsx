@@ -9,12 +9,14 @@ import { projects } from "@/app/constants";
 export default function PosApp() {
   const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
-  const current = projects.find((p) => p.slug === "pos-system");
-  if (!current) return <div>Project not found</div>;
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  const current = projects.find((p) => p.slug === "pos-system");
+  if (!current) return <div>Project not found</div>;
+
   return (
     <main className="min-h-screen w-full">
       <div className="grid xl:grid-cols-9 w-full min-h-screen">
