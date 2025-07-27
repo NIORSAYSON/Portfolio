@@ -5,7 +5,7 @@ import { useTheme } from "next-themes";
 export default function SocialMedia() {
   const { theme } = useTheme();
   return (
-    <div className="flex justify-center items-center flex-wrap gap-2 my-10">
+    <div className="flex justify-center items-center flex-wrap gap-1 my-10">
       {socialMediaPlatforms.map((Icon, idx) => (
         <button
           key={idx}
