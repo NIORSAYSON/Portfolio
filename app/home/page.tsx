@@ -136,6 +136,7 @@ export default function HomePage() {
                     description={projects[0].description}
                     slug={projects[0].slug}
                     link="https://niorsayson.vercel.app/"
+                    source="/"
                   />
                   <ProjectCard
                     title={projects[1].title}
@@ -143,6 +144,7 @@ export default function HomePage() {
                     image="/Projects/POS.png"
                     description={projects[1].description}
                     slug={projects[1].slug}
+                    source="/"
                   />
                   <ProjectCard
                     title={projects[2].title}
@@ -151,6 +153,7 @@ export default function HomePage() {
                     description={projects[2].description}
                     slug={projects[2].slug}
                     link="https://huggingface.co/spaces/Nioooor/CSPC_Conversational_Agent"
+                    source="/"
                   />
                   <ProjectCard
                     title={projects[3].title}
@@ -159,6 +162,7 @@ export default function HomePage() {
                     description={projects[3].description}
                     slug={projects[3].slug}
                     link="https://niorsayson.github.io/SIAS-Online-Portal-Redesign/"
+                    source="/"
                   />
                   <ProjectCard
                     title={projects[4].title}
@@ -167,6 +171,7 @@ export default function HomePage() {
                     description={projects[4].description}
                     slug={projects[4].slug}
                     link="https://synthetic-data-generator-sayson.streamlit.app/Synthetic_Data_Generator"
+                    source="/"
                   />
                   <ProjectCard
                     title={projects[5].title}
@@ -175,6 +180,7 @@ export default function HomePage() {
                     description={projects[5].description}
                     slug={projects[5].slug}
                     link="https://saysonnior-cs3b.streamlit.app/"
+                    source="/"
                   />
                 </div>
               </div>

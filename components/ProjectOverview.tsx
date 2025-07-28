@@ -2,6 +2,7 @@ import { WeuiBackFilled } from "@/app/icons";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface ProjectOverviewProps {
   projectName: string;
@@ -12,7 +13,6 @@ interface ProjectOverviewProps {
   };
   projectTools: string[];
   projectImages: string[];
-  // page?: string; // used for navigation
 }
 
 export default function ProjectOverview({
@@ -21,20 +21,34 @@ export default function ProjectOverview({
   projectLink,
   projectTools,
   projectImages,
-}: // page,
-ProjectOverviewProps) {
+}: ProjectOverviewProps) {
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [sourcePage, setSourcePage] = useState("/projects");
+  const router = useRouter();
 
   useEffect(() => {
     setMounted(true);
+    // Get the source page from localStorage
+    const storedSource = localStorage.getItem("projectSourcePage");
+    if (storedSource) {
+      setSourcePage(storedSource);
+      console.log("Retrieved source page from localStorage:", storedSource);
+    }
   }, []);
+
+  const handleBack = () => {
+    // Clear the stored source page
+    localStorage.removeItem("projectSourcePage");
+    router.push(sourcePage);
+  };
+
   return (
     <div className="col-span-2 xl:col-span-6 w-full">
       <div className="bg-sbackground relative md:mx-5 md:rounded-xl xl:mb-5 text-text mt-20 md:mt-5 shadow-md">
         {/* Back Button */}
-        <a
-          href="/projects"
+        <button
+          onClick={handleBack}
           className="ml-5 pt-4 flex flex-row items-center gap-3 cursor-pointer hover:underline group">
           {mounted && (
             <WeuiBackFilled
@@ -45,7 +59,7 @@ ProjectOverviewProps) {
           <span className="text-[18px] md:text-[18px] font-bold text-center ">
             Back
           </span>
-        </a>
+        </button>
         {/* Project Overview */}
         <div className="flex flex-col h-full w-full items-start justify-start overflow-x-auto p-10">
           {/* Project Title */}

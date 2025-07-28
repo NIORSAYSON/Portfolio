@@ -1,6 +1,7 @@
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface ProjectProps {
   title: string;
@@ -9,6 +10,7 @@ interface ProjectProps {
   image: string;
   link?: string;
   slug: string;
+  source?: string;
 }
 export default function ProjectCard({
   title,
@@ -17,13 +19,22 @@ export default function ProjectCard({
   image,
   link,
   slug,
+  source = "/projects",
 }: ProjectProps) {
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  const handleViewProject = () => {
+    // Store the source page in localStorage
+    localStorage.setItem("projectSourcePage", source);
+    console.log("Setting source page to:", source);
+    router.push(`/projects/${slug}`);
+  };
 
   return (
     <div className="flex flex-col min-w-[280px] my-5 text-text rounded-2xl border-1 border-gray-400">
@@ -65,7 +76,7 @@ export default function ProjectCard({
                       ? "hover:bg-white hover:text-black"
                       : "hover:bg-black hover:text-white"
                   }`}
-                  onClick={() => (window.location.href = `/projects/${slug}`)}>
+                  onClick={handleViewProject}>
                   View Project
                 </button>
               </>
@@ -76,7 +87,7 @@ export default function ProjectCard({
                     ? "hover:bg-white hover:text-black"
                     : "hover:bg-black hover:text-white"
                 }`}
-                onClick={() => (window.location.href = `/projects/${slug}`)}>
+                onClick={handleViewProject}>
                 View Project
               </button>
             )}
