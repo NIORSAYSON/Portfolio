@@ -28,7 +28,7 @@ export default function About() {
           </div>
           {mounted && (
             <a
-              href="/Nestor Sayson Jr Developer Resume.pdf"
+              href="/Nestor B. Sayson Jr - Resume 2025.pdf"
               download
               className={`flex items-center gap-1 text-base px-2 md:px-10 mr-10 py-1 border border-text rounded-sm transition ${
                 theme === "dark" ? "hover:bg-gray-700" : "hover:bg-gray-100"
@@ -59,7 +59,7 @@ export default function About() {
             className="w-full h-full"
           /> */}
           <iframe
-            src="/Nestor Sayson Jr Developer Resume.pdf#toolbar=0&navpanes=0&scrollbar=0"
+            src="/Nestor B. Sayson Jr - Resume 2025.pdf#toolbar=0&navpanes=0&scrollbar=0"
             className="w-full h-full"
             allow="autoplay; fullscreen"
           />
