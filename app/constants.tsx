@@ -56,6 +56,8 @@ export const projects = [
     description: `This portfolio project is a fully responsive and modern web application developed from scratch using React, Next.js, and TypeScript. The design and layout are built with Tailwind CSS and enhanced with styled-components for dynamic styling capabilities. Smooth, interactive animations are implemented using Framer Motion, providing an engaging user experience. 
               
     The project supports dark and light mode toggling, ensuring optimal accessibility and user preference adaptability across devices. All source code is version-controlled with Git and hosted on GitHub, while deployment is managed via Vercel for fast, seamless delivery.
+
+    The design is inspired by the portfolio of Mr. Mark John Allen Nizal, whose clean and user-focused interface served as a visual and structural reference throughout the development process.
               
     This project highlights best practices in modern frontend development, including clean architecture, reusable components, and scalability in both design and code.`,
   },
