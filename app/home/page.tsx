@@ -156,29 +156,29 @@ export default function HomePage() {
                     source="/"
                   />
                   <ProjectCard
-                    title={projects[3].title}
+                    title={projects[5].title}
                     subtitle="Human Computer Interaction Project"
                     image="/Projects/SIAS Project.png"
-                    description={projects[3].description}
-                    slug={projects[3].slug}
+                    description={projects[5].description}
+                    slug={projects[5].slug}
                     link="https://niorsayson.github.io/SIAS-Online-Portal-Redesign/"
                     source="/"
                   />
                   <ProjectCard
-                    title={projects[4].title}
+                    title={projects[6].title}
                     subtitle="Modeling and Simulation Project"
                     image="/Projects/Modeling and Simulation Project.png"
-                    description={projects[4].description}
-                    slug={projects[4].slug}
+                    description={projects[6].description}
+                    slug={projects[6].slug}
                     link="https://synthetic-data-generator-sayson.streamlit.app/Synthetic_Data_Generator"
                     source="/"
                   />
                   <ProjectCard
-                    title={projects[5].title}
+                    title={projects[7].title}
                     subtitle="Applied Cryptography Project"
                     image="/Projects/Cryptographic App Project.png"
-                    description={projects[5].description}
-                    slug={projects[5].slug}
+                    description={projects[7].description}
+                    slug={projects[7].slug}
                     link="https://saysonnior-cs3b.streamlit.app/"
                     source="/"
                   />
