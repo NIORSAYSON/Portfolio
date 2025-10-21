@@ -72,7 +72,7 @@ export default function About() {
             {/* Banner */}
             <div className="relative h-45 w-full">
               <Image
-                src="/Home Background.jpg"
+                src="/Home Background.png"
                 alt="Banner"
                 fill
                 className="object-cover"

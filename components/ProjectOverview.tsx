@@ -102,16 +102,30 @@ export default function ProjectOverview({
             </div>
           </div>
           {/* Project Image */}
-          <div className="mt-4 flex flex-col items-center justify-center w-full">
+          <div className="mt-4 flex flex-col items-center justify-center w-full gap-4">
             {projectImages.map((src, idx) => (
-              <div key={idx} className="flex justify-center w-full">
-                <Image
-                  src={src}
-                  alt={`${projectName} screenshot ${idx + 1}`}
-                  width={800}
-                  height={450}
-                  className="rounded-lg shadow-md mt-5 border-1 border-black"
-                />
+              <div
+                key={idx}
+                className="w-full flex justify-center mt-5"
+                style={{ maxWidth: 900 }}>
+                <div
+                  className="rounded-lg shadow-md overflow-hidden bg-black/5"
+                  style={{ width: "100%", maxHeight: 720 }}>
+                  <Image
+                    src={src}
+                    alt={`${projectName} screenshot ${idx + 1}`}
+                    width={900}
+                    height={720}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "contain",
+                    }}
+                    sizes="(max-width: 768px) 100vw, 900px"
+                    className="bg-black/5"
+                    priority={idx === 0}
+                  />
+                </div>
               </div>
             ))}
           </div>

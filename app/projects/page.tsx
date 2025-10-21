@@ -2,17 +2,23 @@
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { CodiconGithubAlt, MdiLightPin } from "../icons";
-import { projects } from "../constants";
+import { projects, projectCategories } from "../constants";
 import ContributionCalendar from "@/components/GithubContributions";
 import Link from "next/link";
 
 export default function Projects() {
   const [mounted, setMounted] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState("All Projects");
   const { theme } = useTheme();
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  const filteredProjects =
+    selectedCategory === "All Projects"
+      ? projects
+      : projects.filter((project) => project.category === selectedCategory);
 
   return (
     <main className="min-h-screen w-full">
@@ -29,37 +35,66 @@ export default function Projects() {
             Projects
           </span>
         </div>
+
+        {/* Category Filter */}
+        <div className="mx-5 mt-4">
+          <div className="flex flex-wrap gap-2 pb-4 border-b border-gray-700">
+            {projectCategories.map((category) => (
+              <button
+                key={category}
+                onClick={() => setSelectedCategory(category)}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                  selectedCategory === category
+                    ? "bg-[#1b56fd] text-white shadow-md"
+                    : "bg-transparent border border-[#3D444D] text-text hover:border-[#1b56fd] hover:text-[#1b56fd]"
+                }`}>
+                {category}
+              </button>
+            ))}
+          </div>
+        </div>
+
         <div className="mx-5">
           <div className="hide-scrollbar flex h-full w-full items-start justify-start overflow-x-auto">
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-5 px-2 py-5 w-full">
-              {projects.map((project) => (
+              {filteredProjects.map((project) => (
                 <Link
                   key={project.id}
                   href={`/projects/${project.slug}`}
-                  className="cursor-pointer">
-                  <div className="relative h-50 w-full border-2 rounded-lg border-gray-500 overflow-hidden hover:shadow-lg transition-shadow">
-                    <div className="flex justify-between items-center p-6">
+                  className="cursor-pointer group">
+                  <div className="relative h-64 w-full border-2 rounded-lg border-gray-500 overflow-hidden hover:shadow-lg hover:border-[#1b56fd] transition-all duration-300">
+                    <div className="flex flex-col justify-between h-full p-6">
                       <div>
-                        <h3 className="text-lg font-semibold">
-                          {project.title}
-                        </h3>
-                        <p className="text-base text-gray-500">
-                          {project.duration}
+                        <div className="flex justify-between items-start mb-2">
+                          <div className="flex-1">
+                            <h3 className="text-lg font-semibold group-hover:text-[#1b56fd] transition-colors">
+                              {project.title}
+                            </h3>
+                            <p className="text-sm text-gray-500 mt-1">
+                              {project.duration}
+                            </p>
+                          </div>
+                          <p className="text-xs px-3 py-1 rounded-full border border-[#3D444D] whitespace-nowrap ml-2">
+                            {project.subtitle}
+                          </p>
+                        </div>
+                        <p className="text-xs px-3 py-1 rounded-md bg-[#1b56fd]/10 text-[#1b56fd] inline-block mt-2">
+                          {project.category}
                         </p>
                       </div>
-                      <p className="text-sm px-4 py-1 rounded-full border border-[#3D444D]">
-                        {project.subtitle}
-                      </p>
-                    </div>
-                    <div className="absolute bottom-0 w-full p-6">
-                      <div className="flex gap-2 flex-wrap">
-                        {project.tools.map((tool, idx) => (
+                      <div className="flex gap-2 flex-wrap mt-4">
+                        {project.tools.slice(0, 4).map((tool, idx) => (
                           <span
                             key={idx}
                             className="text-xs px-3 py-1 rounded-md border border-[#3D444D]">
                             {tool}
                           </span>
                         ))}
+                        {project.tools.length > 4 && (
+                          <span className="text-xs px-3 py-1 rounded-md border border-[#3D444D] text-gray-500">
+                            +{project.tools.length - 4} more
+                          </span>
+                        )}
                       </div>
                     </div>
                   </div>

@@ -33,6 +33,7 @@ export const projects = [
     slug: "my-portfolio",
     title: "My Portfolio",
     subtitle: "Public",
+    category: "Web Development",
     projectLink: {
       link: "https://niorsayson.vercel.app/",
       linkName: "Nestor B. Sayson Jr - Portfolio",
@@ -66,6 +67,7 @@ export const projects = [
     slug: "pos-system",
     title: "Point of Sale System App",
     subtitle: "Private",
+    category: "Mobile Development",
     tools: ["React Native", "Redux", "Typescript", "Expo", "API Integration"],
     projectImages: [
       "/Projects/Sample Images/POS System App 1.png",
@@ -108,6 +110,7 @@ export const projects = [
     slug: "cspc-chatbot",
     title: "CSPC Conversational Agent",
     subtitle: "Public",
+    category: "AI & Machine Learning",
     projectLink: {
       link: "https://huggingface.co/spaces/Nioooor/CSPC_Conversational_Agent",
       linkName: "CSPC Conversational Agent",
@@ -150,10 +153,70 @@ export const projects = [
     This project demonstrates the practical application of natural language processing, machine learning, and AI-driven information retrieval in the context of public service and education. It reflects my ability to integrate state-of-the-art technologies into real-world, purpose-driven applications.`,
   },
   {
+    id: 7,
+    slug: "notes-app",
+    title: "Notes App",
+    subtitle: "Public",
+    category: "Mobile Development",
+    projectLink: {
+      link: "https://github.com/NIORSAYSON/notes-app",
+      linkName: "Notes App — React Native (Expo)",
+    },
+    tools: [
+      "React Native",
+      "Expo",
+      "Redux Toolkit",
+      "redux-persist",
+      "TypeScript",
+    ],
+    projectImages: [
+      "/Projects/Sample Images/Notes App 1.jpg",
+      "/Projects/Sample Images/Notes App 2.jpg",
+      "/Projects/Sample Images/Notes App 3.jpg",
+      "/Projects/Sample Images/Notes App 4.jpg",
+      "/Projects/Sample Images/Notes App 5.jpg",
+      "/Projects/Sample Images/Notes App 6.jpg",
+      "/Projects/Sample Images/Notes App 7.jpg",
+    ],
+    // duration: "1 month",
+    description: `A simple and intuitive mobile notes application built with React Native and Expo. Features a secure mock login (username: test / password: password123), persistent sessions using redux-persist, full CRUD for notes, search by title/description, and a clean, modern UI inspired by a Figma design.`,
+  },
+  {
+    id: 9,
+    slug: "task-manager-app",
+    title: "Task Manager App",
+    subtitle: "Public",
+    category: "Web Development",
+    projectLink: {
+      link: "https://github.com/NIORSAYSON/task-manager-app",
+      linkName: "Task Manager App — Full Stack",
+    },
+    tools: [
+      "Next.js",
+      "Express.js",
+      "MongoDB",
+      "TypeScript",
+      "Tailwind CSS",
+      "Radix UI",
+      "Zustand",
+    ],
+    projectImages: [
+      "/Projects/Sample Images/Task Manager 1.png",
+      "/Projects/Sample Images/Task Manager 2.png",
+      "/Projects/Sample Images/Task Manager 3.png",
+      "/Projects/Sample Images/Task Manager 4.png",
+      "/Projects/Sample Images/Task Manager 5.png",
+      "/Projects/Sample Images/Task Manager 6.png",
+    ],
+    // duration: "2 months",
+    description: `A modern, full-stack task management application with user authentication, task organization, and both list and Kanban board views. Built with Next.js (App Router) for the frontend and Express.js + MongoDB for the backend. Features include JWT-based authentication, password hashing with bcryptjs, task priorities and due dates, drag-and-drop Kanban board, real-time updates, and a responsive UI built with Tailwind and Radix UI.`,
+  },
+  {
     id: 4,
     slug: "sias-redesign",
     title: "SIAS Online Portal Redesign",
     subtitle: "Public",
+    category: "Web Development",
     projectLink: {
       link: "https://niorsayson.github.io/SIAS-Online-Portal-Redesign/",
       linkName: "CSPC SIAS Online Portal Redesign",
@@ -176,6 +239,7 @@ export const projects = [
     slug: "synthetic-data-generator",
     title: "Synthetic Data Generator",
     subtitle: "Public",
+    category: "AI & Machine Learning",
     projectLink: {
       link: "https://synthetic-data-generator-sayson.streamlit.app/",
       linkName: "CSPC Synthetic Data Generator",
@@ -214,6 +278,7 @@ export const projects = [
     slug: "cryptographic-application",
     title: "Cryptographic Application",
     subtitle: "Public",
+    category: "Security & Cryptography",
     projectLink: {
       link: "https://saysonnior-cs3b.streamlit.app/",
       linkName: "Cryptographic Application",
@@ -235,6 +300,14 @@ export const projects = [
 
     The project was built using Streamlit for the interface, along with PyCrypto and hashlib for the cryptographic operations. This experience helped deepen my understanding of cryptographic principles and gave me the opportunity to apply theory in a more practical, user-friendly format.`,
   },
+];
+
+export const projectCategories = [
+  "All Projects",
+  "Web Development",
+  "Mobile Development",
+  "AI & Machine Learning",
+  "Security & Cryptography",
 ];
 
 export const skillIcons1 = [

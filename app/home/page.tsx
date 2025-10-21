@@ -82,7 +82,7 @@ export default function HomePage() {
           {/* Home Background with typewriter */}
           <div className="h-[40vh] md:h-[40vh] mt-20 md:mt-5 relative mx-5 mb-5 xl:mr-0">
             <Image
-              src="/Home Background.jpg"
+              src="/Home Background.png"
               alt="Home Background"
               layout="fill"
               objectFit="cover"
@@ -94,7 +94,7 @@ export default function HomePage() {
               style={{
                 boxShadow: "inset 0 -120px 100px 10px rgba(0,0,0,0.5)",
               }}>
-              <div className="text-black rounded px-5 py-3 text-xs md:text-lg font-bold">
+              <div className="text-white rounded px-5 py-3 text-xs md:text-lg font-bold">
                 {day && date ? (
                   <>
                     {day.slice(0, 3)}, {date}
