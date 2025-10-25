@@ -32,11 +32,10 @@ export async function POST(request: NextRequest) {
     // Lazy-import heavy dependencies so we only load them when this
     // endpoint is called. This reduces memory and CPU pressure during
     // Next.js dev server startup.
-    const [{ ChatGroq }, { PromptTemplate }, { StringOutputParser }, hfModule] =
+    const [{ ChatGroq }, { PromptTemplate }, hfModule] =
       await Promise.all([
         import("@langchain/groq"),
         import("@langchain/core/prompts"),
-        import("@langchain/core/output_parsers"),
         import("@huggingface/inference"),
       ]);
 
@@ -56,12 +55,12 @@ export async function POST(request: NextRequest) {
         if (Array.isArray(res)) {
           // If it's nested ([ [nums] ]) flatten to 1D
           if (Array.isArray(res[0])) {
-            return (res as any).flat(Infinity) as number[];
+            return (res as number[][]).flat(Infinity) as number[];
           }
           return res as number[];
         }
 
-        return Array.from(res as any) as number[];
+        return Array.from(res as ArrayLike<number>) as number[];
       } catch (err) {
         console.error("❌ Error generating embedding:", err);
         throw err;
@@ -79,7 +78,7 @@ export async function POST(request: NextRequest) {
     if (message.length < 50 && chatHistory && chatHistory.length > 0) {
       const recentContext = chatHistory
         .slice(-2)
-        .map((m: any) => `${m.role === "user" ? "Q" : "A"}: ${m.content}`)
+        .map((m: { role: string; content: string }) => `${m.role === "user" ? "Q" : "A"}: ${m.content}`)
         .join("\n");
 
       searchQuery = `${recentContext}\nCurrent question: ${message}`;
@@ -108,9 +107,14 @@ export async function POST(request: NextRequest) {
 
     console.log(`📚 Found ${relevantDocs?.length || 0} relevant documents`);
 
+    interface RelevantDoc {
+      content: string;
+      similarity?: number;
+    }
+
     // Log the documents found for debugging
     if (relevantDocs && relevantDocs.length > 0) {
-      relevantDocs.forEach((doc: any, idx: number) => {
+      relevantDocs.forEach((doc: RelevantDoc, idx: number) => {
         console.log(
           `  [${idx + 1}] Similarity: ${doc.similarity?.toFixed(
             3
@@ -126,7 +130,7 @@ export async function POST(request: NextRequest) {
     // Combine retrieved documents into context
     const context =
       relevantDocs && relevantDocs.length > 0
-        ? relevantDocs.map((doc: any) => doc.content).join("\n\n")
+        ? relevantDocs.map((doc: RelevantDoc) => doc.content).join("\n\n")
         : "No specific information available.";
 
     console.log("📝 Context length:", context.length, "characters");
@@ -137,7 +141,7 @@ export async function POST(request: NextRequest) {
         ? chatHistory
             .slice(-5) // Only use last 5 messages for context
             .map(
-              (m: any) =>
+              (m: { role: string; content: string }) =>
                 `${m.role === "user" ? "Human" : "Assistant"}: ${m.content}`
             )
             .join("\n")
@@ -236,7 +240,7 @@ Your response (plain text, first-person as Nestor):`,
       {
         error: "Failed to process message",
         details: error instanceof Error ? error.message : "Unknown error",
-        type: error?.constructor?.name || "Unknown",
+        type: (error as { constructor?: { name?: string } })?.constructor?.name || "Unknown",
       },
       { status: 500 }
     );

@@ -2,7 +2,6 @@
 
 import { useTheme } from "next-themes";
 import { useEffect, useState, useRef } from "react";
-import { MaterialSymbolsLightChatOutline } from "../icons";
 import ChatMessage from "@/components/ChatMessage";
 import Image from "next/image";
 import { motion } from "framer-motion";
