@@ -1,18 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 // Delay importing heavy LLM/embedding libraries until request time to avoid
 // inflating the dev server bundle and causing out-of-memory failures.
-import { createClient } from "@supabase/supabase-js";
-// Note: Chat model and HF client are created per-request below to keep the
-// dev server lightweight during startup.
 
-// Initialize Supabase client
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_KEY!
-);
-
-// Note: Chat model and HF client are created per-request below to keep the
-// dev server lightweight during startup.
+// Note: Supabase client, chat model, and HF client are created per-request
+// below to keep the dev server lightweight during startup and avoid build-time errors.
 
 export async function POST(request: NextRequest) {
   try {
@@ -32,15 +23,22 @@ export async function POST(request: NextRequest) {
     // Lazy-import heavy dependencies so we only load them when this
     // endpoint is called. This reduces memory and CPU pressure during
     // Next.js dev server startup.
-    const [{ ChatGroq }, { PromptTemplate }, hfModule] =
+    const [{ ChatGroq }, { PromptTemplate }, hfModule, { createClient }] =
       await Promise.all([
         import("@langchain/groq"),
         import("@langchain/core/prompts"),
         import("@huggingface/inference"),
+        import("@supabase/supabase-js"),
       ]);
 
     const { HfInference } = hfModule;
     console.log("✅ Dependencies loaded");
+
+    // Initialize Supabase client (per-request to avoid build-time errors)
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_KEY!
+    );
 
     // Initialize HF client and embedding helper (per-request)
     const hf = new HfInference(process.env.HUGGINGFACE_API_KEY);
@@ -78,7 +76,10 @@ export async function POST(request: NextRequest) {
     if (message.length < 50 && chatHistory && chatHistory.length > 0) {
       const recentContext = chatHistory
         .slice(-2)
-        .map((m: { role: string; content: string }) => `${m.role === "user" ? "Q" : "A"}: ${m.content}`)
+        .map(
+          (m: { role: string; content: string }) =>
+            `${m.role === "user" ? "Q" : "A"}: ${m.content}`
+        )
         .join("\n");
 
       searchQuery = `${recentContext}\nCurrent question: ${message}`;
@@ -240,7 +241,9 @@ Your response (plain text, first-person as Nestor):`,
       {
         error: "Failed to process message",
         details: error instanceof Error ? error.message : "Unknown error",
-        type: (error as { constructor?: { name?: string } })?.constructor?.name || "Unknown",
+        type:
+          (error as { constructor?: { name?: string } })?.constructor?.name ||
+          "Unknown",
       },
       { status: 500 }
     );
