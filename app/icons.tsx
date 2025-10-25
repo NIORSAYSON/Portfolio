@@ -536,3 +536,20 @@ export function WeuiBackFilled(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
+export function MaterialSymbolsLightChatOutline(
+  props: SVGProps<SVGSVGElement>
+) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      {...props}>
+      <path
+        fill={props.fill || "#000"}
+        d="M6.455 19L2 22.5V4a1 1 0 0 1 1-1h18a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1zM3 19.345L5.763 17H21V4H3zM7.5 11h9a.5.5 0 0 0 0-1h-9a.5.5 0 0 0 0 1m0-3h9a.5.5 0 0 0 0-1h-9a.5.5 0 0 0 0 1"></path>
+    </svg>
+  );
+}

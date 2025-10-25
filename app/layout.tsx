@@ -44,8 +44,8 @@ export default function RootLayout({
               <div className="md:hidden bg-background transition-all duration-300">
                 <MobileSidebar>{children}</MobileSidebar>
               </div>
-              {/* Desktop main content */}
-              <div className="hidden md:block">{children}</div>
+              {/* Desktop main content - ensure children can fill the available height */}
+              <div className="hidden md:block h-full">{children}</div>
             </main>
           </div>
         </ThemeProvider>

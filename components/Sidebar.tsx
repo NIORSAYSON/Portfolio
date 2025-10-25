@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   HugeiconsContact01,
+  MaterialSymbolsLightChatOutline,
   MaterialSymbolsLightDownloadSharp,
   MaterialSymbolsLightHomeOutlineRounded,
   MaterialSymbolsLightInfoOutlineRounded,
@@ -109,6 +110,25 @@ export default function Sidebar() {
               />
             )}
             <div className="text-l">Projects</div>
+          </div>
+        </Link>
+        <Link
+          href="/chat"
+          className={`w-full text-left rounded pl-8 py-2 flex items-center transition-all duration-300 ${
+            pathname === "/chat"
+              ? "bg-snbackground text-[#1B56FD] font-semibold"
+              : "text-text hover:bg-snbackground"
+          }`}>
+          <div className="flex items-center">
+            {mounted && (
+              <MaterialSymbolsLightChatOutline
+                className="inline-block w-8 h-8 mr-2"
+                {...(pathname === "/chat"
+                  ? { fill: theme === "dark" ? "#4C8DFF" : "#1B56FD" }
+                  : { fill: theme === "dark" ? "#fff" : "#000" })}
+              />
+            )}
+            <div className="text-l">Chat with Me</div>
           </div>
         </Link>
         <Link
