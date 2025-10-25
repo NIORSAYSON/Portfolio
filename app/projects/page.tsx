@@ -5,6 +5,7 @@ import { CodiconGithubAlt, MdiLightPin } from "../icons";
 import { projects, projectCategories } from "../constants";
 import ContributionCalendar from "@/components/GithubContributions";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function Projects() {
   const [mounted, setMounted] = useState(false);
@@ -23,7 +24,11 @@ export default function Projects() {
   return (
     <main className="min-h-screen w-full">
       {/* Projects Section */}
-      <div className="bg-sbackground md:rounded-xl shadow-md overflow-hidden md:mx-5 mt-20 md:mt-5 text-text">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="bg-sbackground md:rounded-xl shadow-md overflow-hidden md:mx-5 mt-20 md:mt-5 text-text">
         <div className="ml-5 pt-4 flex flex-row items-center gap-1">
           {mounted && (
             <MdiLightPin
@@ -103,9 +108,13 @@ export default function Projects() {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
       {/* Contributions Section */}
-      <div className="bg-sbackground text-text mt-2 md:mx-5 relative md:rounded-xl md:mb-5 mb-5">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.1 }}
+        className="bg-sbackground text-text mt-2 md:mx-5 relative md:rounded-xl md:mb-5 mb-5">
         <div className="ml-5 pt-4 flex flex-row items-center gap-1">
           {mounted && (
             <CodiconGithubAlt
@@ -120,7 +129,7 @@ export default function Projects() {
         <div className="mx-5 justify-center items-center text-center xl:mx-25 mt-5">
           <ContributionCalendar />
         </div>
-      </div>
+      </motion.div>
     </main>
   );
 }

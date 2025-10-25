@@ -27,6 +27,26 @@ export default function ProjectOverview({
   const [sourcePage, setSourcePage] = useState("/projects");
   const router = useRouter();
 
+  // Determine if the provided link should be treated as a repository/source-only link.
+  // We treat explicit GitHub links as repository links, and also handle a couple
+  // of known project-name cases (notes-app / task-manager) which are not deployed
+  // and only have repository links.
+  const isRepositoryLink = (() => {
+    if (!projectLink) return false;
+    const link = projectLink.link || "";
+    const name = projectName ? projectName.toLowerCase() : "";
+    if (link.includes("github.com")) return true;
+    // handle common variants of the two projects mentioned
+    if (
+      name.includes("notes") ||
+      name.includes("task") ||
+      name.includes("task-manager") ||
+      name.includes("notes-app")
+    )
+      return true;
+    return false;
+  })();
+
   useEffect(() => {
     setMounted(true);
     // Get the source page from localStorage
@@ -76,14 +96,29 @@ export default function ProjectOverview({
           {/* Project Subtitle */}
           {projectLink && (
             <div className="text-[13px] md:text-[15px] mt-2 text-[#808080]">
-              Hosted and showcased the project on:{" "}
-              <a
-                href={projectLink.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline text-[#1B56FD]">
-                {projectLink.linkName}
-              </a>
+              {isRepositoryLink ? (
+                <>
+                  Repository:{" "}
+                  <a
+                    href={projectLink.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline text-[#1B56FD]">
+                    {projectLink.linkName}
+                  </a>
+                </>
+              ) : (
+                <>
+                  Hosted and showcased the project on:{" "}
+                  <a
+                    href={projectLink.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline text-[#1B56FD]">
+                    {projectLink.linkName}
+                  </a>
+                </>
+              )}
             </div>
           )}
           {/* Project Tools */}

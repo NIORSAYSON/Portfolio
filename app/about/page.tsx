@@ -23,6 +23,7 @@ import {
 import { useTheme } from "next-themes";
 import ProjectCard from "@/components/ProjectCard";
 import ExpAndEduc from "@/components/ExpAndEduc";
+import { motion } from "framer-motion";
 
 export default function About() {
   const [showMore, setShowMore] = useState<{
@@ -68,7 +69,11 @@ export default function About() {
         {/* Right Column */}
         <div className="col-span-2 xl:col-span-5 w-full">
           {/* About Me Section */}
-          <div className="bg-sbackground rounded-xl shadow-md overflow-hidden mx-5 mt-20 md:mt-5 text-text">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="bg-sbackground rounded-xl shadow-md overflow-hidden mx-5 mt-20 md:mt-5 text-text">
             {/* Banner */}
             <div className="relative h-45 w-full">
               <Image
@@ -119,9 +124,13 @@ export default function About() {
                 </button>
               </div>
             </div>
-          </div>
+          </motion.div>
           {/* Experience Section */}
-          <div className="bg-sbackground md:rounded-xl shadow-md md:mx-5 mt-5 text-text">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="bg-sbackground md:rounded-xl shadow-md md:mx-5 mt-5 text-text">
             <div className="ml-5 pt-4 flex flex-row items-center gap-1">
               {mounted && (
                 <BiPersonCheck
@@ -145,9 +154,13 @@ export default function About() {
               subtitle="Intelliseven Technology Solutions Inc."
               date="Mar 2025 - Jun 2025"
             />
-          </div>
+          </motion.div>
           {/* Projects Section */}
-          <div className="bg-sbackground relative md:mx-5 md:rounded-xl xl:mb-5 text-text mt-2 md:mt-5 shadow-md">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="bg-sbackground relative md:mx-5 md:rounded-xl xl:mb-5 text-text mt-2 md:mt-5 shadow-md">
             <div className="ml-5 pt-4 flex flex-row items-center gap-1">
               {mounted && (
                 <MdiLightPin
@@ -230,13 +243,17 @@ export default function About() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Left Column */}
         <div className="col-span-2 xl:col-span-4 w-full text-text">
           {/* Education Section */}
-          <div className="bg-sbackground mt-2 md:mt-5 xl:ml-0 relative md:mx-5 md:rounded-xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="bg-sbackground mt-2 md:mt-5 xl:ml-0 relative md:mx-5 md:rounded-xl">
             <div className="ml-5 pt-4 flex flex-row items-center gap-1">
               {mounted && (
                 <CilEducation
@@ -286,9 +303,13 @@ export default function About() {
               subtitle="Libon Agro Industrial High School"
               date="July 2015 - Jun 2019"
             />
-          </div>
+          </motion.div>
           {/* Contact Section */}
-          <div className="bg-sbackground text-text mt-2 md:mt-5 xl:ml-0 relative md:mx-5 md:rounded-xl md:mb-5 shadow-md ml-0">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="bg-sbackground text-text mt-2 md:mt-5 xl:ml-0 relative md:mx-5 md:rounded-xl md:mb-5 shadow-md ml-0">
             <div className="ml-5 pt-4 flex flex-row items-center gap-1">
               {mounted && (
                 <MaterialSymbolsLightMailOutline
@@ -362,7 +383,7 @@ export default function About() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </main>

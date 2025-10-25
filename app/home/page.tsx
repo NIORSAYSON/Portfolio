@@ -80,7 +80,11 @@ export default function HomePage() {
         {/* First Column */}
         <div className="col-span-2 xl:col-span-4 w-full">
           {/* Home Background with typewriter */}
-          <div className="h-[40vh] md:h-[40vh] mt-20 md:mt-5 relative mx-5 mb-5 xl:mr-0">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="h-[40vh] md:h-[40vh] mt-20 md:mt-5 relative mx-5 mb-5 xl:mr-0">
             <Image
               src="/Home Background.png"
               alt="Home Background"
@@ -112,9 +116,13 @@ export default function HomePage() {
                 <span className="animate-pulse">|</span>
               </motion.h1>
             </div>
-          </div>
+          </motion.div>
           {/* Projects Section */}
-          <div className="bg-sbackground relative md:mx-5 md:rounded-xl md:mb-5 xl:mr-0 text-text">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="bg-sbackground relative md:mx-5 md:rounded-xl md:mb-5 xl:mr-0 text-text">
             <div className="ml-5 pt-4 flex flex-row items-center gap-1">
               {mounted && (
                 <MdiLightPin
@@ -185,9 +193,13 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
           {/* Contributions Section */}
-          <div className="bg-sbackground text-text mt-2 relative md:mx-5 md:rounded-xl xl:mb-5 xl:mr-0">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="bg-sbackground text-text mt-2 relative md:mx-5 md:rounded-xl xl:mb-5 xl:mr-0">
             <div className="ml-5 pt-4 flex flex-row items-center gap-1">
               {mounted && (
                 <CodiconGithubAlt
@@ -202,13 +214,17 @@ export default function HomePage() {
             <div className="mx-5 justify-center items-center text-center">
               <ContributionCalendar />
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Second Column */}
         <div className="col-span-2 xl:col-span-2 w-full text-text">
           {/* Skills Section */}
-          <div className="bg-sbackground mt-2 md:mt-5 relative md:mx-5 md:rounded-xl md:mb-5">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="bg-sbackground mt-2 md:mt-5 relative md:mx-5 md:rounded-xl md:mb-5">
             <div className="ml-5 pt-4 flex flex-row items-center gap-1">
               {mounted && (
                 <GrommetIconsTechnology
@@ -226,9 +242,13 @@ export default function HomePage() {
                 <SkillsTicker images={skillIcons2} from={"-100%"} to={0} />
               </div>
             </div>
-          </div>
+          </motion.div>
           {/* Expertise Section */}
-          <div className="bg-sbackground text-text mt-2 xl:mt-0 relative pb-5 md:mx-5 md:rounded-xl md:mb-5">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="bg-sbackground text-text mt-2 xl:mt-0 relative pb-5 md:mx-5 md:rounded-xl md:mb-5">
             <div className="ml-5 pt-4 flex flex-row items-center gap-1">
               {mounted && (
                 <BiPersonCheck
@@ -322,9 +342,13 @@ export default function HomePage() {
                 </div>
               </Accordion>
             </div>
-          </div>
+          </motion.div>
           {/* Contact Section */}
-          <div className="bg-sbackground text-text mt-2 relative md:mx-5 md:rounded-xl md:mb-5">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="bg-sbackground text-text mt-2 relative md:mx-5 md:rounded-xl md:mb-5">
             <div className="ml-5 pt-4 flex flex-row items-center gap-1">
               {mounted && (
                 <MaterialSymbolsLightMailOutline
@@ -348,7 +372,7 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </main>
