@@ -178,7 +178,7 @@ Your response (plain text, first-person as Nestor):`,
     // Initialize the Groq chat model per-request
     const model = new ChatGroq({
       apiKey: process.env.GROQ_API_KEY!,
-      model: "openai/gpt-oss-20b", // Using LLaMA 3.1 70B for better understanding
+      model: "openai/gpt-oss-20b", // Using gpt-oss-20b for better understanding
       temperature: 0.7,
       maxTokens: 1024,
     });

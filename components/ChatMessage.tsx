@@ -95,7 +95,7 @@ export default function ChatMessage({
           }`}>
           <div
             className={`rounded-2xl px-4 py-2.5 ${
-              isUser ? "bg-[#1B56FD] text-white" : "bg-gray-100 text-black"
+              isUser ? "bg-[#1B56FD] text-white" : "bg-gray-400 text-black"
             }`}>
             <p className="text-sm md:text-base whitespace-pre-wrap break-words">
               {message}
@@ -141,8 +141,8 @@ export default function ChatMessage({
             isUser
               ? "bg-[#1B56FD] text-white"
               : theme === "dark"
-              ? "bg-[#2c2c2c] text-white"
-              : "bg-gray-100 text-black"
+              ? "bg-[#222222] text-white"
+              : "bg-gray-200 text-black"
           }`}>
           <p className="text-sm md:text-base whitespace-pre-wrap break-words">
             {message}

@@ -217,7 +217,9 @@ export default function ChatPage() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.1 }}
-        className="px-6 md:px-10 py-4 border-t border-border bg-white dark:bg-[#0b0b0b] z-10 sticky bottom-0">
+        className={`px-6 md:px-10 py-4 border-t border-border z-10 sticky bottom-0 ${
+          !mounted ? "bg-white" : theme === "dark" ? "bg-[#0b0b0b]" : "bg-white"
+        }`}>
         <div className="max-w-4xl mx-auto">
           <div className="flex gap-2 items-end">
             <div className="flex-1 relative">
