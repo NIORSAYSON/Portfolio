@@ -24,15 +24,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${inter.className} dark`}
-      suppressHydrationWarning>
+    <html lang="en" className={inter.className} suppressHydrationWarning>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
       <body className={`antialiased ${inter.className}`}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <div className="min-h-screen flex bg-background transition-all duration-300">
             {/* Sidebar for large screens */}
             <aside className="hidden md:flex fixed left-0 top-0 h-full z-30 w-72 shadow-xl">

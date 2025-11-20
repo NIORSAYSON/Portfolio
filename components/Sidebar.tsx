@@ -165,7 +165,7 @@ export default function Sidebar() {
           <label className="relative inline-flex items-center cursor-pointer ml-5">
             <input
               type="checkbox"
-              checked={theme === "dark"}
+              checked={mounted && theme === "dark"}
               onChange={() => setTheme(theme === "dark" ? "light" : "dark")}
               className="sr-only peer"
             />
