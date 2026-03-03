@@ -14,7 +14,7 @@ import {
   SolarCodeLineDuotone,
 } from "../icons";
 import ProjectCard from "@/components/ProjectCard";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import SkillsTicker from "@/components/SkillsTicker";
 import {
@@ -41,6 +41,33 @@ export default function HomePage() {
   const [mounted, setMounted] = useState(false);
   const [displayedText, setDisplayedText] = useState("");
   const [currentSentence, setCurrentSentence] = useState(0);
+  const projectsScrollRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  const updateScrollState = () => {
+    const el = projectsScrollRef.current;
+    if (!el) return;
+    setCanScrollLeft(el.scrollLeft > 0);
+    setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 1);
+  };
+
+  const scrollProjects = (direction: "left" | "right") => {
+    if (projectsScrollRef.current) {
+      projectsScrollRef.current.scrollBy({
+        left: direction === "right" ? 300 : -300,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  useEffect(() => {
+    const el = projectsScrollRef.current;
+    if (!el) return;
+    updateScrollState();
+    el.addEventListener("scroll", updateScrollState);
+    return () => el.removeEventListener("scroll", updateScrollState);
+  }, [mounted]);
 
   useEffect(() => {
     setMounted(true);
@@ -134,8 +161,17 @@ export default function HomePage() {
                 Projects
               </span>
             </div>
-            <div className="mx-5">
-              <div className="hide-scrollbar flex h-[360px] w-full items-start justify-start overflow-x-auto">
+            <div className="mx-5 relative">
+              {canScrollLeft && (
+                <button
+                  onClick={() => scrollProjects("left")}
+                  className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-background/80 hover:bg-background border border-border rounded-full w-8 h-8 flex items-center justify-center shadow-md transition-all"
+                  aria-label="Scroll left"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                </button>
+              )}
+              <div ref={projectsScrollRef} className="hide-scrollbar flex h-[360px] w-full items-start justify-start overflow-x-auto px-8">
                 <div className="flex flex-nowrap gap-5 max-w-[300px]">
                   <ProjectCard
                     title={projects[0].title}
@@ -192,6 +228,15 @@ export default function HomePage() {
                   />
                 </div>
               </div>
+              {canScrollRight && (
+                <button
+                  onClick={() => scrollProjects("right")}
+                  className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-background/80 hover:bg-background border border-border rounded-full w-8 h-8 flex items-center justify-center shadow-md transition-all"
+                  aria-label="Scroll right"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </button>
+              )}
             </div>
           </motion.div>
           {/* Contributions Section */}

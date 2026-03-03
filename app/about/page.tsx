@@ -11,15 +11,11 @@ import {
 } from "@/app/constants";
 import {
   BiPersonCheck,
-  BxlGmail,
   CilEducation,
-  IcBaselineFacebook,
   MaterialSymbolsLightMailOutline,
-  MdiGithub,
-  MdiInstagram,
   MdiLightPin,
-  MdiLinkedin,
 } from "../icons";
+import SocialMedia from "@/components/SocialMedia";
 import { useTheme } from "next-themes";
 import ProjectCard from "@/components/ProjectCard";
 import ExpAndEduc from "@/components/ExpAndEduc";
@@ -323,56 +319,7 @@ export default function About() {
             </div>
             <div className="justify-center items-center text-center mx-5 mt-4 p-3">
               <div className="flex-col ">
-                {mounted && (
-                  <div className="flex justify-center items-center flex-wrap gap-2">
-                    {[
-                      IcBaselineFacebook,
-                      MdiInstagram,
-                      BxlGmail,
-                      MdiLinkedin,
-                      MdiGithub,
-                    ].map((Icon, idx) => (
-                      <button
-                        key={idx}
-                        className={`p-2 rounded-full ${
-                          theme === "dark"
-                            ? "hover:bg-gray-700"
-                            : "hover:bg-gray-200"
-                        } transition-colors transform hover:scale-110`}
-                        aria-label={`social-icon-${idx}`}
-                        onClick={() => {
-                          if (idx === 0) {
-                            window.open(
-                              "https://www.facebook.com/nioooooor?mibextid=ZbWKwL",
-                              "_blank"
-                            );
-                          } else if (idx === 1) {
-                            window.open(
-                              "https://www.instagram.com/niorsayson/",
-                              "_blank"
-                            );
-                          } else if (idx === 2) {
-                            window.location.href = "mailto:nessayson@gmail.com";
-                          } else if (idx === 3) {
-                            window.open(
-                              "https://www.linkedin.com/in/nestor-sayson-b8671b292/",
-                              "_blank"
-                            );
-                          } else if (idx === 4) {
-                            window.open(
-                              "https://github.com/NIORSAYSON",
-                              "_blank"
-                            );
-                          }
-                        }}>
-                        <Icon
-                          className="h-10 w-10"
-                          fill={theme === "dark" ? "#fff" : "#000"}
-                        />
-                      </button>
-                    ))}
-                  </div>
-                )}
+                {mounted && <SocialMedia />}
 
                 <div className="flex justify-center items-center mt-4">
                   <span className="opacity-40 text-xs md:text-sm">

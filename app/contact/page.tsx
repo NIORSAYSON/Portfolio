@@ -3,16 +3,12 @@ import React, { FormEvent, ChangeEvent, useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { motion } from "framer-motion";
 import {
-  BxlGmail,
   CircumMail,
-  IcBaselineFacebook,
   MaterialSymbolsLightMailOutline,
-  MdiGithub,
-  MdiInstagram,
   MdiLightPhone,
-  MdiLinkedin,
   MynauiLocation,
 } from "../icons";
+import SocialMedia from "@/components/SocialMedia";
 
 type FormValues = {
   name: string;
@@ -105,34 +101,6 @@ export default function Contact() {
     },
   ];
 
-  const socialLinks = [
-    {
-      icon: IcBaselineFacebook,
-      label: "Facebook",
-      url: "https://www.facebook.com/nioooooor?mibextid=ZbWKwL",
-    },
-    {
-      icon: MdiInstagram,
-      label: "Instagram",
-      url: "https://www.instagram.com/niorsayson/",
-    },
-    {
-      icon: BxlGmail,
-      label: "Gmail",
-      url: "mailto:nessayson@gmail.com",
-      isEmail: true,
-    },
-    {
-      icon: MdiLinkedin,
-      label: "LinkedIn",
-      url: "https://www.linkedin.com/in/nestor-sayson-b8671b292/",
-    },
-    {
-      icon: MdiGithub,
-      label: "GitHub",
-      url: "https://github.com/NIORSAYSON",
-    },
-  ];
 
   return (
     <main className="min-h-screen w-full">
@@ -209,34 +177,7 @@ export default function Contact() {
                 projects and activities.
               </p>
 
-              {mounted && (
-                <div className="grid grid-cols-5 gap-3">
-                  {socialLinks.map((social, idx) => (
-                    <motion.button
-                      key={idx}
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.95 }}
-                      className={`p-3 rounded-xl transition-all duration-300 flex items-center justify-center ${
-                        theme === "dark"
-                          ? "bg-snbackground hover:bg-dmbackground"
-                          : "bg-snbackground hover:bg-dmbackground"
-                      } border border-border`}
-                      aria-label={social.label}
-                      onClick={() => {
-                        if (social.isEmail) {
-                          window.location.href = social.url;
-                        } else {
-                          window.open(social.url, "_blank");
-                        }
-                      }}>
-                      <social.icon
-                        className="h-7 w-7"
-                        fill={theme === "dark" ? "#fff" : "#000"}
-                      />
-                    </motion.button>
-                  ))}
-                </div>
-              )}
+              {mounted && <SocialMedia />}
             </div>
           </motion.div>
         </div>
