@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   aboutText,
   collegeText,
@@ -46,6 +46,33 @@ export default function About() {
   const seniorHighShortText = getShortText(seniorHighText);
   const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
+  const projectsScrollRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  const updateScrollState = () => {
+    const el = projectsScrollRef.current;
+    if (!el) return;
+    setCanScrollLeft(el.scrollLeft > 0);
+    setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 1);
+  };
+
+  const scrollProjects = (direction: "left" | "right") => {
+    if (projectsScrollRef.current) {
+      projectsScrollRef.current.scrollBy({
+        left: direction === "right" ? 300 : -300,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  useEffect(() => {
+    const el = projectsScrollRef.current;
+    if (!el) return;
+    updateScrollState();
+    el.addEventListener("scroll", updateScrollState);
+    return () => el.removeEventListener("scroll", updateScrollState);
+  }, [mounted]);
   // const [current, setCurrent] = useState(0);
 
   // const prevProject = () => {
@@ -168,21 +195,18 @@ export default function About() {
                 Projects
               </span>
             </div>
-            <div className="mx-5">
-              <div className="hide-scrollbar flex h-[360px] w-full items-start justify-start overflow-x-auto">
+            <div className="mx-5 relative">
+              {canScrollLeft && (
+                <button
+                  onClick={() => scrollProjects("left")}
+                  className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-background/80 hover:bg-background border border-border rounded-full w-8 h-8 flex items-center justify-center shadow-md transition-all"
+                  aria-label="Scroll left"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                </button>
+              )}
+              <div ref={projectsScrollRef} className="hide-scrollbar flex h-[360px] w-full items-start justify-start overflow-x-auto px-8">
                 <div className="flex flex-nowrap gap-5 max-w-[300px] items-center">
-                  {/* <button
-                    onClick={prevProject}
-                    className="absolute left-8 z-10 flex items-center justify-center p-4 bg-gray-200 opacity-80 rounded-full shadow hover:bg-gray-300"
-                    style={{
-                      width: "50px",
-                      height: "50px",
-                      top: "50%",
-                      transform: "translateY(-50%)",
-                    }}
-                    aria-label="Previous Project">
-                    <MingcuteArrowLeftFill className="w-14 h-14" />
-                  </button> */}
                   <ProjectCard
                     title={projects[0].title}
                     subtitle="Personal Project"
@@ -238,6 +262,15 @@ export default function About() {
                   />
                 </div>
               </div>
+              {canScrollRight && (
+                <button
+                  onClick={() => scrollProjects("right")}
+                  className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-background/80 hover:bg-background border border-border rounded-full w-8 h-8 flex items-center justify-center shadow-md transition-all"
+                  aria-label="Scroll right"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </button>
+              )}
             </div>
           </motion.div>
         </div>
