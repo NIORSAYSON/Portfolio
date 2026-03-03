@@ -1,4 +1,3 @@
-import { useTheme } from "next-themes";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -21,8 +20,6 @@ export default function ProjectOverview({
   projectTools,
   projectImages,
 }: ProjectOverviewProps) {
-  const { theme } = useTheme();
-  const [mounted, setMounted] = useState(false);
   const [sourcePage, setSourcePage] = useState("/projects");
   const router = useRouter();
 
@@ -42,7 +39,6 @@ export default function ProjectOverview({
   })();
 
   useEffect(() => {
-    setMounted(true);
     const storedSource = localStorage.getItem("projectSourcePage");
     if (storedSource) {
       setSourcePage(storedSource);
@@ -53,8 +49,6 @@ export default function ProjectOverview({
     localStorage.removeItem("projectSourcePage");
     router.push(sourcePage);
   };
-
-  const isDark = mounted && theme === "dark";
 
   return (
     <div className="xl:col-span-6 w-full">

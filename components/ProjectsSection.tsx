@@ -1,7 +1,5 @@
 import { projects } from "@/app/constants";
-import { useTheme } from "next-themes";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 
 interface ProjectsSectionProps {
   currentProjectSlug: string;
@@ -10,16 +8,9 @@ interface ProjectsSectionProps {
 export default function ProjectsSection({
   currentProjectSlug,
 }: ProjectsSectionProps) {
-  const { theme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
   const otherProjects = projects.filter(
     (project) => project.slug !== currentProjectSlug
   );
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   return (
     <div className="bg-sbackground border border-border rounded-2xl text-text mb-5">
