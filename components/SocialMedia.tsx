@@ -6,6 +6,7 @@ import {
   MdiLinkedin,
 } from "@/app/icons";
 import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 const socialLinks = [
   {
@@ -42,8 +43,12 @@ const socialLinks = [
 
 export default function SocialMedia() {
   const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
+  const isDark = mounted && theme === "dark";
+
   return (
-    <div className="flex justify-center items-center flex-nowrap gap-2 my-6">
+    <div className="flex justify-center items-center flex-nowrap gap-3 my-4">
       {socialLinks.map(({ Icon, color, label, href }) => (
         <a
           key={label}
@@ -51,13 +56,10 @@ export default function SocialMedia() {
           target={href.startsWith("mailto") ? undefined : "_blank"}
           rel="noopener noreferrer"
           aria-label={label}
-          className={`p-2 rounded-full transition-all transform hover:scale-110 ${
-            theme === "dark" ? "hover:bg-gray-700" : "hover:bg-gray-200"
-          }`}
-        >
+          className="p-2.5 rounded-full border border-border hover:border-[--navtext] hover:bg-snbackground transition-all duration-200 group">
           <Icon
-            className="h-9 w-9"
-            fill={color ?? (theme === "dark" ? "#fff" : "#000")}
+            className="h-5 w-5 transition-all duration-200"
+            fill={color ?? (isDark ? "#f0f0f0" : "#0a0a0a")}
           />
         </a>
       ))}

@@ -17,12 +17,26 @@ export default function MobileSidebar({
 
   useEffect(() => {
     if (sidebarOpen) {
-      document.body.classList.add("overflow-hidden");
+      const scrollY = window.scrollY;
+      document.body.dataset.scrollY = String(scrollY);
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = "100%";
     } else {
-      document.body.classList.remove("overflow-hidden");
+      const scrollY = parseInt(document.body.dataset.scrollY || "0", 10);
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      delete document.body.dataset.scrollY;
+      window.scrollTo(0, scrollY);
     }
     return () => {
-      document.body.classList.remove("overflow-hidden");
+      const scrollY = parseInt(document.body.dataset.scrollY || "0", 10);
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      delete document.body.dataset.scrollY;
+      if (scrollY) window.scrollTo(0, scrollY);
     };
   }, [sidebarOpen]);
 
@@ -32,10 +46,8 @@ export default function MobileSidebar({
       if (currentY <= 0) {
         setShowTopBar(true);
       } else if (currentY > lastScrollY.current) {
-        // Scrolling down
         setShowTopBar(false);
       } else if (currentY < lastScrollY.current) {
-        // Scrolling up
         setShowTopBar(true);
       }
       lastScrollY.current = currentY;
@@ -47,7 +59,6 @@ export default function MobileSidebar({
 
   return (
     <>
-      {/* Menu button for small screens */}
       {showMenuButton && (
         <TopBar
           showMenuButton={showMenuButton}
@@ -55,32 +66,32 @@ export default function MobileSidebar({
           setSidebarOpen={setSidebarOpen}
         />
       )}
-      {/* Sidebar drawer for small screens */}
+      {/* Sidebar drawer */}
       <AnimatePresence>
         {sidebarOpen && (
           <motion.div
             className="fixed inset-0 z-40 flex"
             initial={{ backgroundColor: "rgba(0,0,0,0)" }}
-            animate={{ backgroundColor: "rgba(0,0,0,0.3)" }}
+            animate={{ backgroundColor: "rgba(0,0,0,0.4)" }}
             exit={{ backgroundColor: "rgba(0,0,0,0)" }}
-            transition={{ duration: 0.3 }}>
+            transition={{ duration: 0.25 }}>
             <motion.div
-              className="bg-white w-72 h-full min-h-0 shadow-2xl overflow-y-auto flex flex-col"
+              className="bg-sbackground w-72 h-full min-h-0 border-r border-border overflow-y-auto overscroll-contain flex flex-col"
               initial={{ x: "-100%" }}
               animate={{ x: 0 }}
               exit={{ x: "-100%" }}
-              transition={{ type: "tween", duration: 0.3 }}>
+              transition={{ type: "tween", duration: 0.25 }}>
               <Sidebar />
             </motion.div>
             <div
               className="flex-1"
               onClick={() => setSidebarOpen(false)}
+              onTouchMove={(e) => e.preventDefault()}
               aria-label="Close sidebar overlay"
             />
           </motion.div>
         )}
       </AnimatePresence>
-      {/* Main content area with full background */}
       <div className="min-h-full flex flex-col">
         <main className="flex-1">{children}</main>
       </div>

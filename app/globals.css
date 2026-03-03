@@ -1,36 +1,49 @@
 @import "tailwindcss";
 
+html {
+  overflow-x: hidden;
+}
+
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
   --color-sbackground: var(--sbackground);
   --color-snbackground: var(--snbackground);
   --color-dmbackground: var(--dmbackground);
   --color-border: var(--border);
+  --font-heading: var(--font-heading);
+  --font-inter: var(--font-inter);
 }
 
 :root {
-  --background: #f5f5f5;
-  --text: #000000;
+  --background: #f7f7f7;
+  --text: #0a0a0a;
+  --text-muted: #6b7280;
   --sbackground: #ffffff;
-  --snbackground: #f5f5f5;
+  --snbackground: #f0f0f0;
   --navtext: #1b56fd;
-  --dmbackground: #c7c7c772;
-  --border: #e5e7eb;
+  --dmbackground: #e8e8e8;
+  --border: #e2e2e2;
 }
 
 .dark {
-  --background: #2c2c2c;
-  --text: #ffffff;
-  --sbackground: #121212;
-  --snbackground: #2c2c2c;
-  --dmbackground: #2c2c2c;
-  --navtext: #1b56fd;
-  --border: #1e2939;
+  --background: #0c0c0c;
+  --text: #f0f0f0;
+  --text-muted: #9ca3af;
+  --sbackground: #141414;
+  --snbackground: #1c1c1c;
+  --dmbackground: #1c1c1c;
+  --navtext: #4c8dff;
+  --border: #272727;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -39,8 +52,8 @@ body {
 }
 /* Hide scrollbar for IE, Edge and Firefox */
 .hide-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .MyGradient {

@@ -24,9 +24,14 @@ const initValues: FormValues = {
   message: "",
 };
 
+const SECTION_HEADER_CLASS = "flex items-center gap-2 px-5 pt-5 pb-1";
+const SECTION_TITLE_CLASS =
+  "text-[15px] font-semibold tracking-wide uppercase text-text-muted";
+
 export default function Contact() {
   const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
+  const isDark = mounted && theme === "dark";
 
   const [values, setValues] = useState<FormValues>(initValues);
   const [status, setStatus] = useState<
@@ -64,25 +69,6 @@ export default function Contact() {
     setMounted(true);
   }, []);
 
-  // Theme-aware classes for status messages to ensure good contrast in light mode
-  const successBoxClass =
-    theme === "dark"
-      ? "p-4 bg-green-900/30 border border-green-500 rounded-lg"
-      : "p-4 bg-green-600 border border-green-600 text-white rounded-lg";
-  const successTextClass =
-    theme === "dark"
-      ? "text-[15px] text-green-300 text-center"
-      : "text-[15px] text-white text-center";
-
-  const errorBoxClass =
-    theme === "dark"
-      ? "p-4 bg-red-900/30 border border-red-500 rounded-lg"
-      : "p-4 bg-red-600 border border-red-600 text-white rounded-lg";
-  const errorTextClass =
-    theme === "dark"
-      ? "text-[15px] text-red-300 text-center"
-      : "text-[15px] text-white text-center";
-
   const contactInfo = [
     {
       icon: MynauiLocation,
@@ -101,57 +87,53 @@ export default function Contact() {
     },
   ];
 
-
   return (
     <main className="min-h-screen w-full">
-      <div className="grid xl:grid-cols-5 w-full min-h-screen gap-0">
-        {/* Left Column - Contact Info & Social */}
-        <div className="col-span-2 w-full">
+      <div className="grid grid-cols-1 xl:grid-cols-5 w-full min-h-screen gap-5 p-5 pt-16 md:pt-5">
+        {/* Left Column */}
+        <div className="xl:col-span-2 w-full flex flex-col gap-5">
           {/* Contact Info Card */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="bg-sbackground md:rounded-xl shadow-md overflow-hidden mx-5 mt-20 md:mt-5 text-text">
-            <div className="ml-5 pt-4 flex flex-row items-center gap-1">
+            className="bg-sbackground border border-border rounded-2xl text-text">
+            <div className={SECTION_HEADER_CLASS}>
               {mounted && (
                 <MaterialSymbolsLightMailOutline
-                  className="w-8 h-8"
-                  fill={theme === "dark" ? "#fff" : "#000"}
+                  className="w-5 h-5"
+                  fill={isDark ? "#9ca3af" : "#6b7280"}
                 />
               )}
-              <span className="text-[18px] md:text-[20px] font-bold">
-                Get in Touch
-              </span>
+              <span className={SECTION_TITLE_CLASS}>Get in Touch</span>
             </div>
-
-            <div className="px-5 py-6">
-              <p className="text-[15px] md:text-[16px] mb-6 opacity-80">
+            <div className="px-5 py-4">
+              <p className="text-sm text-text-muted leading-relaxed mb-5">
                 I&rsquo;m always open to discussing new projects, creative
                 ideas, or opportunities to be part of your vision. Feel free to
                 reach out!
               </p>
-
-              {/* Contact Information */}
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {contactInfo.map((item, index) => (
                   <motion.div
                     key={index}
-                    initial={{ opacity: 0, x: -20 }}
+                    initial={{ opacity: 0, x: -16 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="flex items-center gap-4 p-3 rounded-lg border border-border hover:bg-snbackground transition-all duration-300">
+                    transition={{ duration: 0.4, delay: index * 0.08 }}
+                    className="flex items-center gap-3 p-3 rounded-xl border border-border hover:border-[--navtext] transition-all duration-200">
                     {mounted && (
-                      <item.icon
-                        className="w-6 h-6 flex-shrink-0"
-                        fill={theme === "dark" ? "#fff" : "#000"}
-                      />
+                      <div className="w-8 h-8 rounded-full border border-border flex items-center justify-center shrink-0">
+                        <item.icon
+                          className="w-4 h-4"
+                          fill={isDark ? "#f0f0f0" : "#0a0a0a"}
+                        />
+                      </div>
                     )}
-                    <div className="flex-1 min-w-0">
-                      <p className="text-xs opacity-60 mb-1">{item.label}</p>
-                      <p className="text-[15px] md:text-[16px] truncate">
-                        {item.value}
+                    <div className="min-w-0">
+                      <p className="text-[11px] text-text-muted uppercase tracking-wide">
+                        {item.label}
                       </p>
+                      <p className="text-sm truncate">{item.value}</p>
                     </div>
                   </motion.div>
                 ))}
@@ -164,50 +146,44 @@ export default function Contact() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="bg-sbackground md:rounded-xl shadow-md overflow-hidden mx-5 mt-5 text-text md:mb-5">
-            <div className="ml-5 pt-4 flex flex-row items-center gap-1">
-              <span className="text-[18px] md:text-[20px] font-bold">
-                Connect on Social Media
-              </span>
+            className="bg-sbackground border border-border rounded-2xl text-text pb-5 md:mb-5">
+            <div className={SECTION_HEADER_CLASS}>
+              <span className={SECTION_TITLE_CLASS}>Social Media</span>
             </div>
-
-            <div className="px-5 py-6">
-              <p className="text-[15px] md:text-[16px] mb-6 opacity-80">
-                Follow me on social media to stay updated with my latest
-                projects and activities.
+            <div className="px-5 py-2">
+              <p className="text-sm text-text-muted leading-relaxed mb-2">
+                Follow me to stay updated with my latest projects and
+                activities.
               </p>
-
-              {mounted && <SocialMedia />}
+              <SocialMedia />
             </div>
           </motion.div>
         </div>
 
-        {/* Right Column - Contact Form */}
-        <div className="col-span-3 w-full">
+        {/* Right Column — Contact Form */}
+        <div className="xl:col-span-3 w-full">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="bg-sbackground md:rounded-xl shadow-md overflow-hidden xl:ml-0 mx-5 mt-5 xl:mt-5 md:mr-5 text-text mb-5">
-            <div className="ml-5 pt-4 flex flex-row items-center gap-1">
+            transition={{ duration: 0.5, delay: 0.15 }}
+            className="bg-sbackground border border-border rounded-2xl text-text mb-5">
+            <div className={SECTION_HEADER_CLASS}>
               {mounted && (
                 <MaterialSymbolsLightMailOutline
-                  className="w-8 h-8"
-                  fill={theme === "dark" ? "#fff" : "#000"}
+                  className="w-5 h-5"
+                  fill={isDark ? "#9ca3af" : "#6b7280"}
                 />
               )}
-              <span className="text-[18px] md:text-[20px] font-bold">
-                Send Me a Message
-              </span>
+              <span className={SECTION_TITLE_CLASS}>Send a Message</span>
             </div>
 
-            <div className="px-5 py-6">
-              <form onSubmit={onSubmit} className="space-y-5">
-                {/* Name Field */}
+            <div className="px-5 py-4">
+              <form onSubmit={onSubmit} className="space-y-4">
+                {/* Name */}
                 <div>
                   <label
                     htmlFor="name"
-                    className="block text-[15px] md:text-[16px] font-medium mb-2">
+                    className="block text-xs font-medium text-text-muted uppercase tracking-wide mb-1.5">
                     Full Name
                   </label>
                   <input
@@ -218,15 +194,14 @@ export default function Contact() {
                     id="name"
                     type="text"
                     placeholder="John Doe"
-                    className="border border-border bg-background rounded-lg px-4 py-3 w-full text-text focus:outline-none focus:ring-2 focus:ring-[#1B56FD] transition-all duration-300"
+                    className="border border-border bg-background rounded-xl px-4 py-2.5 w-full text-sm text-text placeholder:text-text-muted focus:outline-none focus:border-[--navtext] transition-all duration-200"
                   />
                 </div>
-
-                {/* Email Field */}
+                {/* Email */}
                 <div>
                   <label
                     htmlFor="email"
-                    className="block text-[15px] md:text-[16px] font-medium mb-2">
+                    className="block text-xs font-medium text-text-muted uppercase tracking-wide mb-1.5">
                     Email Address
                   </label>
                   <input
@@ -237,15 +212,14 @@ export default function Contact() {
                     id="email"
                     type="email"
                     placeholder="john.doe@example.com"
-                    className="border border-border bg-background rounded-lg px-4 py-3 w-full text-text focus:outline-none focus:ring-2 focus:ring-[#1B56FD] transition-all duration-300"
+                    className="border border-border bg-background rounded-xl px-4 py-2.5 w-full text-sm text-text placeholder:text-text-muted focus:outline-none focus:border-[--navtext] transition-all duration-200"
                   />
                 </div>
-
-                {/* Subject Field */}
+                {/* Subject */}
                 <div>
                   <label
                     htmlFor="subject"
-                    className="block text-[15px] md:text-[16px] font-medium mb-2">
+                    className="block text-xs font-medium text-text-muted uppercase tracking-wide mb-1.5">
                     Subject
                   </label>
                   <input
@@ -256,16 +230,15 @@ export default function Contact() {
                     id="subject"
                     type="text"
                     placeholder="Project Inquiry"
-                    className="border border-border bg-background rounded-lg px-4 py-3 w-full text-text focus:outline-none focus:ring-2 focus:ring-[#1B56FD] transition-all duration-300"
+                    className="border border-border bg-background rounded-xl px-4 py-2.5 w-full text-sm text-text placeholder:text-text-muted focus:outline-none focus:border-[--navtext] transition-all duration-200"
                   />
                 </div>
-
-                {/* Message Field */}
+                {/* Message */}
                 <div>
                   <label
                     htmlFor="message"
-                    className="block text-[15px] md:text-[16px] font-medium mb-2">
-                    Your Message
+                    className="block text-xs font-medium text-text-muted uppercase tracking-wide mb-1.5">
+                    Message
                   </label>
                   <textarea
                     required
@@ -275,40 +248,37 @@ export default function Contact() {
                     id="message"
                     placeholder="Tell me about your project or idea..."
                     rows={8}
-                    className="border border-border bg-background rounded-lg px-4 py-3 w-full text-text resize-none focus:outline-none focus:ring-2 focus:ring-[#1B56FD] transition-all duration-300"
+                    className="border border-border bg-background rounded-xl px-4 py-2.5 w-full text-sm text-text placeholder:text-text-muted resize-none focus:outline-none focus:border-[--navtext] transition-all duration-200"
                   />
                 </div>
-
-                {/* Submit Button */}
+                {/* Submit */}
                 <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  whileHover={{ scale: 1.01 }}
+                  whileTap={{ scale: 0.99 }}
                   type="submit"
                   disabled={status === "loading"}
-                  className="bg-[#1B56FD] hover:bg-blue-700 text-white font-medium w-full py-3 rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg">
+                  className="bg-[--navtext] hover:opacity-90 text-white font-medium w-full py-2.5 rounded-xl text-sm transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
                   {status === "loading" ? "Sending..." : "Send Message"}
                 </motion.button>
 
-                {/* Status Messages */}
                 {status === "success" && (
                   <motion.div
-                    initial={{ opacity: 0, y: -10 }}
+                    initial={{ opacity: 0, y: -8 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className={successBoxClass}>
-                    <p className={successTextClass}>
-                      ✓ Your message was sent successfully! I&rsquo;ll get back
-                      to you soon.
+                    className="p-3 bg-green-500/10 border border-green-500/30 rounded-xl">
+                    <p className="text-sm text-green-500 text-center">
+                      Message sent successfully! I&rsquo;ll get back to you
+                      soon.
                     </p>
                   </motion.div>
                 )}
                 {status === "error" && (
                   <motion.div
-                    initial={{ opacity: 0, y: -10 }}
+                    initial={{ opacity: 0, y: -8 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className={errorBoxClass}>
-                    <p className={errorTextClass}>
-                      ✗ There was an error sending your message. Please try
-                      again.
+                    className="p-3 bg-red-500/10 border border-red-500/30 rounded-xl">
+                    <p className="text-sm text-red-500 text-center">
+                      There was an error sending your message. Please try again.
                     </p>
                   </motion.div>
                 )}

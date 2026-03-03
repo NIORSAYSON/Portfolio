@@ -25,8 +25,6 @@ export default function ChatMessage({
     setMounted(true);
   }, []);
 
-  // When this message is the last one, scroll the nearest scrollable ancestor
-  // to its bottom so the message is fully visible.
   useEffect(() => {
     if (!mounted || !isLast || !containerRef.current) return;
 
@@ -45,21 +43,17 @@ export default function ChatMessage({
         }
         parent = parent.parentElement;
       }
-      // fallback to viewport's scrolling element
       return document.scrollingElement || document.documentElement;
     };
 
-    // Wait until the browser has painted the new message/layout.
     requestAnimationFrame(() => {
       const scrollParent = getScrollParent(el);
       try {
-        // Prefer scrolling the parent to its scrollHeight to reach the very bottom
         (scrollParent as Element).scrollTo({
           top: (scrollParent as HTMLElement).scrollHeight,
           behavior: "smooth",
         });
       } catch {
-        // Fallbacks
         try {
           el.scrollIntoView({ block: "end" });
         } catch {
@@ -75,40 +69,27 @@ export default function ChatMessage({
     return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
   };
 
-  // Prevent hydration mismatch by not rendering theme-dependent content until mounted
+  const isDark = mounted && theme === "dark";
+
   if (!mounted) {
     return (
       <div
         ref={containerRef}
-        suppressHydrationWarning={true}
+        suppressHydrationWarning
         className={`flex gap-3 ${isUser ? "justify-end" : "justify-start"} ${
           isLast ? "mb-0" : "mb-4"
         }`}>
         {!isUser && (
-          <div className="flex-shrink-0">
-            <div className="w-8 h-8 rounded-full bg-gray-200" />
-          </div>
+          <div className="w-8 h-8 rounded-full bg-border shrink-0" />
         )}
         <div
-          className={`flex flex-col max-w-[75%] md:max-w-[60%] ${
-            isUser ? "items-end" : "items-start"
+          className={`rounded-2xl px-4 py-2.5 max-w-[75%] md:max-w-[65%] ${
+            isUser ? "bg-[--navtext] text-white" : "bg-snbackground border border-border"
           }`}>
-          <div
-            className={`rounded-2xl px-4 py-2.5 ${
-              isUser ? "bg-[#1B56FD] text-white" : "bg-gray-400 text-black"
-            }`}>
-            <p className="text-sm md:text-base whitespace-pre-wrap break-words">
-              {message}
-            </p>
-          </div>
-          {/* Don't render the timestamp on the server/pre-mount to avoid
-              locale/timezone hydration mismatches. It will be rendered
-              after client mount in the mounted branch. */}
+          <p className="text-sm whitespace-pre-wrap wrap-break-word">{message}</p>
         </div>
         {isUser && (
-          <div className="flex-shrink-0">
-            <div className="w-8 h-8 rounded-full bg-[#1B56FD]" />
-          </div>
+          <div className="w-8 h-8 rounded-full bg-[--navtext] shrink-0" />
         )}
       </div>
     );
@@ -117,46 +98,44 @@ export default function ChatMessage({
   return (
     <div
       ref={containerRef}
-      suppressHydrationWarning={true}
+      suppressHydrationWarning
       className={`flex gap-3 ${isUser ? "justify-end" : "justify-start"} ${
         isLast ? "mb-0" : "mb-4"
       }`}>
       {!isUser && (
-        <div className="flex-shrink-0">
+        <div className="shrink-0">
           <Image
             src="/profile.jpg"
-            alt="User"
+            alt="Assistant"
             width={32}
             height={32}
-            className="rounded-full object-cover"
+            className="rounded-full object-cover ring-1 ring-border"
           />
         </div>
       )}
       <div
-        className={`flex flex-col max-w-[75%] md:max-w-[60%] ${
+        className={`flex flex-col max-w-[75%] md:max-w-[65%] ${
           isUser ? "items-end" : "items-start"
         }`}>
         <div
           className={`rounded-2xl px-4 py-2.5 ${
             isUser
-              ? "bg-[#1B56FD] text-white"
-              : theme === "dark"
-              ? "bg-[#222222] text-white"
-              : "bg-gray-200 text-black"
+              ? "bg-[--navtext] text-white"
+              : isDark
+              ? "bg-snbackground border border-border text-text"
+              : "bg-snbackground border border-border text-text"
           }`}>
-          <p className="text-sm md:text-base whitespace-pre-wrap break-words">
-            {message}
-          </p>
+          <p className="text-sm whitespace-pre-wrap wrap-break-word">{message}</p>
         </div>
         {timestamp && (
-          <span className="text-xs opacity-50 mt-1 px-1">
+          <span className="text-[11px] text-text-muted mt-1 px-1">
             {formatTime(timestamp)}
           </span>
         )}
       </div>
       {isUser && (
-        <div className="flex-shrink-0">
-          <div className="w-8 h-8 rounded-full bg-[#1B56FD] flex items-center justify-center text-white font-semibold text-sm leading-none">
+        <div className="shrink-0">
+          <div className="w-8 h-8 rounded-full bg-[--navtext] flex items-center justify-center text-white shrink-0">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="w-4 h-4"

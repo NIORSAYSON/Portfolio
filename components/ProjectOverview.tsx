@@ -1,4 +1,3 @@
-import { WeuiBackFilled } from "@/app/icons";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -27,16 +26,11 @@ export default function ProjectOverview({
   const [sourcePage, setSourcePage] = useState("/projects");
   const router = useRouter();
 
-  // Determine if the provided link should be treated as a repository/source-only link.
-  // We treat explicit GitHub links as repository links, and also handle a couple
-  // of known project-name cases (notes-app / task-manager) which are not deployed
-  // and only have repository links.
   const isRepositoryLink = (() => {
     if (!projectLink) return false;
     const link = projectLink.link || "";
     const name = projectName ? projectName.toLowerCase() : "";
     if (link.includes("github.com")) return true;
-    // handle common variants of the two projects mentioned
     if (
       name.includes("notes") ||
       name.includes("task") ||
@@ -49,118 +43,94 @@ export default function ProjectOverview({
 
   useEffect(() => {
     setMounted(true);
-    // Get the source page from localStorage
     const storedSource = localStorage.getItem("projectSourcePage");
     if (storedSource) {
       setSourcePage(storedSource);
-      console.log("Retrieved source page from localStorage:", storedSource);
     }
   }, []);
 
   const handleBack = () => {
-    // Clear the stored source page
     localStorage.removeItem("projectSourcePage");
     router.push(sourcePage);
   };
 
+  const isDark = mounted && theme === "dark";
+
   return (
-    <div className="col-span-2 xl:col-span-6 w-full">
-      <div className="bg-sbackground relative md:mx-5 md:rounded-xl xl:mb-5 text-text mt-20 md:mt-5 shadow-md">
+    <div className="xl:col-span-6 w-full">
+      <div className="bg-sbackground border border-border rounded-2xl text-text mt-16 md:mt-0 mb-5">
         {/* Back Button */}
-        <button
-          onClick={handleBack}
-          className="ml-5 pt-4 flex flex-row items-center gap-3 cursor-pointer hover:underline group">
-          {mounted && (
-            <WeuiBackFilled
-              className="w-7 h-7 items-center justify-center transition-colors duration-200 group-hover:fill-blue-500"
-              fill={theme === "dark" ? "#fff" : "#000"}
-            />
-          )}
-          <span className="text-[18px] md:text-[18px] font-bold text-center ">
-            Back
-          </span>
-        </button>
-        {/* Project Overview */}
-        <div className="flex flex-col h-full w-full items-start justify-start overflow-x-auto p-10">
-          {/* Project Title */}
-          <div className="text-[18px] md:text-[20px] font-bold">
-            <div className="flex justify-between items-center gap-6">
-              <div>
-                <h3 className="text-xl font-semibold">{projectName}</h3>
-              </div>
-              <p className="text-sm px-4 py-1 rounded-full border border-[#3D444D]">
-                {projectSubtitle}
-              </p>
-            </div>
+        <div className="px-5 pt-5">
+          <button
+            onClick={handleBack}
+            className="flex items-center gap-2 text-sm text-text-muted hover:text-[--navtext] transition-colors duration-200 group">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-4 h-4"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round">
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+            <span>Back</span>
+          </button>
+        </div>
+
+        {/* Project content */}
+        <div className="p-4 md:p-6">
+          {/* Header */}
+          <div className="flex items-start justify-between gap-3 mb-3">
+            <h1 className="text-lg md:text-xl font-semibold min-w-0 flex-1 leading-snug">
+              {projectName}
+            </h1>
+            <span className="text-[11px] px-2.5 py-1 rounded-full border border-border text-text-muted shrink-0 max-w-[40%] truncate text-right">
+              {projectSubtitle}
+            </span>
           </div>
-          {/* Project Subtitle */}
+
+          {/* Link */}
           {projectLink && (
-            <div className="text-[13px] md:text-[15px] mt-2 text-[#808080]">
-              {isRepositoryLink ? (
-                <>
-                  Repository:{" "}
-                  <a
-                    href={projectLink.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="underline text-[#1B56FD]">
-                    {projectLink.linkName}
-                  </a>
-                </>
-              ) : (
-                <>
-                  Hosted and showcased the project on:{" "}
-                  <a
-                    href={projectLink.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="underline text-[#1B56FD]">
-                    {projectLink.linkName}
-                  </a>
-                </>
-              )}
-            </div>
+            <p className="text-sm text-text-muted mb-4">
+              {isRepositoryLink ? "Repository: " : "Live at: "}
+              <a
+                href={projectLink.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[--navtext] hover:underline">
+                {projectLink.linkName}
+              </a>
+            </p>
           )}
-          {/* Project Tools */}
-          <div className="mt-2">
-            <div className="flex gap-2 flex-wrap">
-              {projectTools.map((tool, idx) => (
-                <span
-                  key={idx}
-                  className="text-xs px-3 py-1 rounded-md border border-[#3D444D] 
-                      md:text-xs md:px-3 md:py-1
-                      sm:text-[10px] sm:px-2 sm:py-0.5
-                      ">
-                  {tool}
-                </span>
-              ))}
-            </div>
+
+          {/* Tools */}
+          <div className="flex flex-wrap gap-2 mb-6">
+            {projectTools.map((tool, idx) => (
+              <span
+                key={idx}
+                className="text-xs px-2.5 py-1 rounded-lg border border-border text-text-muted">
+                {tool}
+              </span>
+            ))}
           </div>
-          {/* Project Image */}
-          <div className="mt-4 flex flex-col items-center justify-center w-full gap-4">
+
+          {/* Images */}
+          <div className="flex flex-col gap-6">
             {projectImages.map((src, idx) => (
               <div
                 key={idx}
-                className="w-full flex justify-center mt-5"
-                style={{ maxWidth: 900 }}>
-                <div
-                  className="rounded-lg shadow-md overflow-hidden bg-black/5"
-                  style={{ width: "100%", maxHeight: 720 }}>
-                  <Image
-                    src={src}
-                    alt={`${projectName} screenshot ${idx + 1}`}
-                    width={900}
-                    height={720}
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "contain",
-                    }}
-                    sizes="(max-width: 768px) 100vw, 900px"
-                    className="bg-black/5"
-                    priority={idx === 0}
-                  />
-                </div>
+                className="w-full rounded-xl overflow-hidden border border-border bg-snbackground">
+                <Image
+                  src={src}
+                  alt={`${projectName} screenshot ${idx + 1}`}
+                  width={900}
+                  height={720}
+                  style={{ width: "100%", height: "auto", objectFit: "contain" }}
+                  sizes="(max-width: 768px) 100vw, 900px"
+                  priority={idx === 0}
+                />
               </div>
             ))}
           </div>

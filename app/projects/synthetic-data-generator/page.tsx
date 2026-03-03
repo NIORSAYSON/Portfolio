@@ -19,7 +19,7 @@ export default function SyntheticDataGenerator() {
 
   return (
     <main className="min-h-screen w-full">
-      <div className="grid xl:grid-cols-9 w-full min-h-screen">
+      <div className="grid grid-cols-1 xl:grid-cols-9 w-full min-h-screen gap-5 p-5 pt-16 md:pt-5">
         {/* Right Column */}
         <ProjectOverview
           projectName={current.title}
@@ -30,21 +30,21 @@ export default function SyntheticDataGenerator() {
         />
 
         {/* Left Column */}
-        <div className="col-span-2 xl:col-span-3 w-full text-text">
+        <div className="xl:col-span-3 w-full text-text flex flex-col gap-5">
           {/* About Section */}
-          <div className="bg-sbackground relative xl:mr-5 md:mx-5 xl:ml-0 md:rounded-xl xl:mb-5 text-text mt-2 md:mt-5 shadow-md">
-            <div className="ml-5 pt-4 flex flex-row items-center gap-1">
+          <div className="bg-sbackground border border-border rounded-2xl text-text">
+            <div className="px-5 pt-5 pb-2 flex items-center gap-2">
               {mounted && (
                 <MaterialSymbolsLightInfoOutlineRounded
-                  className="w-8 h-8 items-center justify-center"
-                  fill={theme === "dark" ? "#fff" : "#000"}
+                  className="w-5 h-5"
+                  fill={mounted && theme === "dark" ? "#9ca3af" : "#6b7280"}
                 />
               )}
-              <span className="text-[18px] md:text-[20px] font-bold text-center ">
+              <span className="text-[15px] font-semibold tracking-wide uppercase text-text-muted">
                 About
               </span>
             </div>
-            <div className="whitespace-pre-line mx-10 mt-5 pb-5 text-[13px] md:text-[15px]">
+            <div className="px-5 pb-5 text-sm text-text-muted leading-relaxed whitespace-pre-line">
               {current.description}
             </div>
           </div>

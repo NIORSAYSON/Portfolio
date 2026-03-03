@@ -1,4 +1,3 @@
-import { useTheme } from "next-themes";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -12,6 +11,7 @@ interface ProjectProps {
   slug: string;
   source?: string;
 }
+
 export default function ProjectCard({
   title,
   subtitle,
@@ -21,7 +21,6 @@ export default function ProjectCard({
   slug,
   source = "/projects",
 }: ProjectProps) {
-  const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const router = useRouter();
 
@@ -30,63 +29,47 @@ export default function ProjectCard({
   }, []);
 
   const handleViewProject = () => {
-    // Store the source page in localStorage
     localStorage.setItem("projectSourcePage", source);
-    console.log("Setting source page to:", source);
     router.push(`/projects/${slug}`);
   };
 
   return (
-    <div className="flex flex-col min-w-[280px] my-5 text-text rounded-2xl border-1 border-gray-400">
-      <div className="relative w-[280px] h-40 flex items-center justify-center">
+    <div className="flex flex-col min-w-[240px] my-3 text-text rounded-xl border border-border hover:border-[--navtext] transition-all duration-200 group overflow-hidden bg-sbackground">
+      <div className="relative w-[240px] h-32">
         <Image
           src={image}
-          alt="Project Card"
+          alt="Project screenshot"
           fill
-          sizes="(max-width: 768px) 100vw, 70vw"
-          className="object-cover rounded-t-2xl"
+          sizes="240px"
+          className="object-cover"
         />
       </div>
-      <div className="w-[280px] h-40 flex flex-col items-center">
-        <span className="font-bold text-base px-1 text-center">{title}</span>
+      <div className="w-[240px] flex flex-col flex-1 p-3">
+        <span className="font-semibold text-sm leading-tight">{title}</span>
         {subtitle && (
-          <span className="text-sm font-semibold px-1 text-center pb-2">
-            ({subtitle})
-          </span>
+          <span className="text-xs text-text-muted mt-0.5">{subtitle}</span>
         )}
-        <span className="text-[11px] text-center px-6 mb-2 line-clamp-2">
+        <p className="text-xs text-text-muted mt-2 line-clamp-2 leading-relaxed flex-1">
           {description}
-        </span>
+        </p>
         {mounted && (
-          <div className="flex text-[12px] gap-2">
+          <div className="flex gap-2 mt-3">
             {link ? (
               <>
                 <button
-                  className={`border-1 border-gray-400 bg-background mt-2 py-2 px-7 rounded-lg transition ${
-                    theme === "dark"
-                      ? "hover:bg-white hover:text-black"
-                      : "hover:bg-black hover:text-white"
-                  }`}
+                  className="flex-1 text-xs border border-border py-1.5 px-3 rounded-lg hover:border-[--navtext] hover:text-[--navtext] transition-all duration-200"
                   onClick={() => window.open(link, "_blank")}>
                   Live Site
                 </button>
                 <button
-                  className={`border-1 border-gray-400 bg-background mt-2 py-2 px-4 rounded-lg transition ${
-                    theme === "dark"
-                      ? "hover:bg-white hover:text-black"
-                      : "hover:bg-black hover:text-white"
-                  }`}
+                  className="flex-1 text-xs border border-border py-1.5 px-3 rounded-lg hover:border-[--navtext] hover:text-[--navtext] transition-all duration-200"
                   onClick={handleViewProject}>
-                  View Project
+                  Details
                 </button>
               </>
             ) : (
               <button
-                className={`border-1 border-gray-400 bg-background py-2 mt-2 px-18 rounded-lg transition ${
-                  theme === "dark"
-                    ? "hover:bg-white hover:text-black"
-                    : "hover:bg-black hover:text-white"
-                }`}
+                className="w-full text-xs border border-border py-1.5 px-3 rounded-lg hover:border-[--navtext] hover:text-[--navtext] transition-all duration-200"
                 onClick={handleViewProject}>
                 View Project
               </button>
@@ -95,17 +78,5 @@ export default function ProjectCard({
         )}
       </div>
     </div>
-    // <div className="relative flex flex-col w-[280px] min-w-[280px] h-80 my-5 text-text rounded-2xl border-1 border-gray-400">
-    //   <div className="flex ">
-    //     <Image
-    //       src={image}
-    //       alt="Project Card"
-    //       fill
-    //       sizes="(max-width: 768px) 100vw, 70vw"
-    //       className="object-cover rounded-t-2xl"
-    //     />
-    //   </div>
-    //   <div className="flex">Te</div>
-    // </div>
   );
 }

@@ -1,9 +1,9 @@
-import Image from "next/image";
 import { JamMenu } from "../app/icons";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 interface TopBarProps {
   showMenuButton: boolean;
@@ -28,33 +28,31 @@ export default function TopBar({
       {showMenuButton && showTopBar && (
         <motion.div
           key="topbar"
-          initial={{ y: -80, opacity: 0 }}
+          initial={{ y: -64, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          exit={{ y: -80, opacity: 0 }}
-          transition={{ type: "tween", duration: 0.3 }}
-          className="fixed top-0 left-0 w-full h-16 bg-sbackground z-40 flex items-center justify-between px-4 shadow">
+          exit={{ y: -64, opacity: 0 }}
+          transition={{ type: "tween", duration: 0.25 }}
+          className="fixed top-0 left-0 w-full h-14 bg-sbackground/90 backdrop-blur-sm border-b border-border z-40 flex items-center justify-between px-4">
           <button
-            className="lg:hidden fixed top-4 left-4 z-50"
+            className="flex items-center justify-center w-9 h-9 rounded-lg hover:bg-snbackground transition-colors duration-200"
             onClick={() => setSidebarOpen(true)}
             aria-label="Open menu">
             {mounted && (
               <JamMenu
-                className="inline-block w-9 h-9"
-                fill={theme === "dark" ? "#fff" : "#000"}
+                className="w-5 h-5"
+                fill={theme === "dark" ? "#f0f0f0" : "#0a0a0a"}
               />
             )}
           </button>
-          <div className="flex-1 items-center justify-end flex">
-            <Link href="/">
-              <Image
-                src="/logo.png"
-                alt="Logo"
-                width={40}
-                height={40}
-                style={{ cursor: "pointer" }}
-              />
-            </Link>
-          </div>
+          <Link href="/" aria-label="Home">
+            <Image
+              src="/logo.png"
+              alt="Logo"
+              width={32}
+              height={32}
+              className="object-contain"
+            />
+          </Link>
         </motion.div>
       )}
     </AnimatePresence>

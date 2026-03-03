@@ -14,26 +14,27 @@ interface SkillsTickerProps {
 
 export default function SkillsTicker({ images, from, to }: SkillsTickerProps) {
   return (
-    <main>
+    <div className="overflow-hidden w-full">
       <motion.div
         initial={{ x: `${from}` }}
         animate={{ x: `${to}` }}
         transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-        className="flex flex-shrink-0 my-2 mx-2">
+        className="flex shrink-0 my-2 mx-2"
+        style={{ willChange: "transform" }}>
         {[...images, ...images].map((icon, idx) => (
           <Image
             key={idx}
             src={icon.src}
             alt={icon.title}
             title={icon.title}
-            width={80}
-            height={80}
-            className="ml-2"
+            width={72}
+            height={72}
+            className="ml-2 shrink-0"
             draggable={false}
             loading="eager"
           />
         ))}
       </motion.div>
-    </main>
+    </div>
   );
 }

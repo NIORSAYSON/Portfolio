@@ -5,66 +5,59 @@ import {
   MaterialSymbolsLightDownloadSharp,
   SolarDocumentOutline,
 } from "../icons";
+import { motion } from "framer-motion";
 
-export default function About() {
+const SECTION_HEADER_CLASS = "flex items-center gap-2 px-5 pt-5 pb-1";
+const SECTION_TITLE_CLASS =
+  "text-[15px] font-semibold tracking-wide uppercase text-text-muted";
+
+export default function Resume() {
   const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
+  const isDark = mounted && theme === "dark";
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
   return (
-    <main className="min-h-screen w-full md:px-5">
-      <div className="bg-sbackground md:rounded-xl shadow-md overflow-hidden md:mx-5 mt-20 md:mt-5 text-text">
-        <div className="ml-10 pt-10 flex items-center justify-between">
-          <div className="flex items-center gap-2">
+    <main className="min-h-screen w-full p-5 pt-16 md:pt-5">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="bg-sbackground border border-border rounded-2xl text-text">
+        <div className="flex items-center justify-between pr-5">
+          <div className={SECTION_HEADER_CLASS}>
             {mounted && (
               <SolarDocumentOutline
-                className="w-8 h-8"
-                fill={theme === "dark" ? "#fff" : "#000"}
+                className="w-5 h-5"
+                fill={isDark ? "#9ca3af" : "#6b7280"}
               />
             )}
-            <span className="text-[18px] md:text-[20px] font-bold">Resume</span>
+            <span className={SECTION_TITLE_CLASS}>Resume</span>
           </div>
           {mounted && (
             <a
               href="/Nestor B. Sayson Jr - Resume 2025.pdf"
               download
-              className={`flex items-center gap-1 text-base px-2 md:px-10 mr-10 py-1 border border-text rounded-sm transition ${
-                theme === "dark" ? "hover:bg-gray-700" : "hover:bg-gray-100"
-              }`}>
+              className="flex items-center gap-1.5 text-xs font-medium px-4 py-1.5 rounded-lg border border-border hover:border-[--navtext] hover:text-[--navtext] transition-all duration-200">
               <MaterialSymbolsLightDownloadSharp
-                className="w-5 h-5"
-                fill={theme === "dark" ? "#fff" : "#000"}
+                className="w-4 h-4"
+                fill={isDark ? "#f0f0f0" : "#0a0a0a"}
               />
               <span>Download</span>
             </a>
           )}
         </div>
-        {/* Embed PDF */}
-        {/* <div
-            className="mt-4 w-full border border-gray-300 rounded-lg overflow-hidden"
-            style={{ height: "70vh" }}>
-            <iframe
-              src="/Nestor Sayson Jr Developer Resume.pdf"
-              className="w-full h-full"
-              style={{ minHeight: "500px" }}
-              //   frameBorder="0"
-            />
-          </div> */}
-        <div className="m-10 h-[70vh] md:h-[calc(100vh-180px)] border border-gray-300 rounded-lg overflow-hidden">
-          {/* <embed
-            src="/Nestor Sayson Jr Developer Resume.pdf#toolbar=0"
-            type="application/pdf"
-            className="w-full h-full"
-          /> */}
+        <div className="m-5 rounded-xl overflow-hidden border border-border" style={{ height: "calc(100vh - 140px)", minHeight: "500px" }}>
           <iframe
             src="/Nestor B. Sayson Jr - Resume 2025.pdf#toolbar=0&navpanes=0&scrollbar=0"
             className="w-full h-full"
             allow="autoplay; fullscreen"
           />
         </div>
-      </div>
+      </motion.div>
     </main>
   );
 }

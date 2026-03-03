@@ -1,6 +1,6 @@
 "use client";
 
-import { Roboto } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import Image from "next/image";
 import {
   BiPersonCheck,
@@ -27,11 +27,17 @@ import Accordion from "@/components/Accordion";
 import ContributionCalendar from "@/components/GithubContributions";
 import { useTheme } from "next-themes";
 import SocialMedia from "@/components/SocialMedia";
+import Link from "next/link";
 
-const roboto = Roboto({
+const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
+  weight: ["600", "700"],
 });
+
+const SECTION_HEADER_CLASS =
+  "flex items-center gap-2 px-5 pt-5 pb-1";
+const SECTION_TITLE_CLASS =
+  "text-[15px] font-semibold tracking-wide uppercase text-text-muted";
 
 export default function HomePage() {
   const [day, setDay] = useState("");
@@ -44,6 +50,8 @@ export default function HomePage() {
   const projectsScrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+
+  const isDark = mounted && theme === "dark";
 
   const updateScrollState = () => {
     const el = projectsScrollRef.current;
@@ -95,7 +103,7 @@ export default function HomePage() {
         clearInterval(interval);
         setTimeout(() => {
           setCurrentSentence((prev) => (prev + 1) % typewriterTexts.length);
-        }, 1500); // Pause before next sentence
+        }, 1500);
       }
     }, 30);
     return () => clearInterval(interval);
@@ -103,76 +111,103 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen w-full">
-      <div className="grid xl:grid-cols-6 w-full min-h-screen">
-        {/* First Column */}
-        <div className="col-span-2 xl:col-span-4 w-full">
-          {/* Home Background with typewriter */}
+      <div className="grid grid-cols-1 xl:grid-cols-6 w-full min-h-screen gap-4 p-4 pt-16 md:pt-5 md:gap-5 md:p-5">
+        {/* Left Column */}
+        <div className="xl:col-span-4 w-full flex flex-col gap-5">
+          {/* Hero Card */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="h-[40vh] md:h-[40vh] mt-20 md:mt-5 relative mx-5 mb-5 xl:mr-0">
-            <Image
-              src="/Home Background.png"
-              alt="Home Background"
-              layout="fill"
-              objectFit="cover"
-              priority
-              className="rounded-2xl"
-            />
-            <div
-              className="pointer-events-none absolute inset-0 rounded-2xl"
-              style={{
-                boxShadow: "inset 0 -120px 100px 10px rgba(0,0,0,0.5)",
-              }}>
-              <div className="text-white rounded px-5 py-3 text-xs md:text-lg font-bold">
-                {day && date ? (
-                  <>
-                    {day.slice(0, 3)}, {date}
-                  </>
-                ) : (
-                  <span>Loading...</span>
-                )}
+            className="bg-sbackground border border-border rounded-2xl overflow-hidden">
+            <div className="relative w-full h-[38vh] min-h-[220px]">
+              <Image
+                src="/Home Background.png"
+                alt="Home Background"
+                fill
+                sizes="(max-width: 768px) 100vw, 66vw"
+                priority
+                className="object-cover"
+              />
+              {/* Gradient overlay */}
+              <div
+                className="absolute inset-0"
+                style={{
+                  background:
+                    "linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.65) 100%)",
+                }}>
+                <div className="absolute top-4 left-5 text-white/70 text-xs font-medium">
+                  {day && date ? (
+                    <>
+                      {day.slice(0, 3)}, {date}
+                    </>
+                  ) : null}
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 px-6 pb-6">
+                  <motion.h1
+                    className={`text-white text-2xl sm:text-3xl font-semibold leading-tight ${plusJakarta.className}`}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5 }}>
+                    {displayedText}
+                    <span className="animate-pulse opacity-70">|</span>
+                  </motion.h1>
+                  <div className="flex gap-3 mt-4">
+                    <Link
+                      href="/projects"
+                      className="text-sm font-medium px-4 py-2 rounded-lg bg-white text-[#0a0a0a] hover:bg-white/90 transition-all duration-200">
+                      View Projects
+                    </Link>
+                    <Link
+                      href="/chat"
+                      className="text-sm font-medium px-4 py-2 rounded-lg bg-white/15 text-white border border-white/30 hover:bg-white/25 transition-all duration-200">
+                      Chat with Me
+                    </Link>
+                  </div>
+                </div>
               </div>
-              <motion.h1
-                className={`absolute bottom-6 text-center text-white text-xl sm:text-3xl font-semibold px-4 ${roboto.className}`}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}>
-                {displayedText}
-                <span className="animate-pulse">|</span>
-              </motion.h1>
             </div>
           </motion.div>
+
           {/* Projects Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="bg-sbackground relative md:mx-5 md:rounded-xl md:mb-5 xl:mr-0 text-text">
-            <div className="ml-5 pt-4 flex flex-row items-center gap-1">
+            className="bg-sbackground border border-border rounded-2xl text-text">
+            <div className={SECTION_HEADER_CLASS}>
               {mounted && (
                 <MdiLightPin
-                  className="w-7 h-7 items-center justify-center"
-                  fill={theme === "dark" ? "#fff" : "#000"}
+                  className="w-5 h-5"
+                  fill={isDark ? "#9ca3af" : "#6b7280"}
                 />
               )}
-              <span className="text-[18px] md:text-[20px] font-bold text-center">
-                Projects
-              </span>
+              <span className={SECTION_TITLE_CLASS}>Pinned Projects</span>
             </div>
-            <div className="mx-5 relative">
+            <div className="px-5 relative pb-4">
               {canScrollLeft && (
                 <button
                   onClick={() => scrollProjects("left")}
-                  className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-background/80 hover:bg-background border border-border rounded-full w-8 h-8 flex items-center justify-center shadow-md transition-all"
-                  aria-label="Scroll left"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                  className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-sbackground border border-border rounded-full w-8 h-8 flex items-center justify-center hover:border-[--navtext] transition-all duration-200"
+                  aria-label="Scroll left">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round">
+                    <polyline points="15 18 9 12 15 6" />
+                  </svg>
                 </button>
               )}
-              <div ref={projectsScrollRef} className="hide-scrollbar flex h-[360px] w-full items-start justify-start overflow-x-auto px-8">
-                <div className="flex flex-nowrap gap-5 max-w-[300px]">
+              <div
+                ref={projectsScrollRef}
+                className="hide-scrollbar flex h-[320px] w-full items-start justify-start overflow-x-auto">
+                <div className="flex flex-nowrap gap-4">
                   <ProjectCard
                     title={projects[0].title}
                     subtitle="Personal Project"
@@ -201,7 +236,7 @@ export default function HomePage() {
                   />
                   <ProjectCard
                     title={projects[5].title}
-                    subtitle="Human Computer Interaction Project"
+                    subtitle="HCI Project"
                     image="/Projects/SIAS Project.png"
                     description={projects[5].description}
                     slug={projects[5].slug}
@@ -210,7 +245,7 @@ export default function HomePage() {
                   />
                   <ProjectCard
                     title={projects[6].title}
-                    subtitle="Modeling and Simulation Project"
+                    subtitle="Modeling & Simulation"
                     image="/Projects/Modeling and Simulation Project.png"
                     description={projects[6].description}
                     slug={projects[6].slug}
@@ -219,7 +254,7 @@ export default function HomePage() {
                   />
                   <ProjectCard
                     title={projects[7].title}
-                    subtitle="Applied Cryptography Project"
+                    subtitle="Applied Cryptography"
                     image="/Projects/Cryptographic App Project.png"
                     description={projects[7].description}
                     slug={projects[7].slug}
@@ -231,191 +266,179 @@ export default function HomePage() {
               {canScrollRight && (
                 <button
                   onClick={() => scrollProjects("right")}
-                  className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-background/80 hover:bg-background border border-border rounded-full w-8 h-8 flex items-center justify-center shadow-md transition-all"
-                  aria-label="Scroll right"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                  className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-sbackground border border-border rounded-full w-8 h-8 flex items-center justify-center hover:border-[--navtext] transition-all duration-200"
+                  aria-label="Scroll right">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round">
+                    <polyline points="9 18 15 12 9 6" />
+                  </svg>
                 </button>
               )}
             </div>
           </motion.div>
-          {/* Contributions Section */}
+
+          {/* GitHub Contributions */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="bg-sbackground text-text mt-2 relative md:mx-5 md:rounded-xl xl:mb-5 xl:mr-0">
-            <div className="ml-5 pt-4 flex flex-row items-center gap-1">
+            className="bg-sbackground border border-border rounded-2xl text-text pb-4">
+            <div className={SECTION_HEADER_CLASS}>
               {mounted && (
                 <CodiconGithubAlt
-                  className="w-7 h-7 items-center justify-center"
-                  fill={theme === "dark" ? "#fff" : "#000"}
+                  className="w-5 h-5"
+                  fill={isDark ? "#9ca3af" : "#6b7280"}
                 />
               )}
-              <span className="text-[18px] md:text-[20px] font-bold text-center">
-                GitHub Contributions
-              </span>
+              <span className={SECTION_TITLE_CLASS}>GitHub Contributions</span>
             </div>
-            <div className="mx-5 justify-center items-center text-center">
+            <div className="px-5">
               <ContributionCalendar />
             </div>
           </motion.div>
         </div>
 
-        {/* Second Column */}
-        <div className="col-span-2 xl:col-span-2 w-full text-text">
+        {/* Right Column */}
+        <div className="xl:col-span-2 w-full flex flex-col gap-5 text-text">
           {/* Skills Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="bg-sbackground mt-2 md:mt-5 relative md:mx-5 md:rounded-xl md:mb-5">
-            <div className="ml-5 pt-4 flex flex-row items-center gap-1">
+            className="bg-sbackground border border-border rounded-2xl pb-4">
+            <div className={SECTION_HEADER_CLASS}>
               {mounted && (
                 <GrommetIconsTechnology
-                  className="w-7 h-7 items-center justify-center"
-                  fill={theme === "dark" ? "#fff" : "#000"}
+                  className="w-5 h-5"
+                  fill={isDark ? "#9ca3af" : "#6b7280"}
                 />
               )}
-              <span className="text-[18px] md:text-[20px] font-bold text-center">
-                Skills
-              </span>
+              <span className={SECTION_TITLE_CLASS}>Tech Stack</span>
             </div>
-            <div className="mx-5 my-3">
+            <div className="px-5 mt-2">
               <div className="w-full h-[200px] overflow-hidden MyGradient">
                 <SkillsTicker images={skillIcons1} from={0} to={"-100%"} />
                 <SkillsTicker images={skillIcons2} from={"-100%"} to={0} />
               </div>
             </div>
           </motion.div>
+
           {/* Expertise Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="bg-sbackground text-text mt-2 xl:mt-0 relative pb-5 md:mx-5 md:rounded-xl md:mb-5">
-            <div className="ml-5 pt-4 flex flex-row items-center gap-1">
+            className="bg-sbackground border border-border rounded-2xl text-text pb-5">
+            <div className={SECTION_HEADER_CLASS}>
               {mounted && (
                 <BiPersonCheck
-                  className="w-7 h-7 items-center justify-center mr-1"
-                  fill={theme === "dark" ? "#fff" : "#000"}
+                  className="w-5 h-5"
+                  fill={isDark ? "#9ca3af" : "#6b7280"}
                 />
               )}
-              <span className="text-[18px] md:text-[20px] font-bold text-center">
-                Expertise
-              </span>
+              <span className={SECTION_TITLE_CLASS}>Expertise</span>
             </div>
-            <div className="mt-5 relative rounded-xl border-3 border-border shadow-md p-4 mx-5">
+            <div className="px-5 mt-3">
               <Accordion
                 i={0}
                 expanded={expanded}
                 setExpanded={setExpanded}
                 accordionTitle="Web Development"
-                className="mb-2 bg-sbackground text-text"
                 icon={
                   <SolarCodeLineDuotone
-                    className="mr-2"
-                    fill={theme === "dark" ? "#fff" : "#000"}
+                    className="w-4 h-4"
+                    fill={isDark ? "#f0f0f0" : "#0a0a0a"}
                   />
                 }>
-                <div className="text-sm border border-gray-200 px-4 py-2 rounded-b-lg">
-                  I specialize in front-end web development, where I build
+                <p className="text-sm text-text-muted px-1 py-2 leading-relaxed">
+                  I specialize in front-end web development, building
                   responsive and user-friendly websites using modern
-                  technologies. I focus on creating clean, interactive
-                  interfaces that provide a smooth and engaging experience for
-                  users across all devices, and I integrate APIs to connect the
-                  front end with dynamic data and external services.
-                </div>
+                  technologies. I focus on clean, interactive interfaces and
+                  integrating APIs.
+                </p>
               </Accordion>
               <Accordion
                 i={1}
                 expanded={expanded}
                 setExpanded={setExpanded}
                 accordionTitle="Machine Learning"
-                className="mb-2"
                 icon={
                   <CarbonMachineLearning
-                    className="mr-2 w-6 h-6"
-                    fill={theme === "dark" ? "#fff" : "#000"}
+                    className="w-4 h-4"
+                    fill={isDark ? "#f0f0f0" : "#0a0a0a"}
                   />
                 }>
-                <div className="text-sm  text-text border border-gray-200 px-4 py-2 rounded-b-lg">
-                  I explore machine learning by building models that can analyze
-                  data, recognize patterns, and make predictions. I work on
-                  training, testing, and improving these models to solve
-                  real-world problems using tools like Python and popular ML
-                  libraries.
-                </div>
+                <p className="text-sm text-text-muted px-1 py-2 leading-relaxed">
+                  I explore machine learning by building models that analyze
+                  data, recognize patterns, and make predictions using Python
+                  and popular ML libraries.
+                </p>
               </Accordion>
               <Accordion
                 i={2}
                 expanded={expanded}
                 setExpanded={setExpanded}
-                accordionTitle="Large Language Model"
-                className="mb-2"
+                accordionTitle="Large Language Models"
                 icon={
                   <PhOpenAiLogo
-                    className="mr-2 w-6 h-6"
-                    fill={theme === "dark" ? "#fff" : "#000"}
+                    className="w-4 h-4"
+                    fill={isDark ? "#f0f0f0" : "#0a0a0a"}
                   />
                 }>
-                <div className="text-sm text-text border border-gray-200 px-4 py-2 rounded-b-lg">
-                  I work with large language models and use Retrieval-Augmented
-                  Generation (RAG) to build more accurate and context-aware
-                  applications. By combining LLMs with external knowledge
-                  sources, I enable the model to retrieve relevant information
-                  and generate reliable, real-time responses for tasks like
-                  question answering and conversational agents.
-                </div>
+                <p className="text-sm text-text-muted px-1 py-2 leading-relaxed">
+                  I work with LLMs and use Retrieval-Augmented Generation (RAG)
+                  to build context-aware applications, combining models with
+                  external knowledge sources.
+                </p>
               </Accordion>
               <Accordion
                 i={3}
                 expanded={expanded}
                 setExpanded={setExpanded}
                 accordionTitle="UI/UX Design"
-                className=""
                 icon={
                   <LineiconsFigma
-                    className="mr-2 w-6 h-6"
-                    fill={theme === "dark" ? "#fff" : "#000"}
+                    className="w-4 h-4"
+                    fill={isDark ? "#f0f0f0" : "#0a0a0a"}
                   />
                 }>
-                <div className="text-sm text-text border border-gray-200 px-4 py-2 rounded-b-lg">
-                  I design easy-to-use and visually clean interfaces. I focus on
-                  making sure users have a smooth and enjoyable experience when
-                  using a website or app.
-                </div>
+                <p className="text-sm text-text-muted px-1 py-2 leading-relaxed">
+                  I design clean, easy-to-use interfaces, focusing on smooth
+                  and enjoyable user experiences across websites and apps.
+                </p>
               </Accordion>
             </div>
           </motion.div>
-          {/* Contact Section */}
+
+          {/* Connect Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.5 }}
-            className="bg-sbackground text-text mt-2 relative md:mx-5 md:rounded-xl md:mb-5">
-            <div className="ml-5 pt-4 flex flex-row items-center gap-1">
+            className="bg-sbackground border border-border rounded-2xl text-text pb-5">
+            <div className={SECTION_HEADER_CLASS}>
               {mounted && (
                 <MaterialSymbolsLightMailOutline
-                  className="w-8 h-8 items-center justify-center"
-                  fill={theme === "dark" ? "#fff" : "#000"}
+                  className="w-5 h-5"
+                  fill={isDark ? "#9ca3af" : "#6b7280"}
                 />
               )}
-              <span className="text-[18px] md:text-[20px] font-bold text-center">
-                Let&rsquo;s Connect
-              </span>
+              <span className={SECTION_TITLE_CLASS}>Connect</span>
             </div>
-            <div className="justify-center items-center text-center mx-5 mt-4 p-3">
-              <div className="flex-col ">
-                {mounted && <SocialMedia />}
-                <div className="flex justify-center items-center mt-4">
-                  <span className="opacity-40 text-xs md:text-sm">
-                    Let&rsquo;s create something amazing &mdash; reach out
-                    through any of the platforms above and let&rsquo;s start the
-                    conversation.
-                  </span>
-                </div>
-              </div>
+            <div className="px-5 mt-2">
+              <SocialMedia />
+              <p className="text-center text-xs text-text-muted leading-relaxed mt-2">
+                Let&rsquo;s create something amazing — reach out through any
+                platform above.
+              </p>
             </div>
           </motion.div>
         </div>

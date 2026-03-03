@@ -30,40 +30,25 @@ export default function Accordion({
     setMounted(true);
   }, []);
 
-  const getHeaderStyles = () => {
-    if (!mounted) return {};
-    return {
-      backgroundColor: isOpen
-        ? theme === "dark"
-          ? "#1e2939"
-          : "#F5F5F5"
-        : theme === "dark"
-        ? "#121212"
-        : "white",
-      borderColor: isOpen ? "#E0E0E0" : "#D9D9D9",
-      borderWidth: isOpen ? "1px" : "0",
-      borderBottom: isOpen ? "none" : "1px solid #D9D9D9",
-    };
-  };
-
   return (
-    <div className={className}>
-      <motion.header
-        initial={false}
-        animate={getHeaderStyles()}
+    <div className={`border-b border-border last:border-b-0 ${className ?? ""}`}>
+      <button
+        type="button"
         onClick={() => setExpanded(isOpen ? false : i)}
-        className="cursor-pointer px-4 py-2 rounded-t flex">
-        {icon && mounted && <span>{icon}</span>}
-        <span className="font-semibold">{accordionTitle}</span>
+        className="w-full flex items-center gap-2.5 py-3 text-left hover:text-[--navtext] transition-colors duration-200 group">
+        {icon && mounted && (
+          <span className="shrink-0 opacity-70">{icon}</span>
+        )}
+        <span className="text-sm font-medium flex-1">{accordionTitle}</span>
         {mounted && (
           <MingcuteDownSmallLine
-            className={`ml-auto transition-transform duration-300 ${
+            className={`w-4 h-4 shrink-0 opacity-60 transition-transform duration-300 ${
               isOpen ? "rotate-180" : ""
             }`}
-            fill={theme === "dark" ? "#fff" : "#000"}
+            fill={theme === "dark" ? "#f0f0f0" : "#0a0a0a"}
           />
         )}
-      </motion.header>
+      </button>
       <AnimatePresence initial={false}>
         {isOpen && (
           <motion.section
@@ -75,8 +60,8 @@ export default function Accordion({
               open: { opacity: 1, height: "auto" },
               collapsed: { opacity: 0, height: 0 },
             }}
-            transition={{ duration: 0.8, ease: [0.04, 0.62, 0.23, 0.98] }}
-            className="overflow-hidden ">
+            transition={{ duration: 0.6, ease: [0.04, 0.62, 0.23, 0.98] }}
+            className="overflow-hidden">
             {children}
           </motion.section>
         )}

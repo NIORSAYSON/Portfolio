@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import Sidebar from "../components/Sidebar";
 import MobileSidebar from "../components/MobileSidebar";
@@ -7,9 +7,14 @@ import { ThemeProvider } from "next-themes";
 
 const inter = Inter({
   subsets: ["latin"],
-  weight: "400",
-  // variable: "--font-inter",
-  // display: "swap",?
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const plusJakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-heading",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -31,12 +36,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.className} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${inter.variable} ${plusJakarta.variable}`}
+      suppressHydrationWarning>
       <body className={`antialiased ${inter.className}`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <div className="min-h-screen flex bg-background transition-all duration-300">
             {/* Sidebar for large screens */}
-            <aside className="hidden md:flex fixed left-0 top-0 h-full z-30 w-72 shadow-xl">
+            <aside className="hidden md:flex fixed left-0 top-0 h-full z-30 w-72">
               <Sidebar />
             </aside>
             {/* Main Content for large screens */}
@@ -45,7 +53,7 @@ export default function RootLayout({
               <div className="md:hidden bg-background transition-all duration-300">
                 <MobileSidebar>{children}</MobileSidebar>
               </div>
-              {/* Desktop main content - ensure children can fill the available height */}
+              {/* Desktop main content */}
               <div className="hidden md:block h-full">{children}</div>
             </main>
           </div>
