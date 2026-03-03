@@ -76,7 +76,7 @@ export default function Sidebar() {
         <h1 className="text-base font-semibold tracking-tight">
           Nestor Sayson Jr.
         </h1>
-        <p className="text-sm text-text-muted mt-0.5">Front-End Developer</p>
+        <p className="text-sm text-text-muted mt-0.5">Software Developer</p>
         <Link
           href="/resume"
           className="mt-4 flex items-center gap-1.5 text-sm px-5 py-1.5 rounded-lg border border-border hover:border-[--navtext] hover:text-[--navtext] transition-all duration-200">
@@ -172,7 +172,7 @@ export default function Sidebar() {
               fill={isDark ? "#9ca3af" : "#6b7280"}
             />
           )}
-          <span>2025 Nestor B. Sayson Jr.</span>
+          <span>{new Date().getFullYear()} Nestor B. Sayson Jr.</span>
         </div>
       </div>
     </aside>

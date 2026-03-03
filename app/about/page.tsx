@@ -113,8 +113,9 @@ export default function About() {
             </div>
             {/* Profile */}
             <div className="px-5 pb-5">
-              <div className="flex items-end gap-4 -mt-8 mb-4">
-                <div className="w-16 h-16 rounded-full overflow-hidden ring-4 ring-sbackground border border-border shrink-0">
+              {/* Avatar overlaps banner */}
+              <div className="relative z-10 -mt-8 mb-3">
+                <div className="w-16 h-16 rounded-full overflow-hidden ring-4 ring-sbackground border border-border">
                   <Image
                     src="/profile.jpg"
                     alt="Profile"
@@ -124,12 +125,13 @@ export default function About() {
                     priority
                   />
                 </div>
-                <div className="pb-1">
-                  <h2 className="text-base font-semibold">
-                    Nestor B. Sayson Jr.
-                  </h2>
-                  <p className="text-sm text-text-muted">Front-End Developer</p>
-                </div>
+              </div>
+              {/* Name sits below banner */}
+              <div className="mb-4">
+                <h2 className="text-base font-semibold">
+                  Nestor B. Sayson Jr.
+                </h2>
+                <p className="text-sm text-text-muted">Software Developer</p>
               </div>
               <div>
                 <h3 className="text-sm font-semibold mb-2">About Me</h3>

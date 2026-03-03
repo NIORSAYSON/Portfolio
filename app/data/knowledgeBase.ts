@@ -4,10 +4,10 @@
 export const knowledgeBase = {
   personal: {
     name: "Nestor B. Sayson Jr.",
-    title: "Front-End Developer",
+    title: "Software Developer",
     location: "Philippines",
     email: "Contact via portfolio",
-    about: `Front-End Developer with experience in building web and mobile applications, 
+    about: `Software Developer with experience in building web and mobile applications, 
     combining strong programming skills with a focus on intelligent, user-centered design. 
     Research-oriented with a background in machine learning and Retrieval-Augmented Generation (RAG), 
     and driven to create scalable, AI-powered solutions through collaboration and innovation.`,

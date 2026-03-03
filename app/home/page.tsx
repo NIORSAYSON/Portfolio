@@ -10,8 +10,10 @@ import {
   LineiconsFigma,
   MaterialSymbolsLightMailOutline,
   MdiLightPin,
+  PhDeviceMobileLight,
   PhOpenAiLogo,
   SolarCodeLineDuotone,
+  TablerAutomation,
 } from "../icons";
 import ProjectCard from "@/components/ProjectCard";
 import { useEffect, useRef, useState } from "react";
@@ -401,6 +403,40 @@ export default function HomePage() {
               </Accordion>
               <Accordion
                 i={3}
+                expanded={expanded}
+                setExpanded={setExpanded}
+                accordionTitle="Mobile Development"
+                icon={
+                  <PhDeviceMobileLight
+                    className="w-4 h-4"
+                    fill={isDark ? "#f0f0f0" : "#0a0a0a"}
+                  />
+                }>
+                <p className="text-sm text-text-muted px-1 py-2 leading-relaxed">
+                  I build cross-platform mobile apps using React Native and
+                  Expo, delivering smooth native experiences on both iOS and
+                  Android from a single codebase.
+                </p>
+              </Accordion>
+              <Accordion
+                i={4}
+                expanded={expanded}
+                setExpanded={setExpanded}
+                accordionTitle="AI Automation"
+                icon={
+                  <TablerAutomation
+                    className="w-4 h-4"
+                    fill={isDark ? "#f0f0f0" : "#0a0a0a"}
+                  />
+                }>
+                <p className="text-sm text-text-muted px-1 py-2 leading-relaxed">
+                  I design and build automated workflows using tools like n8n
+                  and Zapier, connecting apps and AI models to streamline
+                  repetitive tasks and power intelligent pipelines.
+                </p>
+              </Accordion>
+              <Accordion
+                i={5}
                 expanded={expanded}
                 setExpanded={setExpanded}
                 accordionTitle="UI/UX Design"

@@ -7,13 +7,13 @@ import {
 } from "./icons";
 
 export const typewriterTexts = [
-  "A Front-End Developer crafting delightful digital experiences.",
+  "A Software Developer crafting delightful digital experiences.",
   "Passionate about building accessible and responsive web apps.",
   "Turning ideas into interactive user interfaces.",
 ];
 
 export const aboutText =
-  "Front-End Developer with experience in building web and mobile applications, combining strong programming skills with a focus on intelligent, user-centered design. Research-oriented with a background in machine learning and Retrieval-Augmented Generation (RAG), and driven to create scalable, AI-powered solutions through collaboration and innovation.";
+  "Software Developer with experience in building web and mobile applications, combining strong programming skills with a focus on intelligent, user-centered design. Research-oriented with a background in machine learning and Retrieval-Augmented Generation (RAG), and driven to create scalable, AI-powered solutions through collaboration and innovation.";
 
 export const internshipText =
   "Developed a tablet-based Point of Sale (POS) mobile application from scratch to support efficient retail operations. Designed and implemented a responsive, user-friendly interface and handled API integration to connect with backend services. Collaborated closely with the backend developer and UI/UX designer to align design, functionality, and data flow. Actively participated in version control and team collaboration to ensure smooth development and deployment.";

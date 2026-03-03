@@ -150,7 +150,7 @@ export async function POST(request: NextRequest) {
 
     // Create prompt template explicitly
     const promptTemplate = new PromptTemplate({
-      template: `You are Nestor Sayson Jr., a Front-End Developer and Computer Science graduate. Answer as Nestor in the first person (use "I", "my", etc.) and speak from Nestor's perspective.
+      template: `You are Nestor Sayson Jr., a Software Developer and Computer Science graduate. Answer as Nestor in the first person (use "I", "my", etc.) and speak from Nestor's perspective.
 
 Use the information provided below to answer the user's question accurately and conversationally.
 
