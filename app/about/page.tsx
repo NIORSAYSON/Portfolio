@@ -19,7 +19,7 @@ import SocialMedia from "@/components/SocialMedia";
 import { useTheme } from "next-themes";
 import ProjectCard from "@/components/ProjectCard";
 import ExpAndEduc from "@/components/ExpAndEduc";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 const SECTION_HEADER_CLASS = "flex items-center gap-2 px-5 pt-5 pb-1";
 const SECTION_TITLE_CLASS =
@@ -135,11 +135,22 @@ export default function About() {
               </div>
               <div>
                 <h3 className="text-sm font-semibold mb-2">About Me</h3>
-                <p className="text-sm text-text-muted leading-relaxed inline">
-                  {showMore.about ? aboutText : aboutMeShortText}
-                </p>
+
+                {/* Added AnimatePresence and motion.span for the transition */}
+                <AnimatePresence initial={false} mode="wait">
+                  <motion.span
+                    key={showMore.about ? "full" : "short"}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="text-sm text-text-muted leading-relaxed inline">
+                    {showMore.about ? aboutText : aboutMeShortText}
+                  </motion.span>
+                </AnimatePresence>
+
                 <button
-                  className="ml-1.5 text-xs text-[--navtext] hover:underline font-medium"
+                  className="ml-1.5 text-xs text-[--navtext] hover:underline font-medium inline-block"
                   onClick={() =>
                     setShowMore((prev) => ({
                       ...prev,
@@ -204,17 +215,77 @@ export default function About() {
                   onClick={() => scrollProjects("left")}
                   className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-sbackground border border-border rounded-full w-8 h-8 flex items-center justify-center hover:border-[--navtext] transition-all duration-200"
                   aria-label="Scroll left">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round">
+                    <polyline points="15 18 9 12 15 6" />
+                  </svg>
                 </button>
               )}
-              <div ref={projectsScrollRef} className="hide-scrollbar flex h-[320px] w-full items-start justify-start overflow-x-auto">
+              <div
+                ref={projectsScrollRef}
+                className="hide-scrollbar flex h-[320px] w-full items-start justify-start overflow-x-auto">
                 <div className="flex flex-nowrap gap-4 items-center">
-                  <ProjectCard title={projects[0].title} subtitle="Personal Project" image="/Projects/Portfolio.png" description={projects[0].description} slug={projects[0].slug} link="https://niorsayson.vercel.app/" source="/about" />
-                  <ProjectCard title={projects[1].title} subtitle="Internship Project" image="/Projects/POS.png" description={projects[1].description} slug={projects[1].slug} source="/about" />
-                  <ProjectCard title={projects[2].title} subtitle="Thesis Project" image="/Projects/Conversational Agent Project.png" description={projects[2].description} slug={projects[2].slug} link="https://huggingface.co/spaces/Nioooor/CSPC_Conversational_Agent" source="/about" />
-                  <ProjectCard title={projects[5].title} subtitle="HCI Project" image="/Projects/SIAS Project.png" description={projects[5].description} slug={projects[5].slug} link="https://niorsayson.github.io/SIAS-Online-Portal-Redesign/" source="/about" />
-                  <ProjectCard title={projects[6].title} subtitle="Modeling & Simulation" image="/Projects/Modeling and Simulation Project.png" description={projects[6].description} slug={projects[6].slug} link="https://synthetic-data-generator-sayson.streamlit.app/Synthetic_Data_Generator" source="/about" />
-                  <ProjectCard title={projects[7].title} subtitle="Applied Cryptography" image="/Projects/Cryptographic App Project.png" description={projects[7].description} slug={projects[7].slug} link="https://saysonnior-cs3b.streamlit.app/" source="/about" />
+                  <ProjectCard
+                    title={projects[0].title}
+                    subtitle="Personal Project"
+                    image="/Projects/Portfolio.png"
+                    description={projects[0].description}
+                    slug={projects[0].slug}
+                    link="https://niorsayson.vercel.app/"
+                    source="/about"
+                  />
+                  <ProjectCard
+                    title={projects[1].title}
+                    subtitle="Internship Project"
+                    image="/Projects/POS.png"
+                    description={projects[1].description}
+                    slug={projects[1].slug}
+                    source="/about"
+                  />
+                  <ProjectCard
+                    title={projects[2].title}
+                    subtitle="Thesis Project"
+                    image="/Projects/Conversational Agent Project.png"
+                    description={projects[2].description}
+                    slug={projects[2].slug}
+                    link="https://huggingface.co/spaces/Nioooor/CSPC_Conversational_Agent"
+                    source="/about"
+                  />
+                  <ProjectCard
+                    title={projects[5].title}
+                    subtitle="HCI Project"
+                    image="/Projects/SIAS Project.png"
+                    description={projects[5].description}
+                    slug={projects[5].slug}
+                    link="https://niorsayson.github.io/SIAS-Online-Portal-Redesign/"
+                    source="/about"
+                  />
+                  <ProjectCard
+                    title={projects[6].title}
+                    subtitle="Modeling & Simulation"
+                    image="/Projects/Modeling and Simulation Project.png"
+                    description={projects[6].description}
+                    slug={projects[6].slug}
+                    link="https://synthetic-data-generator-sayson.streamlit.app/Synthetic_Data_Generator"
+                    source="/about"
+                  />
+                  <ProjectCard
+                    title={projects[7].title}
+                    subtitle="Applied Cryptography"
+                    image="/Projects/Cryptographic App Project.png"
+                    description={projects[7].description}
+                    slug={projects[7].slug}
+                    link="https://saysonnior-cs3b.streamlit.app/"
+                    source="/about"
+                  />
                 </div>
               </div>
               {canScrollRight && (
@@ -222,7 +293,18 @@ export default function About() {
                   onClick={() => scrollProjects("right")}
                   className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-sbackground border border-border rounded-full w-8 h-8 flex items-center justify-center hover:border-[--navtext] transition-all duration-200"
                   aria-label="Scroll right">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round">
+                    <polyline points="9 18 15 12 9 6" />
+                  </svg>
                 </button>
               )}
             </div>

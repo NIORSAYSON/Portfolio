@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import MobileDeviceFrame from "./MobileDeviceFrame";
 
 interface ProjectOverviewProps {
   projectName: string;
@@ -11,6 +12,7 @@ interface ProjectOverviewProps {
   };
   projectTools: string[];
   projectImages: string[];
+  isMobile?: boolean;
 }
 
 export default function ProjectOverview({
@@ -19,6 +21,7 @@ export default function ProjectOverview({
   projectLink,
   projectTools,
   projectImages,
+  isMobile,
 }: ProjectOverviewProps) {
   const [sourcePage, setSourcePage] = useState("/projects");
   const router = useRouter();
@@ -111,22 +114,39 @@ export default function ProjectOverview({
           </div>
 
           {/* Images */}
-          <div className="flex flex-col gap-6">
-            {projectImages.map((src, idx) => (
-              <div
-                key={idx}
-                className="w-full rounded-xl overflow-hidden border border-border bg-snbackground">
-                <Image
+          <div
+            className={
+              isMobile
+                ? "flex flex-row flex-wrap justify-center gap-4 md:gap-6 py-6"
+                : "flex flex-col gap-6 py-6"
+            }>
+            {projectImages.map((src, idx) =>
+              isMobile ? (
+                <MobileDeviceFrame
+                  key={idx}
                   src={src}
                   alt={`${projectName} screenshot ${idx + 1}`}
-                  width={900}
-                  height={720}
-                  style={{ width: "100%", height: "auto", objectFit: "contain" }}
-                  sizes="(max-width: 768px) 100vw, 900px"
-                  priority={idx === 0}
                 />
-              </div>
-            ))}
+              ) : (
+                <div
+                  key={idx}
+                  className="w-full rounded-xl overflow-hidden border border-border bg-snbackground">
+                  <Image
+                    src={src}
+                    alt={`${projectName} screenshot ${idx + 1}`}
+                    width={900}
+                    height={720}
+                    style={{
+                      width: "100%",
+                      height: "auto",
+                      objectFit: "contain",
+                    }}
+                    sizes="(max-width: 768px) 100vw, 900px"
+                    priority={idx === 0}
+                  />
+                </div>
+              ),
+            )}
           </div>
         </div>
       </div>

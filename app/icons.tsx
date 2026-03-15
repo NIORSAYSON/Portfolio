@@ -2,7 +2,7 @@ import React from "react";
 import type { SVGProps } from "react";
 
 export function MaterialSymbolsLightDownloadSharp(
-  props: SVGProps<SVGSVGElement>
+  props: SVGProps<SVGSVGElement>,
 ) {
   return (
     <svg
@@ -19,7 +19,7 @@ export function MaterialSymbolsLightDownloadSharp(
 }
 
 export function MaterialSymbolsLightHomeOutlineRounded(
-  props: SVGProps<SVGSVGElement>
+  props: SVGProps<SVGSVGElement>,
 ) {
   return (
     <svg
@@ -36,7 +36,7 @@ export function MaterialSymbolsLightHomeOutlineRounded(
 }
 
 export function MaterialSymbolsLightInfoOutlineRounded(
-  props: SVGProps<SVGSVGElement>
+  props: SVGProps<SVGSVGElement>,
 ) {
   return (
     <svg
@@ -60,9 +60,7 @@ export function PhFilesLight(props: SVGProps<SVGSVGElement>) {
       height={256}
       viewBox="0 0 256 256"
       {...props}>
-      <path
-        fill="currentColor"
-        d="m212.24 67.76l-40-40A6 6 0 0 0 168 26H88a14 14 0 0 0-14 14v18H56a14 14 0 0 0-14 14v144a14 14 0 0 0 14 14h112a14 14 0 0 0 14-14v-18h18a14 14 0 0 0 14-14V72a6 6 0 0 0-1.76-4.24M170 216a2 2 0 0 1-2 2H56a2 2 0 0 1-2-2V72a2 2 0 0 1 2-2h77.51L170 106.49Zm32-32a2 2 0 0 1-2 2h-18v-82a6 6 0 0 0-1.76-4.24l-40-40A6 6 0 0 0 136 58H86V40a2 2 0 0 1 2-2h77.51L202 74.49Zm-60-32a6 6 0 0 1-6 6H88a6 6 0 0 1 0-12h48a6 6 0 0 1 6 6m0 32a6 6 0 0 1-6 6H88a6 6 0 0 1 0-12h48a6 6 0 0 1 6 6"></path>
+      <path d="m212.24 67.76l-40-40A6 6 0 0 0 168 26H88a14 14 0 0 0-14 14v18H56a14 14 0 0 0-14 14v144a14 14 0 0 0 14 14h112a14 14 0 0 0 14-14v-18h18a14 14 0 0 0 14-14V72a6 6 0 0 0-1.76-4.24M170 216a2 2 0 0 1-2 2H56a2 2 0 0 1-2-2V72a2 2 0 0 1 2-2h77.51L170 106.49Zm32-32a2 2 0 0 1-2 2h-18v-82a6 6 0 0 0-1.76-4.24l-40-40A6 6 0 0 0 136 58H86V40a2 2 0 0 1 2-2h77.51L202 74.49Zm-60-32a6 6 0 0 1-6 6H88a6 6 0 0 1 0-12h48a6 6 0 0 1 6 6m0 32a6 6 0 0 1-6 6H88a6 6 0 0 1 0-12h48a6 6 0 0 1 6 6"></path>
     </svg>
   );
 }
@@ -276,7 +274,7 @@ export function MingcuteDownSmallLine(props: SVGProps<SVGSVGElement>) {
 }
 
 export function MaterialSymbolsLightMailOutline(
-  props: SVGProps<SVGSVGElement>
+  props: SVGProps<SVGSVGElement>,
 ) {
   return (
     <svg
@@ -538,7 +536,7 @@ export function WeuiBackFilled(props: SVGProps<SVGSVGElement>) {
 }
 
 export function MaterialSymbolsLightChatOutline(
-  props: SVGProps<SVGSVGElement>
+  props: SVGProps<SVGSVGElement>,
 ) {
   return (
     <svg
@@ -564,7 +562,8 @@ export function PhDeviceMobileLight(props: SVGProps<SVGSVGElement>) {
       {...props}>
       <path
         fill={props.fill || "#000"}
-        d="M176 16H80a24 24 0 0 0-24 24v176a24 24 0 0 0 24 24h96a24 24 0 0 0 24-24V40a24 24 0 0 0-24-24m12 200a12 12 0 0 1-12 12H80a12 12 0 0 1-12-12V40a12 12 0 0 1 12-12h96a12 12 0 0 1 12 12ZM132 204a8 8 0 1 1-8-8 8 8 0 0 1 8 8"/>
+        d="M176 16H80a24 24 0 0 0-24 24v176a24 24 0 0 0 24 24h96a24 24 0 0 0 24-24V40a24 24 0 0 0-24-24m12 200a12 12 0 0 1-12 12H80a12 12 0 0 1-12-12V40a12 12 0 0 1 12-12h96a12 12 0 0 1 12 12ZM132 204a8 8 0 1 1-8-8 8 8 0 0 1 8 8"
+      />
     </svg>
   );
 }
@@ -583,7 +582,8 @@ export function TablerAutomation(props: SVGProps<SVGSVGElement>) {
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth={1.5}
-        d="M7 3H5a2 2 0 0 0-2 2v2m4 13H5a2 2 0 0 1-2-2v-2m16-11h-2a2 2 0 0 0-2 2v2m4 9h-2a2 2 0 0 1-2-2v-2M9 12h6M3 12h3m12 0h3"/>
+        d="M7 3H5a2 2 0 0 0-2 2v2m4 13H5a2 2 0 0 1-2-2v-2m16-11h-2a2 2 0 0 0-2 2v2m4 9h-2a2 2 0 0 1-2-2v-2M9 12h6M3 12h3m12 0h3"
+      />
     </svg>
   );
 }

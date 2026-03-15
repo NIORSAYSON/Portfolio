@@ -26,6 +26,7 @@ export default function MyPortfolio() {
           projectLink={current.projectLink}
           projectTools={current.tools}
           projectImages={current.projectImages}
+          isMobile={true}
         />
 
         {/* Left Column */}
