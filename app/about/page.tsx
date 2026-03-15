@@ -231,7 +231,7 @@ export default function About() {
               )}
               <div
                 ref={projectsScrollRef}
-                className="hide-scrollbar flex h-[320px] w-full items-start justify-start overflow-x-auto">
+                className="hide-scrollbar flex h-80 w-full items-start justify-start overflow-x-auto">
                 <div className="flex flex-nowrap gap-4 items-center">
                   <ProjectCard
                     title={projects[0].title}

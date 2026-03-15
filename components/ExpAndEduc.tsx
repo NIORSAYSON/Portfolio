@@ -40,7 +40,7 @@ export default function ExpAndEduc({
             priority
           />
         </div>
-        <div className="w-px flex-1 bg-border mt-2 min-h-[20px]" />
+        <div className="w-px flex-1 bg-border mt-2 min-h-5" />
       </div>
       <div className="flex-1 pb-2">
         <p className="text-xs text-text-muted mb-1">{date}</p>
