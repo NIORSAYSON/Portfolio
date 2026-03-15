@@ -9,7 +9,7 @@ export default function ProjectsSection({
   currentProjectSlug,
 }: ProjectsSectionProps) {
   const otherProjects = projects.filter(
-    (project) => project.slug !== currentProjectSlug
+    (project) => project.slug !== currentProjectSlug,
   );
 
   return (

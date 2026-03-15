@@ -19,7 +19,7 @@ const socialLinks = [
     Icon: MdiInstagram,
     color: "#E1306C",
     label: "Instagram",
-    href: "https://www.instagram.com/niorsayson/",
+    href: "https://www.instagram.com/neon.nior/",
   },
   {
     Icon: BxlGmail,
@@ -44,7 +44,9 @@ const socialLinks = [
 export default function SocialMedia() {
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
-  useEffect(() => { setMounted(true); }, []);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
   const isDark = mounted && theme === "dark";
 
   return (

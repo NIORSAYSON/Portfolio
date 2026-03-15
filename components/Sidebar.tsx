@@ -76,7 +76,7 @@ export default function Sidebar() {
         <h1 className="text-base font-semibold tracking-tight">
           Nestor Sayson Jr.
         </h1>
-        <p className="text-sm text-text-muted mt-0.5">Software Developer</p>
+        <p className="text-sm text-text-muted mt-0.5">Software Engineer</p>
         <Link
           href="/resume"
           className="mt-4 flex items-center gap-1.5 text-sm px-5 py-1.5 rounded-lg border border-border hover:border-[--navtext] hover:text-[--navtext] transition-all duration-200">
@@ -116,8 +116,8 @@ export default function Sidebar() {
                           ? "#4C8DFF"
                           : "#1B56FD"
                         : isDark
-                        ? "#f0f0f0"
-                        : "#0a0a0a"
+                          ? "#f0f0f0"
+                          : "#0a0a0a"
                     }
                   />
                 ) : (
@@ -129,8 +129,8 @@ export default function Sidebar() {
                           ? "#4C8DFF"
                           : "#1B56FD"
                         : isDark
-                        ? "#f0f0f0"
-                        : "#0a0a0a"
+                          ? "#f0f0f0"
+                          : "#0a0a0a"
                     }
                   />
                 ))}

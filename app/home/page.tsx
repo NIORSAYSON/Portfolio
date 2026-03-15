@@ -36,8 +36,7 @@ const plusJakarta = Plus_Jakarta_Sans({
   weight: ["600", "700"],
 });
 
-const SECTION_HEADER_CLASS =
-  "flex items-center gap-2 px-5 pt-5 pb-1";
+const SECTION_HEADER_CLASS = "flex items-center gap-2 px-5 pt-5 pb-1";
 const SECTION_TITLE_CLASS =
   "text-[15px] font-semibold tracking-wide uppercase text-text-muted";
 
@@ -91,7 +90,7 @@ export default function HomePage() {
         year: "numeric",
         month: "long",
         day: "numeric",
-      })
+      }),
     );
   }, []);
 
@@ -238,29 +237,28 @@ export default function HomePage() {
                   />
                   <ProjectCard
                     title={projects[5].title}
-                    subtitle="HCI Project"
-                    image="/Projects/SIAS Project.png"
+                    subtitle="Personal Project"
+                    image="/Projects/FadeFlow Project.png"
                     description={projects[5].description}
                     slug={projects[5].slug}
-                    link="https://niorsayson.github.io/SIAS-Online-Portal-Redesign/"
+                    link="https://fadeflow.shop"
                     source="/"
                   />
                   <ProjectCard
                     title={projects[6].title}
-                    subtitle="Modeling & Simulation"
-                    image="/Projects/Modeling and Simulation Project.png"
+                    subtitle="Personal Project"
+                    image="/Projects/VibeNode Project.png"
                     description={projects[6].description}
                     slug={projects[6].slug}
-                    link="https://synthetic-data-generator-sayson.streamlit.app/Synthetic_Data_Generator"
+                    link="https://www.vibenode.site"
                     source="/"
                   />
                   <ProjectCard
-                    title={projects[7].title}
-                    subtitle="Applied Cryptography"
-                    image="/Projects/Cryptographic App Project.png"
-                    description={projects[7].description}
-                    slug={projects[7].slug}
-                    link="https://saysonnior-cs3b.streamlit.app/"
+                    title={projects[3].title}
+                    subtitle="Freelance Project"
+                    image="/Projects/AgriMarket Project.png"
+                    description={projects[3].description}
+                    slug={projects[3].slug}
                     source="/"
                   />
                 </div>
@@ -361,10 +359,9 @@ export default function HomePage() {
                   />
                 }>
                 <p className="text-sm text-text-muted px-1 py-2 leading-relaxed">
-                  I specialize in front-end web development, building
-                  responsive and user-friendly websites using modern
-                  technologies. I focus on clean, interactive interfaces and
-                  integrating APIs.
+                  I specialize in front-end web development, building responsive
+                  and user-friendly websites using modern technologies. I focus
+                  on clean, interactive interfaces and integrating APIs.
                 </p>
               </Accordion>
               <Accordion
@@ -447,8 +444,8 @@ export default function HomePage() {
                   />
                 }>
                 <p className="text-sm text-text-muted px-1 py-2 leading-relaxed">
-                  I design clean, easy-to-use interfaces, focusing on smooth
-                  and enjoyable user experiences across websites and apps.
+                  I design clean, easy-to-use interfaces, focusing on smooth and
+                  enjoyable user experiences across websites and apps.
                 </p>
               </Accordion>
             </div>

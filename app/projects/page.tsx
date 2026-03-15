@@ -23,7 +23,14 @@ export default function Projects() {
   const filteredProjects =
     selectedCategory === "All Projects"
       ? projects
-      : projects.filter((project) => project.category === selectedCategory);
+      : projects.filter((project) => {
+          // Check if it's an array and see if it includes the selected category
+          if (Array.isArray(project.category)) {
+            return project.category.includes(selectedCategory);
+          }
+          // Fallback for single string categories
+          return project.category === selectedCategory;
+        });
 
   return (
     <main className="min-h-screen w-full">
@@ -94,7 +101,19 @@ export default function Projects() {
                       </div>
                       {/* Category */}
                       <span className="text-xs px-2.5 py-1 rounded-lg bg-[--navtext]/10 text-[--navtext] inline-block mb-3">
-                        {project.category}
+                        {Array.isArray(project.category) ? (
+                          project.category.map((cat, index) => (
+                            <span
+                              key={index}
+                              className="text-xs px-2.5 py-1 rounded-lg bg-[--navtext]/10 text-[--navtext] inline-block">
+                              {cat}
+                            </span>
+                          ))
+                        ) : (
+                          <span className="text-xs px-2.5 py-1 rounded-lg bg-[--navtext]/10 text-[--navtext] inline-block">
+                            {project.category}
+                          </span>
+                        )}
                       </span>
                       {/* Tool tags */}
                       <div className="flex flex-wrap gap-1.5">
@@ -118,8 +137,6 @@ export default function Projects() {
             </div>
           </div>
         </motion.div>
-
-
       </div>
     </main>
   );

@@ -7,16 +7,19 @@ import {
 } from "./icons";
 
 export const typewriterTexts = [
-  "A Software Developer crafting delightful digital experiences.",
+  "A Software Engineer crafting delightful digital experiences.",
   "Passionate about building accessible and responsive web apps.",
   "Turning ideas into interactive user interfaces.",
 ];
 
 export const aboutText =
-  "Software Developer with experience in building web and mobile applications, combining strong programming skills with a focus on intelligent, user-centered design. Research-oriented with a background in machine learning and Retrieval-Augmented Generation (RAG), and driven to create scalable, AI-powered solutions through collaboration and innovation.";
+  "Full-Stack Software Engineer dedicated to bridging the gap between complex AI capabilities and practical business needs. From developing seamless mobile interfaces to building comprehensive web and database architectures, I focus on intelligent, user-centered design. Leveraging my background in machine learning and RAG, I specialize in engineering scalable AI automation solutions that optimize workflows and drive innovation.";
 
 export const internshipText =
-  "Developed a tablet-based Point of Sale (POS) mobile application from scratch to support efficient retail operations. Designed and implemented a responsive, user-friendly interface and handled API integration to connect with backend services. Collaborated closely with the backend developer and UI/UX designer to align design, functionality, and data flow. Actively participated in version control and team collaboration to ensure smooth development and deployment.";
+  "During my internship, I contributed to the front-end development of a new tablet-based Point of Sale (POS) application built from scratch. Using React Native, Expo, and Redux, I helped implement the user interface from existing designs and managed state and API integrations. I collaborated closely with the design and backend teams to build a solid foundation for the app's future release.";
+
+export const agentGeniusDescText =
+  "As an AI Automation Engineer, I bridge the gap between complex AI technology and practical business needs. I design, develop, and maintain full-stack applications using React and Supabase, while powering the backend logic with intelligent n8n automation workflows. Beyond writing code, I work directly with our clients—acting as their technical partner to gather requirements, communicate progress, and deliver custom AI solutions that streamline their operations.";
 
 export const collegeText =
   "Gaining a strong foundation in programming, software development, and emerging technologies such as artificial intelligence and machine learning. Developed practical skills through hands-on projects, research, and real-world applications in web and mobile development.";
@@ -33,7 +36,7 @@ export const projects = [
     slug: "my-portfolio",
     title: "My Portfolio",
     subtitle: "Public",
-    category: "Web Development",
+    category: ["Web Development", "AI & Machine Learning"],
     projectLink: {
       link: "https://niorsayson.vercel.app/",
       linkName: "Nestor B. Sayson Jr - Portfolio",
@@ -153,6 +156,183 @@ export const projects = [
     This project demonstrates the practical application of natural language processing, machine learning, and AI-driven information retrieval in the context of public service and education. It reflects my ability to integrate state-of-the-art technologies into real-world, purpose-driven applications.`,
   },
   {
+    id: 10,
+    slug: "agrimarket",
+    title: "AgriMarket Mobile App",
+    subtitle: "Public",
+    category: "Mobile Development",
+    projectLink: {
+      link: "https://github.com/NIORSAYSON/agrimarket",
+      linkName: "AgriMarket Platform",
+    },
+    tools: [
+      "React Native",
+      "Expo",
+      "TypeScript",
+      "Redux Toolkit",
+      "RTK Query",
+      "Socket.io",
+    ],
+    projectImages: Array.from(
+      { length: 33 },
+      (_, index) => `/Projects/Sample Images/Agrimarket ${index + 1}.jpg`,
+    ),
+    description: `AgriMarket is a comprehensive mobile e-commerce platform designed to connect local farmers directly with consumers. Built from the ground up with React Native and Expo, the application provides a seamless marketplace experience with dedicated interfaces for three distinct user roles: Buyers, Sellers (Farmers), and Administrators.
+
+    Key Features and Technologies:
+
+    • Multi-Role Architecture: Distinct dashboards and functionalities for consumers browsing products, farmers managing their agricultural business, and admins overseeing the platform.
+    
+    • Real-Time Communication: Integrated Socket.io for live chat between buyers and sellers, enabling seamless negotiation and customer support, alongside instant push notifications for order updates.
+    
+    • Advanced State Management: Utilized Redux Toolkit and RTK Query for highly efficient API data fetching, caching, and global state management, combined with Redux Persist for offline session handling.
+    
+    • Complete E-commerce Flow: Features a full shopping cart implementation, secure checkout, order tracking (Processing, In-Transit, Delivered, Cancelled), multi-address management, and product reviews.
+    
+    • Seller & Admin Analytics: Provides farmers with visual dashboards to track total revenue, active orders, and product stock. Admins have access to high-level platform metrics, user management, and product approval workflows.
+
+    This project demonstrates my proficiency in building complex, scalable mobile applications with real-time capabilities, intricate role-based access controls, and highly structured API integrations.`,
+  },
+  {
+    id: 11,
+    slug: "busis-campus-app",
+    title: "Campus Information System (BUSIS)",
+    subtitle: "Public",
+    category: ["Full Stack Development", "Mobile Development"],
+    projectLink: {
+      link: "https://github.com/NIORSAYSON/busis",
+      linkName: "BUSIS Source Code",
+    },
+    tools: [
+      "React Native",
+      "Expo",
+      "TypeScript",
+      "Redux Toolkit",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "3D Mapping",
+    ],
+    projectImages: Array.from(
+      { length: 13 }, // Adjust this number based on how many screenshots you actually have
+      (_, index) => `/Projects/Sample Images/BUSIS ${index + 1}.jpg`,
+    ),
+    description: `The Campus Information System (BUSIS) is a comprehensive full-stack mobile application designed to centralize university announcements, events, department directories, and campus navigation into a single, accessible platform.
+
+    The project is divided into a robust backend architecture and an interactive mobile frontend:
+
+    • Frontend (Mobile App): Built from the ground up using React Native and Expo with TypeScript. The app features a modern, tab-based navigation system and utilizes Redux Toolkit with RTK Query for highly efficient state management and API data caching. A standout feature of the frontend is the interactive 3D Campus Map, which renders actual 3D models (.glb files) of university buildings (e.g., Nursing, Engineering, Canteen, Admin) directly on the user's device for immersive navigation.
+
+    • Backend (REST API): Powered by Node.js and Express.js, the backend provides secure, scalable endpoints for the mobile application. It uses MongoDB (via Mongoose) to manage complex data schemas for users, announcements, categories, departments, and events. The API includes custom middleware for JWT authentication, file uploading, and data validation.
+
+    • Admin & Content Management: The application includes dedicated administrative interfaces and secure login flows, allowing authorized personnel to seamlessly create, update, and delete campus events, announcements, and departmental information in real-time.
+
+    This project showcases my ability to architect and deliver complete full-stack mobile solutions, from designing RESTful APIs and database schemas to implementing advanced frontend features like 3D model rendering and global state management.`,
+  },
+  {
+    id: 12,
+    slug: "fadeflow-saas",
+    title: "FadeFlow - Barbershop SaaS",
+    subtitle: "Public",
+    category: ["Full Stack Development", "Web Development"],
+    projectLink: {
+      link: "https://github.com/NIORSAYSON/fadeflow-saas",
+      linkName: "FadeFlow Source Code",
+    },
+    tools: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Supabase",
+      "Radix UI",
+      "Zod",
+    ],
+    // Automatically generates FadeFlow 1.jpg through FadeFlow 5.jpg
+    projectImages: Array.from(
+      { length: 11 },
+      (_, index) => `/Projects/Sample Images/FadeFlow ${index + 1}.png`,
+    ),
+    description: `FadeFlow is a comprehensive Software-as-a-Service (SaaS) platform tailored for barbershops and salons, designed to streamline appointment bookings and business management.
+
+    Built with a modern tech stack, the application provides two primary experiences: a seamless, public-facing booking flow for clients and a powerful administrative dashboard for business owners.
+
+    Key Features and Technologies:
+
+    • Frontend Architecture: Developed using Next.js (App Router) and TypeScript, featuring a highly responsive and accessible UI built with Tailwind CSS and Radix UI components. Form handling and validation are strictly typed using React Hook Form and Zod.
+
+    • Backend & Authentication: Powered by Supabase for secure, scalable PostgreSQL database management and user authentication, supporting both traditional login and magic link passwordless authentication.
+
+    • Client Booking Flow: Offers an intuitive, step-by-step booking experience where clients can select specific services, view barber availability via dynamic date/time pickers, and confirm appointments.
+
+    • Provider Dashboard: A dedicated management portal for business owners to track upcoming appointments, manage their service catalog, configure working hours/schedules, and block out unavailable time slots.
+
+    This project demonstrates my capability to architect and build end-to-end SaaS applications, integrating complex state management, database schema design, and polished user interfaces to solve real-world business needs.`,
+  },
+  {
+    id: 13,
+    slug: "vibenode",
+    title: "VibeNode",
+    subtitle: "Public",
+    category: ["Full Stack Development", "Web Development"],
+    projectLink: {
+      link: "https://vibenode.site",
+      linkName: "VibeNode Live Site",
+    },
+    tools: ["React", "Vite", "Node.js", "Socket.io", "Redis", "AI Integration"],
+    // Automatically generates VibeNode 1.jpg through VibeNode 5.jpg
+    projectImages: Array.from(
+      { length: 7 },
+      (_, index) => `/Projects/Sample Images/VibeNode ${index + 1}.png`,
+    ),
+    description: `VibeNode is an innovative real-time chat and matchmaking platform designed to connect users based on shared interests and "wavelengths." 
+
+    Built as a scalable full-stack application, the platform handles concurrent connections, real-time messaging, and intelligent user pairing.
+
+    Key Features and Technologies:
+
+    • Real-Time Infrastructure: Powered by Node.js and Socket.io on the backend, enabling low-latency, bidirectional communication for instant messaging and live user status updates.
+
+    • State Management & Scalability: Integrates Redis to efficiently manage active user sessions, chat queues, and matchmaking states across the server, ensuring high performance even under heavy loads.
+
+    • Smart AI Matchmaking: Utilizes an AI matching algorithm to pair users based on contextual similarities rather than just random assignment, creating more meaningful chat experiences.
+
+    • Content Moderation: Features a built-in profanity filter to actively moderate chat rooms and maintain a safe, welcoming community environment.
+
+    • Modern Frontend: The client interface is built with React and Vite, featuring smooth transitions between Lobby, Queue, and Chat pages, alongside a responsive and interactive chat UI.
+
+    This project demonstrates my strong grasp of WebSocket protocols, in-memory data structure stores (Redis), and the ability to architect complex, real-time networking applications.`,
+  },
+  {
+    id: 9,
+    slug: "task-manager-app",
+    title: "Task Manager App",
+    subtitle: "Public",
+    category: ["Web Development", "Full Stack Development"],
+    projectLink: {
+      link: "https://github.com/NIORSAYSON/task-manager-app",
+      linkName: "Task Manager App — Full Stack",
+    },
+    tools: [
+      "Next.js",
+      "Express.js",
+      "MongoDB",
+      "TypeScript",
+      "Tailwind CSS",
+      "Radix UI",
+      "Zustand",
+    ],
+    projectImages: [
+      "/Projects/Sample Images/Task Manager 1.png",
+      "/Projects/Sample Images/Task Manager 2.png",
+      "/Projects/Sample Images/Task Manager 3.png",
+      "/Projects/Sample Images/Task Manager 4.png",
+      "/Projects/Sample Images/Task Manager 5.png",
+      "/Projects/Sample Images/Task Manager 6.png",
+    ],
+    // duration: "2 months",
+    description: `A modern, full-stack task management application with user authentication, task organization, and both list and Kanban board views. Built with Next.js (App Router) for the frontend and Express.js + MongoDB for the backend. Features include JWT-based authentication, password hashing with bcryptjs, task priorities and due dates, drag-and-drop Kanban board, real-time updates, and a responsive UI built with Tailwind and Radix UI.`,
+  },
+  {
     id: 7,
     slug: "notes-app",
     title: "Notes App",
@@ -180,36 +360,6 @@ export const projects = [
     ],
     // duration: "1 month",
     description: `A simple and intuitive mobile notes application built with React Native and Expo. Features a secure mock login (username: test / password: password123), persistent sessions using redux-persist, full CRUD for notes, search by title/description, and a clean, modern UI inspired by a Figma design.`,
-  },
-  {
-    id: 9,
-    slug: "task-manager-app",
-    title: "Task Manager App",
-    subtitle: "Public",
-    category: "Web Development",
-    projectLink: {
-      link: "https://github.com/NIORSAYSON/task-manager-app",
-      linkName: "Task Manager App — Full Stack",
-    },
-    tools: [
-      "Next.js",
-      "Express.js",
-      "MongoDB",
-      "TypeScript",
-      "Tailwind CSS",
-      "Radix UI",
-      "Zustand",
-    ],
-    projectImages: [
-      "/Projects/Sample Images/Task Manager 1.png",
-      "/Projects/Sample Images/Task Manager 2.png",
-      "/Projects/Sample Images/Task Manager 3.png",
-      "/Projects/Sample Images/Task Manager 4.png",
-      "/Projects/Sample Images/Task Manager 5.png",
-      "/Projects/Sample Images/Task Manager 6.png",
-    ],
-    // duration: "2 months",
-    description: `A modern, full-stack task management application with user authentication, task organization, and both list and Kanban board views. Built with Next.js (App Router) for the frontend and Express.js + MongoDB for the backend. Features include JWT-based authentication, password hashing with bcryptjs, task priorities and due dates, drag-and-drop Kanban board, real-time updates, and a responsive UI built with Tailwind and Radix UI.`,
   },
   {
     id: 4,
@@ -300,6 +450,48 @@ export const projects = [
 
     The project was built using Streamlit for the interface, along with PyCrypto and hashlib for the cryptographic operations. This experience helped deepen my understanding of cryptographic principles and gave me the opportunity to apply theory in a more practical, user-friendly format.`,
   },
+
+  // {
+  //   id: 14,
+  //   slug: "our-story",
+  //   title: "Our Story (Intimate Digital Scrapbook)",
+  //   subtitle: "Personal",
+  //   category: "Frontend Development & UI/UX",
+  //   projectLink: {
+  //     link: "https://our-little.space",
+  //     linkName: "Visit Live Site",
+  //   },
+  //   tools: [
+  //     "React",
+  //     "Vite",
+  //     "Tailwind CSS",
+  //     "Framer Motion",
+  //     "TypeScript",
+  //     "Lucide Icons",
+  //   ],
+  //   // Automatically generates Our Story 1.jpg through Our Story 5.jpg
+  //   projectImages: Array.from(
+  //     { length: 5 },
+  //     (_, index) => `/Projects/Sample Images/Our Story ${index + 1}.png`,
+  //   ),
+  //   description: `"Our Story" is a bespoke, deeply personal React web application designed to act as a digital timeline and interactive scrapbook. It was built with a strict focus on high-end, premium UI/UX design.
+
+  //   The application follows an "Intimate Sophistication" design system, utilizing deep charcoal backgrounds, heavy glassmorphism, and muted gold accents to create a cinematic, deeply emotional user experience.
+
+  //   Key Features and Technologies:
+
+  //   • Advanced UI/UX & Animations: Extensive use of Framer Motion for fluid page transitions, interactive scroll events, and staggered entrance animations.
+
+  //   • Persistent Global Audio: Engineered a custom React Context audio provider to maintain a continuous, looping background soundtrack that persists flawlessly across route changes without restarting.
+
+  //   • Custom Authentication: Features a highly stylized, animated password gate that prevents unauthorized access while setting the premium tone of the app.
+
+  //   • Performance Optimized Galleries: Implemented lazy loading and hardware-accelerated animations for the high-resolution masonry photo albums to ensure buttery-smooth scrolling on mobile devices.
+
+  //   • Fully Responsive Design: Engineered a "floating canvas" approach that perfectly adapts from an alternating mobile timeline to a beautiful, centered desktop experience.
+
+  //   This project highlights my passion for pixel-perfect frontend development, advanced CSS techniques, and creating deeply engaging user interfaces.`,
+  // },
 ];
 
 export const projectCategories = [
@@ -308,6 +500,7 @@ export const projectCategories = [
   "Mobile Development",
   "AI & Machine Learning",
   "Security & Cryptography",
+  "Full Stack Development",
 ];
 
 export const skillIcons1 = [

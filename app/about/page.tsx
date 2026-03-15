@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import {
   aboutText,
+  agentGeniusDescText,
   collegeText,
   internshipText,
   juniorHighText,
@@ -45,6 +46,7 @@ export default function About() {
 
   const aboutMeShortText = getShortText(aboutText);
   const internshipShortText = getShortText(internshipText);
+  const agentGeniusDescShortText = getShortText(agentGeniusDescText);
   const collegeShortText = getShortText(collegeText);
   const juniorHighShortText = getShortText(juniorHighText);
   const seniorHighShortText = getShortText(seniorHighText);
@@ -131,7 +133,7 @@ export default function About() {
                 <h2 className="text-base font-semibold">
                   Nestor B. Sayson Jr.
                 </h2>
-                <p className="text-sm text-text-muted">Software Developer</p>
+                <p className="text-sm text-text-muted">Software Engineer</p>
               </div>
               <div>
                 <h3 className="text-sm font-semibold mb-2">About Me</h3>
@@ -179,6 +181,18 @@ export default function About() {
               <span className={SECTION_TITLE_CLASS}>Experience</span>
             </div>
             <div className="mt-2">
+              <ExpAndEduc
+                showMore={showMore.internship}
+                setShowMore={(value: boolean) =>
+                  setShowMore((prev) => ({ ...prev, internship: value }))
+                }
+                descText={agentGeniusDescText}
+                shortDescText={agentGeniusDescShortText}
+                image="/AG-Logo.png"
+                title="AI Automation Engineer"
+                subtitle="AgentGenius.ai"
+                date="August 2025 - Present"
+              />
               <ExpAndEduc
                 showMore={showMore.internship}
                 setShowMore={(value: boolean) =>
