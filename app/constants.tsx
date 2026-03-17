@@ -7,19 +7,38 @@ import {
 } from "./icons";
 
 export const typewriterTexts = [
-  "A Software Engineer crafting delightful digital experiences.",
-  "Passionate about building accessible and responsive web apps.",
-  "Turning ideas into interactive user interfaces.",
+  // Core Identity & AI Focus
+  "A Full-Stack Engineer architecting the future of AI automation.",
+  "Integrating RAG and LLMs into modern web and mobile apps.",
+  "Automating complex workflows with n8n and Python.",
+
+  // Tech Stack Specific
+  "Building high-performance web apps with Next.js and Supabase.",
+  "Crafting seamless mobile experiences with React Native and Expo.",
+  "Developing robust backends using Node.js, Express, and MongoDB.",
+
+  // Result-Oriented & Creative
+  "Turning manual business processes into autonomous systems.",
+  "Transforming complex ideas into production-ready software.",
+  "Bridging the gap between intelligent AI and user-centered design.",
+  "Building from scratch, from database to deployment.",
+  "Your partner in end-to-end full-stack development.",
 ];
 
-export const aboutText =
-  "Full-Stack Software Engineer dedicated to bridging the gap between complex AI capabilities and practical business needs. From developing seamless mobile interfaces to building comprehensive web and database architectures, I focus on intelligent, user-centered design. Leveraging my background in machine learning and RAG, I specialize in engineering scalable AI automation solutions that optimize workflows and drive innovation.";
+export const aboutText = `I'm a Full-Stack Software Engineer and AI Automation Engineer specializing in developing end-to-end solutions with JavaScript/TypeScript and Python. My work spans across building modern web applications, developing mobile apps with React Native, and architecting intelligent automation workflows using n8n and Zapier.
+
+As a freelance developer, I specialize in bringing complex ideas to life by building custom, full-stack software solutions from the ground up. I am actively open to new project offers and love partnering with businesses to build scalable, user-centered applications. When I am not working with clients, I am actively building personal projects to experiment with new technologies and refine my development skills.
+
+Lately, I've been diving deeper into the world of Artificial Intelligence and Machine Learning. My focus is on integrating AI tools, Retrieval-Augmented Generation (RAG), and advanced automations into modern applications to optimize workflows and deliver cutting-edge, intelligent systems.`;
 
 export const internshipText =
   "During my internship, I contributed to the front-end development of a new tablet-based Point of Sale (POS) application built from scratch. Using React Native, Expo, and Redux, I helped implement the user interface from existing designs and managed state and API integrations. I collaborated closely with the design and backend teams to build a solid foundation for the app's future release.";
 
 export const agentGeniusDescText =
   "As an AI Automation Engineer, I bridge the gap between complex AI technology and practical business needs. I design, develop, and maintain full-stack applications using React and Supabase, while powering the backend logic with intelligent n8n automation workflows. Beyond writing code, I work directly with our clients—acting as their technical partner to gather requirements, communicate progress, and deliver custom AI solutions that streamline their operations.";
+
+export const freelanceDescText =
+  "I offer comprehensive full-stack services for web and mobile as an independent developer, specializing in a modern stack that includes Next.js, Vite, and React Native. As the technical lead for my clients, I manage every phase of the project—from UI implementation to complex API development using Node.js and Express. By utilizing Supabase and MongoDB for robust data handling, I consistently deliver high-quality, full-stack applications that are optimized for performance and ready for real-world deployment.";
 
 export const collegeText =
   "Gaining a strong foundation in programming, software development, and emerging technologies such as artificial intelligence and machine learning. Developed practical skills through hands-on projects, research, and real-world applications in web and mobile development.";
@@ -36,7 +55,7 @@ export const projects = [
     slug: "my-portfolio",
     title: "My Portfolio",
     subtitle: "Public",
-    category: ["Web Development", "AI & Machine Learning"],
+    category: ["Web Development", "AI Integration"],
     projectLink: {
       link: "https://niorsayson.vercel.app/",
       linkName: "Nestor B. Sayson Jr - Portfolio",
@@ -273,7 +292,7 @@ export const projects = [
     slug: "vibenode",
     title: "VibeNode",
     subtitle: "Public",
-    category: ["Full Stack Development", "Web Development"],
+    category: ["Full Stack Development", "Web Development", "AI Integration"],
     projectLink: {
       link: "https://vibenode.site",
       linkName: "VibeNode Live Site",
@@ -501,6 +520,7 @@ export const projectCategories = [
   "AI & Machine Learning",
   "Security & Cryptography",
   "Full Stack Development",
+  "AI Integration",
 ];
 
 export const skillIcons1 = [

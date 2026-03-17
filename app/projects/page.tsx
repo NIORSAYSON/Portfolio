@@ -60,7 +60,7 @@ export default function Projects() {
                   onClick={() => setSelectedCategory(category)}
                   className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 ${
                     selectedCategory === category
-                      ? "bg-[--navtext] text-white"
+                      ? "bg-[--navtext]"
                       : "border border-border text-text-muted hover:border-[--navtext] hover:text-[--navtext]"
                   }`}>
                   {category}

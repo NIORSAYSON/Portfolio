@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import ProjectOverview from "@/components/ProjectOverview";
 import ProjectsSection from "@/components/ProjectsSection";
 import { projects } from "@/app/constants";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function MyPortfolio() {
   const [mounted, setMounted] = useState(false);
@@ -13,6 +14,9 @@ export default function MyPortfolio() {
   useEffect(() => {
     setMounted(true);
   }, []);
+  const [showMore, setShowMore] = useState<{
+    description: boolean;
+  }>({ description: false });
 
   const current = projects.find((p) => p.slug === "my-portfolio");
   if (!current) return <div>Project not found</div>;
@@ -44,8 +48,31 @@ export default function MyPortfolio() {
                 About
               </span>
             </div>
-            <div className="px-5 pb-5 text-sm text-text-muted leading-relaxed whitespace-pre-line">
-              {current.description}
+            <div className="px-5 pb-5 text-sm leading-relaxed">
+              <AnimatePresence initial={false} mode="wait">
+                <motion.span
+                  key={showMore.description ? "full" : "short"}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="text-sm text-text-muted leading-relaxed inline whitespace-pre-line">
+                  {showMore.description
+                    ? current.description
+                    : current.description.substring(0, 500) + "..."}
+                </motion.span>
+              </AnimatePresence>
+
+              <button
+                className="ml-1.5 text-xs text-[--navtext] hover:underline font-medium inline-block"
+                onClick={() =>
+                  setShowMore((prev) => ({
+                    ...prev,
+                    description: !prev.description,
+                  }))
+                }>
+                {showMore.description ? "Show less" : "Show more"}
+              </button>
             </div>
           </div>
           {/* Other Sections */}

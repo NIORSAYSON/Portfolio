@@ -5,6 +5,7 @@ import {
   aboutText,
   agentGeniusDescText,
   collegeText,
+  freelanceDescText,
   internshipText,
   juniorHighText,
   projects,
@@ -30,12 +31,16 @@ export default function About() {
   const [showMore, setShowMore] = useState<{
     about: boolean;
     internship: boolean;
+    agentGenius: boolean;
+    freelance: boolean;
     college: boolean;
     seniorHigh: boolean;
     juniorHigh: boolean;
   }>({
     about: false,
     internship: false,
+    agentGenius: false,
+    freelance: false,
     college: false,
     seniorHigh: false,
     juniorHigh: false,
@@ -47,6 +52,7 @@ export default function About() {
   const aboutMeShortText = getShortText(aboutText);
   const internshipShortText = getShortText(internshipText);
   const agentGeniusDescShortText = getShortText(agentGeniusDescText);
+  const freelanceDescShortText = getShortText(freelanceDescText);
   const collegeShortText = getShortText(collegeText);
   const juniorHighShortText = getShortText(juniorHighText);
   const seniorHighShortText = getShortText(seniorHighText);
@@ -146,7 +152,7 @@ export default function About() {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.3 }}
-                    className="text-sm text-text-muted leading-relaxed inline">
+                    className="text-sm text-text-muted leading-relaxed inline whitespace-pre-line">
                     {showMore.about ? aboutText : aboutMeShortText}
                   </motion.span>
                 </AnimatePresence>
@@ -182,9 +188,9 @@ export default function About() {
             </div>
             <div className="mt-2">
               <ExpAndEduc
-                showMore={showMore.internship}
+                showMore={showMore.agentGenius}
                 setShowMore={(value: boolean) =>
-                  setShowMore((prev) => ({ ...prev, internship: value }))
+                  setShowMore((prev) => ({ ...prev, agentGenius: value }))
                 }
                 descText={agentGeniusDescText}
                 shortDescText={agentGeniusDescShortText}
@@ -192,6 +198,18 @@ export default function About() {
                 title="AI Automation Engineer"
                 subtitle="AgentGenius.ai"
                 date="August 2025 - Present"
+              />
+              <ExpAndEduc
+                showMore={showMore.freelance}
+                setShowMore={(value: boolean) =>
+                  setShowMore((prev) => ({ ...prev, freelance: value }))
+                }
+                descText={freelanceDescText}
+                shortDescText={freelanceDescShortText}
+                image="/freelance-logo.png"
+                title="Independent Software Engineer"
+                subtitle="Freelance"
+                date="June 2025 - Present"
               />
               <ExpAndEduc
                 showMore={showMore.internship}
@@ -275,29 +293,28 @@ export default function About() {
                   />
                   <ProjectCard
                     title={projects[5].title}
-                    subtitle="HCI Project"
-                    image="/Projects/SIAS Project.png"
+                    subtitle="Personal Project"
+                    image="/Projects/FadeFlow Project.png"
                     description={projects[5].description}
                     slug={projects[5].slug}
-                    link="https://niorsayson.github.io/SIAS-Online-Portal-Redesign/"
+                    link="https://fadeflow.shop"
                     source="/about"
                   />
                   <ProjectCard
                     title={projects[6].title}
-                    subtitle="Modeling & Simulation"
-                    image="/Projects/Modeling and Simulation Project.png"
+                    subtitle="Personal Project"
+                    image="/Projects/VibeNode Project.png"
                     description={projects[6].description}
                     slug={projects[6].slug}
-                    link="https://synthetic-data-generator-sayson.streamlit.app/Synthetic_Data_Generator"
+                    link="https://www.vibenode.site"
                     source="/about"
                   />
                   <ProjectCard
-                    title={projects[7].title}
-                    subtitle="Applied Cryptography"
-                    image="/Projects/Cryptographic App Project.png"
-                    description={projects[7].description}
-                    slug={projects[7].slug}
-                    link="https://saysonnior-cs3b.streamlit.app/"
+                    title={projects[3].title}
+                    subtitle="Freelance Project"
+                    image="/Projects/AgriMarket Project.png"
+                    description={projects[3].description}
+                    slug={projects[3].slug}
                     source="/about"
                   />
                 </div>
