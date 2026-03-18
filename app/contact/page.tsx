@@ -120,7 +120,7 @@ export default function Contact() {
                     initial={{ opacity: 0, x: -16 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.4, delay: index * 0.08 }}
-                    className="flex items-center gap-3 p-3 rounded-xl border border-border hover:border-[--navtext] transition-all duration-200">
+                    className="flex items-center gap-3 p-3 rounded-xl border border-border hover:border-navtext transition-all duration-200">
                     {mounted && (
                       <div className="w-8 h-8 rounded-full border border-border flex items-center justify-center shrink-0">
                         <item.icon
@@ -194,7 +194,7 @@ export default function Contact() {
                     id="name"
                     type="text"
                     placeholder="John Doe"
-                    className="border border-border bg-background rounded-xl px-4 py-2.5 w-full text-sm text-text placeholder:text-text-muted focus:outline-none focus:border-[--navtext] transition-all duration-200"
+                    className="border border-border bg-background rounded-xl px-4 py-2.5 w-full text-sm text-text placeholder:text-text-muted focus:outline-none focus:border-navtext transition-all duration-200"
                   />
                 </div>
                 {/* Email */}
@@ -212,7 +212,7 @@ export default function Contact() {
                     id="email"
                     type="email"
                     placeholder="john.doe@example.com"
-                    className="border border-border bg-background rounded-xl px-4 py-2.5 w-full text-sm text-text placeholder:text-text-muted focus:outline-none focus:border-[--navtext] transition-all duration-200"
+                    className="border border-border bg-background rounded-xl px-4 py-2.5 w-full text-sm text-text placeholder:text-text-muted focus:outline-none focus:border-navtext transition-all duration-200"
                   />
                 </div>
                 {/* Subject */}
@@ -230,7 +230,7 @@ export default function Contact() {
                     id="subject"
                     type="text"
                     placeholder="Project Inquiry"
-                    className="border border-border bg-background rounded-xl px-4 py-2.5 w-full text-sm text-text placeholder:text-text-muted focus:outline-none focus:border-[--navtext] transition-all duration-200"
+                    className="border border-border bg-background rounded-xl px-4 py-2.5 w-full text-sm text-text placeholder:text-text-muted focus:outline-none focus:border-navtext transition-all duration-200"
                   />
                 </div>
                 {/* Message */}
@@ -248,7 +248,7 @@ export default function Contact() {
                     id="message"
                     placeholder="Tell me about your project or idea..."
                     rows={8}
-                    className="border border-border bg-background rounded-xl px-4 py-2.5 w-full text-sm text-text placeholder:text-text-muted resize-none focus:outline-none focus:border-[--navtext] transition-all duration-200"
+                    className="border border-border bg-background rounded-xl px-4 py-2.5 w-full text-sm text-text placeholder:text-text-muted resize-none focus:outline-none focus:border-navtext transition-all duration-200"
                   />
                 </div>
                 {/* Submit */}
@@ -257,7 +257,7 @@ export default function Contact() {
                   whileTap={{ scale: 0.99 }}
                   type="submit"
                   disabled={status === "loading"}
-                  className="bg-[--navtext] hover:opacity-90 text-white font-medium w-full py-2.5 rounded-xl text-sm transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
+                  className="bg-navtext hover:opacity-90 text-white font-medium w-full py-2.5 rounded-xl text-sm transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
                   {status === "loading" ? "Sending..." : "Send Message"}
                 </motion.button>
 

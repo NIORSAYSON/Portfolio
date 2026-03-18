@@ -194,7 +194,7 @@ export const projects = [
     ],
     projectImages: Array.from(
       { length: 33 },
-      (_, index) => `/Projects/Sample Images/Agrimarket ${index + 1}.jpg`,
+      (_, index) => `/Projects/Sample Images/AgriMarket ${index + 1}.jpg`,
     ),
     description: `AgriMarket is a comprehensive mobile e-commerce platform designed to connect local farmers directly with consumers. Built from the ground up with React Native and Expo, the application provides a seamless marketplace experience with dedicated interfaces for three distinct user roles: Buyers, Sellers (Farmers), and Administrators.
 

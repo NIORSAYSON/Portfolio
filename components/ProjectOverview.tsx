@@ -55,7 +55,7 @@ export default function ProjectOverview({
 
   return (
     <div className="xl:col-span-6 w-full">
-      <div className="bg-sbackground border border-border rounded-2xl text-text mt-16 md:mt-0 mb-5">
+      <div className="bg-sbackground border border-border rounded-2xl text-text mt-5 md:mt-0">
         {/* Back Button */}
         <div className="px-5 pt-5">
           <button

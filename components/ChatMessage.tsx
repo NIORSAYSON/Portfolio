@@ -84,12 +84,12 @@ export default function ChatMessage({
         )}
         <div
           className={`rounded-2xl px-4 py-2.5 max-w-[75%] md:max-w-[65%] ${
-            isUser ? "bg-[--navtext] text-white" : "bg-snbackground border border-border"
+            isUser ? "bg-navtext text-white" : "bg-snbackground border border-border"
           }`}>
           <p className="text-sm whitespace-pre-wrap wrap-break-word">{message}</p>
         </div>
         {isUser && (
-          <div className="w-8 h-8 rounded-full bg-[--navtext] shrink-0" />
+          <div className="w-8 h-8 rounded-full bg-navtext shrink-0" />
         )}
       </div>
     );
@@ -120,7 +120,7 @@ export default function ChatMessage({
         <div
           className={`rounded-2xl px-4 py-2.5 ${
             isUser
-              ? "bg-[--navtext] text-white"
+              ? "bg-navtext text-white"
               : isDark
               ? "bg-snbackground border border-border text-text"
               : "bg-snbackground border border-border text-text"
@@ -135,7 +135,7 @@ export default function ChatMessage({
       </div>
       {isUser && (
         <div className="shrink-0">
-          <div className="w-8 h-8 rounded-full bg-[--navtext] flex items-center justify-center text-white shrink-0">
+          <div className="w-8 h-8 rounded-full bg-navtext flex items-center justify-center text-white shrink-0">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="w-4 h-4"

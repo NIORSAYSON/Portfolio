@@ -39,7 +39,7 @@ export default function TopBar({
             aria-label="Open menu">
             {mounted && (
               <JamMenu
-                className="w-5 h-5"
+                className="w-10 h-10"
                 fill={theme === "dark" ? "#f0f0f0" : "#0a0a0a"}
               />
             )}
