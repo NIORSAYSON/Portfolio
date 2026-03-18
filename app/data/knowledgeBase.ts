@@ -4,14 +4,41 @@
 export const knowledgeBase = {
   personal: {
     name: "Nestor B. Sayson Jr.",
-    title: "Software Developer",
+    nickname: "Nior",
+    title: "Full-Stack Software Engineer & AI Automation Engineer",
     location: "Philippines",
-    email: "Contact via portfolio",
-    about: `Software Developer with experience in building web and mobile applications, 
-    combining strong programming skills with a focus on intelligent, user-centered design. 
-    Research-oriented with a background in machine learning and Retrieval-Augmented Generation (RAG), 
-    and driven to create scalable, AI-powered solutions through collaboration and innovation.`,
+    email: "nessayson@gmail.com",
+    about: `I'm a Full-Stack Software Engineer and AI Automation Engineer specializing in developing end-to-end solutions with JavaScript/TypeScript and Python. My work spans across building modern web applications, developing mobile apps with React Native, and architecting intelligent automation workflows using n8n and Zapier.
+
+    As a freelance developer, I specialize in bringing complex ideas to life by building custom, full-stack software solutions from the ground up. I am actively open to new project offers and love partnering with businesses to build scalable, user-centered applications. When I am not working with clients, I am actively building personal projects to experiment with new technologies and refine my development skills.
+
+    Lately, I've been diving deeper into the world of Artificial Intelligence and Machine Learning. My focus is on integrating AI tools, Retrieval-Augmented Generation (RAG), and advanced automations into modern applications to optimize workflows and deliver cutting-edge, intelligent systems.`,
+    socials: {
+      facebook: "https://www.facebook.com/nioooooor?mibextid=ZbWKwL",
+      instagram: "https://www.instagram.com/neon.nior/",
+      gmail: "mailto:nessayson@gmail.com",
+      linkedin: "https://www.linkedin.com/in/nestor-sayson-b8671b292/",
+      github: "https://github.com/NIORSAYSON",
+    },
   },
+
+  services: [
+    {
+      title: "Full-Stack Web Development",
+      description:
+        "Custom end-to-end web applications built with Next.js, React, and Node.js. Focus on scalable architectures and responsive, accessible user interfaces.",
+    },
+    {
+      title: "Mobile App Development",
+      description:
+        "Cross-platform mobile applications for iOS and Android using React Native and Expo, complete with complex backend integrations and real-time features.",
+    },
+    {
+      title: "AI & Workflow Automation",
+      description:
+        "Designing intelligent business workflows using n8n and Zapier. Integrating custom LLMs, RAG pipelines, and AI agents into existing business processes to save time and reduce manual tasks.",
+    },
+  ],
 
   education: [
     {
@@ -41,14 +68,35 @@ export const knowledgeBase = {
 
   experience: [
     {
+      company: "AgentGenius.ai",
+      position: "AI Automation Engineer",
+      duration: "August 2025 - Present",
+      type: "Work Experience",
+      description: `As an AI Automation Engineer, I bridge the gap between complex AI technology and practical business needs. I design, develop, and maintain full-stack applications using React and Supabase, while powering the backend logic with intelligent n8n automation workflows. Beyond writing code, I work directly with our clients—acting as their technical partner to gather requirements, communicate progress, and deliver custom AI solutions that streamline their operations.`,
+      technologies: ["React", "Supabase", "n8n", "Zapier", "AI Models"],
+    },
+    {
+      company: "Independent Software Engineer",
+      position: "Freelance Developer",
+      duration: "June 2025 - Present",
+      type: "Freelancing Experience",
+      description: `I offer comprehensive full-stack services for web and mobile as an independent developer, specializing in a modern stack that includes Next.js, Vite, and React Native. As the technical lead for my clients, I manage every phase of the project—from UI implementation to complex API development using Node.js and Express. By utilizing Supabase and MongoDB for robust data handling, I consistently deliver high-quality, full-stack applications that are optimized for performance and ready for real-world deployment.`,
+      technologies: [
+        "Next.js",
+        "Vite",
+        "React Native",
+        "Node.js",
+        "Express",
+        "Supabase",
+        "MongoDB",
+      ],
+    },
+    {
       company: "IntelliSeven Technology Solutions Inc.",
-      position: "Frontend Developer Intern",
-      duration: "3 months",
+      position: "Frontend Developer",
+      duration: "March - June 2025",
       type: "Internship",
-      description: `Developed a tablet-based Point of Sale (POS) mobile application from scratch to 
-      support efficient retail operations. Designed and implemented a responsive, user-friendly interface 
-      and handled API integration to connect with backend services. Collaborated closely with the backend 
-      developer and UI/UX designer to align design, functionality, and data flow.`,
+      description: `During my internship, I contributed to the front-end development of a new tablet-based Point of Sale (POS) application built from scratch. Using React Native, Expo, and Redux, I helped implement the user interface from existing designs and managed state and API integrations. I collaborated closely with the design and backend teams to build a solid foundation for the app's future release.`,
       technologies: [
         "React Native",
         "Redux",
@@ -82,6 +130,11 @@ export const knowledgeBase = {
       description: "Experience in building cross-platform mobile applications",
       technologies: ["React Native", "Expo", "Redux"],
     },
+    aiAutomation: {
+      title: "AI Automation",
+      description: `I design and build automated workflows using tools like n8n and Zapier, connecting apps and AI models to streamline repetitive tasks and power intelligent pipelines.`,
+      technologies: ["n8n", "Zapier", "Automated Workflows", "API Integration"],
+    },
     machineLearning: {
       title: "Machine Learning",
       description: `Explore machine learning by building models that can analyze data, recognize 
@@ -106,6 +159,68 @@ export const knowledgeBase = {
   },
 
   projects: [
+    {
+      name: "AgriMarket Mobile App",
+      category: "Mobile Development",
+      status: "Public",
+      link: "https://github.com/NIORSAYSON/agrimarket",
+      technologies: [
+        "React Native",
+        "Expo",
+        "TypeScript",
+        "Redux Toolkit",
+        "RTK Query",
+        "Socket.io",
+      ],
+      description: `AgriMarket is a comprehensive mobile e-commerce platform designed to connect local farmers directly with consumers. Built from the ground up with React Native and Expo, the application provides a seamless marketplace experience with dedicated interfaces for three distinct user roles: Buyers, Sellers (Farmers), and Administrators. Features Real-Time Communication via Socket.io, Advanced State Management, Complete E-commerce Flows, and dedicated Seller/Admin Analytics.`,
+    },
+    {
+      name: "Campus Information System (BUSIS)",
+      category: "Full Stack Development & Mobile Development",
+      status: "Public",
+      link: "https://github.com/NIORSAYSON/busis",
+      technologies: [
+        "React Native",
+        "Expo",
+        "TypeScript",
+        "Redux Toolkit",
+        "Node.js",
+        "Express.js",
+        "MongoDB",
+        "3D Mapping",
+      ],
+      description: `The Campus Information System (BUSIS) is a comprehensive full-stack mobile application designed to centralize university announcements, events, department directories, and campus navigation into a single, accessible platform. Features a React Native mobile frontend with an interactive 3D Campus Map, powered by a robust REST API using Node.js, Express.js, and MongoDB.`,
+    },
+    {
+      name: "FadeFlow - Barbershop SaaS",
+      category: "Full Stack Development & Web Development",
+      status: "Public",
+      link: "https://github.com/NIORSAYSON/fadeflow-saas",
+      technologies: [
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "Supabase",
+        "Radix UI",
+        "Zod",
+      ],
+      description: `FadeFlow is a comprehensive Software-as-a-Service (SaaS) platform tailored for barbershops and salons, designed to streamline appointment bookings and business management. Features a seamless client booking flow and a powerful administrative dashboard for business owners, built on Next.js and securely powered by Supabase.`,
+    },
+    {
+      name: "VibeNode",
+      category: "Full Stack Development, Web Development & AI Integration",
+      status: "Public",
+      link: "https://vibenode.site",
+      technologies: [
+        "React",
+        "Vite",
+        "Node.js",
+        "Socket.io",
+        "Redis",
+        "AI Integration",
+      ],
+      description: `VibeNode is an innovative real-time chat and matchmaking platform designed to connect users based on shared interests and "wavelengths." Handles concurrent connections, real-time messaging, and intelligent user pairing using Redis, Socket.io, and smart AI Matchmaking algorithms.`,
+    },
     {
       name: "My Portfolio",
       category: "Web Development",
@@ -222,7 +337,6 @@ export const knowledgeBase = {
     },
   ],
 
-  // Additional context for common questions
   faqs: [
     {
       question: "What is Nestor's educational background?",
@@ -233,18 +347,35 @@ export const knowledgeBase = {
       question: "What technologies does Nestor know?",
       answer: `Nestor is proficient in web development (React, Next.js, TypeScript, Tailwind CSS), 
       mobile development (React Native, Expo), machine learning (Python, Scikit-learn, TensorFlow), 
-      and has experience with LLMs and RAG using LangChain and Groq.`,
+      and AI Automation using n8n and Zapier. He also has strong experience with LLMs and RAG using LangChain and Groq.`,
     },
     {
       question: "What kind of projects has Nestor worked on?",
-      answer: `Nestor has worked on various projects including a personal portfolio website, 
-      a conversational AI agent using RAG, mobile POS system, task management apps, and data 
-      generation tools.`,
+      answer: `Nestor has worked on a diverse array of projects including comprehensive SaaS platforms (FadeFlow), full-stack campus management systems with 3D mapping (BUSIS), mobile e-commerce platforms (AgriMarket), real-time AI matchmaking chat apps (VibeNode), conversational AI agents using RAG, and various other full-stack systems.`,
     },
     {
       question: "Does Nestor have work experience?",
-      answer: `Yes, Nestor completed a 3-month internship at IntelliSeven Technology Solutions Inc. 
-      as a Frontend Developer, where he developed a Point of Sale mobile application.`,
+      answer: `Yes, Nestor currently works as an AI Automation Engineer at AgentGenius.ai and operates as a Freelance Full-Stack Developer. Previously, he completed a frontend developer internship at IntelliSeven Technology Solutions Inc., where he developed a tablet-based Point of Sale mobile application.`,
+    },
+    {
+      question: "Is Nior currently available for freelance work?",
+      answer:
+        "Yes, Nior is actively open to new freelance projects and opportunities. You can reach out to him via email at nessayson@gmail.com to discuss your project.",
+    },
+    {
+      question: "What is Nior's preferred tech stack?",
+      answer:
+        "For web, Nior prefers Next.js, React, Tailwind CSS, and Node.js/Express. For mobile, he uses React Native with Expo. For databases, he relies on Supabase, PostgreSQL, and MongoDB. He also uses Python for AI and machine learning tasks.",
+    },
+    {
+      question: "What timezone does Nior work in?",
+      answer:
+        "Nior is based in the Philippines (PST/GMT+8), but he is highly adaptable and experienced in working asynchronously with clients across different timezones.",
+    },
+    {
+      question: "How does Nior approach a new project?",
+      answer:
+        "Nior acts as a technical partner. He starts by understanding the core business requirements, designs a scalable architecture (database schema, UI/UX flow), and develops the solution iteratively while maintaining clear communication with the client.",
     },
   ],
 };
@@ -255,11 +386,35 @@ export function prepareDocumentsForEmbedding() {
 
   // Personal info
   documents.push({
-    content: `Name: ${knowledgeBase.personal.name}
+    content: `Name: ${knowledgeBase.personal.name} (Nickname: ${knowledgeBase.personal.nickname})
 Title: ${knowledgeBase.personal.title}
+Email: ${knowledgeBase.personal.email}
 About: ${knowledgeBase.personal.about}`,
     metadata: { type: "personal" },
   });
+
+  // Social Links
+  if (knowledgeBase.personal.socials) {
+    documents.push({
+      content: `Nior's Social Media and Contact Links:
+Facebook: ${knowledgeBase.personal.socials.facebook}
+Instagram: ${knowledgeBase.personal.socials.instagram}
+Gmail: ${knowledgeBase.personal.socials.gmail}
+LinkedIn: ${knowledgeBase.personal.socials.linkedin}
+GitHub: ${knowledgeBase.personal.socials.github}`,
+      metadata: { type: "personal_links" },
+    });
+  }
+
+  // Services
+  if (knowledgeBase.services) {
+    knowledgeBase.services.forEach((service) => {
+      documents.push({
+        content: `Service Offered - ${service.title}\nDescription: ${service.description}`,
+        metadata: { type: "service" },
+      });
+    });
+  }
 
   // Education
   knowledgeBase.education.forEach((edu) => {

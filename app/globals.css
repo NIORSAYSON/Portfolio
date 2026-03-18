@@ -20,6 +20,7 @@ body {
   --color-snbackground: var(--snbackground);
   --color-dmbackground: var(--dmbackground);
   --color-border: var(--border);
+  --color-navtext: var(--navtext);
   --font-heading: var(--font-heading);
   --font-inter: var(--font-inter);
 }

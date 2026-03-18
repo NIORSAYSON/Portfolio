@@ -15,14 +15,14 @@ require("dotenv").config({ path: path.resolve(__dirname, "../.env.local") });
 // Initialize Supabase client
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_KEY
+  process.env.SUPABASE_SERVICE_KEY,
 );
 
 // Import knowledge base - we'll use dynamic import for ES modules
 async function loadKnowledgeBase() {
   const knowledgeBasePath = path.resolve(
     __dirname,
-    "../app/data/knowledgeBase.ts"
+    "../app/data/knowledgeBase.ts",
   );
 
   // For simplicity, we'll manually define the documents here
@@ -48,7 +48,7 @@ async function generateEmbedding(text) {
     if (!response.ok) {
       const errorText = await response.text();
       throw new Error(
-        `Embedding API error: ${response.statusText} - ${errorText}`
+        `Embedding API error: ${response.statusText} - ${errorText}`,
       );
     }
 
@@ -75,7 +75,7 @@ async function populateKnowledgeBase() {
     if (deleteError) {
       console.warn(
         "Warning: Could not clear existing documents:",
-        deleteError.message
+        deleteError.message,
       );
     } else {
       console.log("✅ Existing documents cleared\n");
@@ -95,7 +95,7 @@ async function populateKnowledgeBase() {
 
       try {
         console.log(
-          `\n[${docNumber}/${documents.length}] Processing document...`
+          `\n[${docNumber}/${documents.length}] Processing document...`,
         );
         console.log(`Type: ${doc.metadata.type}`);
         console.log(`Preview: ${doc.content.substring(0, 80)}...`);
@@ -152,7 +152,7 @@ async function populateKnowledgeBase() {
       console.log("\n🎉 Knowledge base population completed successfully!");
     } else {
       console.log(
-        "\n⚠️  Knowledge base population completed with some errors."
+        "\n⚠️  Knowledge base population completed with some errors.",
       );
     }
   } catch (error) {
@@ -189,7 +189,7 @@ console.log(
   "✅ Groq API Key:",
   process.env.GROQ_API_KEY
     ? "***" + process.env.GROQ_API_KEY.slice(-4)
-    : "Not set"
+    : "Not set",
 );
 console.log("");
 

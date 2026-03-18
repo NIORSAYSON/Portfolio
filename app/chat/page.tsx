@@ -40,17 +40,9 @@ export default function ChatPage() {
   }, [messages]);
 
   const scrollToBottom = () => {
-    const container = messagesContainerRef.current;
-    if (container) {
-      const inputHeight = inputContainerRef.current?.offsetHeight ?? 0;
-      const maxScrollTop = container.scrollHeight - container.clientHeight;
-      const target = Math.max(0, maxScrollTop - inputHeight + 8);
-      container.scrollTo({ top: target, behavior: "smooth" });
-      return;
-    }
-    messagesEndRef.current?.scrollIntoView({
+    window.scrollTo({
+      top: document.body.scrollHeight,
       behavior: "smooth",
-      block: "end",
     });
   };
 
@@ -118,14 +110,14 @@ export default function ChatPage() {
   };
 
   return (
-    <main className="w-full min-h-screen flex flex-col">
+    <main className="w-full flex flex-col">
       {/* Messages */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         ref={messagesContainerRef}
-        className="flex-1 overflow-y-auto px-5 md:px-10 pt-6 pb-32 hide-scrollbar">
+        className="flex-1 px-5 md:px-10 pt-6 pb-40">
         <div className="max-w-3xl mx-auto mt-14 md:mt-0">
           {messages.map((message, idx) => (
             <ChatMessage
@@ -173,7 +165,7 @@ export default function ChatPage() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.1 }}
-        className="px-5 md:px-10 py-4 border-t border-border bg-sbackground z-10 sticky bottom-0">
+        className="px-5 md:px-10 py-4 border-t border-border bg-sbackground z-10 fixed bottom-0 left-0 right-0 md:left-72">
         <div className="max-w-3xl mx-auto">
           <div className="flex gap-2 items-center">
             <input

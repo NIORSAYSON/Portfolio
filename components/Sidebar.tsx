@@ -79,7 +79,7 @@ export default function Sidebar() {
         <p className="text-sm text-text-muted mt-0.5">Software Engineer</p>
         <Link
           href="/resume"
-          className="mt-4 flex items-center gap-1.5 text-sm px-5 py-1.5 rounded-lg border border-border hover:border-[--navtext] hover:text-[--navtext] transition-all duration-200">
+          className="mt-4 flex items-center gap-1.5 text-sm px-5 py-1.5 rounded-lg border border-border hover:border-navtext hover:text-navtext transition-all duration-200">
           {mounted && (
             <MaterialSymbolsLightDownloadSharp
               className="w-4 h-4"
@@ -103,7 +103,7 @@ export default function Sidebar() {
               href={href}
               className={`flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm transition-all duration-200 ${
                 isActive
-                  ? "bg-snbackground text-[--navtext] font-medium"
+                  ? "bg-snbackground text-navtext font-medium"
                   : "text-text hover:bg-snbackground"
               }`}>
               {mounted &&
@@ -161,7 +161,7 @@ export default function Sidebar() {
               onChange={() => setTheme(theme === "dark" ? "light" : "dark")}
               className="sr-only peer"
             />
-            <div className="w-9 h-5 bg-border peer-focus:outline-none rounded-full peer peer-checked:bg-[--navtext] transition-colors duration-200" />
+            <div className="w-9 h-5 bg-border peer-focus:outline-none rounded-full peer peer-checked:bg-navtext transition-colors duration-200" />
             <div className="absolute left-0.5 top-0.5 bg-white w-4 h-4 rounded-full transition-transform duration-200 peer-checked:translate-x-4 shadow-sm" />
           </label>
         </div>

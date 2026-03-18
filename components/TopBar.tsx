@@ -46,11 +46,11 @@ export default function TopBar({
           </button>
           <Link href="/" aria-label="Home">
             <Image
-              src="/logo.png"
+              src="/profile.jpg"
               alt="Logo"
               width={32}
               height={32}
-              className="object-contain"
+              className="rounded-full object-cover ring-1 ring-border/50"
             />
           </Link>
         </motion.div>
