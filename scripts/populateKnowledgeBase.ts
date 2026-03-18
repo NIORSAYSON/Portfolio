@@ -31,7 +31,7 @@ async function loadKnowledgeBase() {
 }
 
 // Function to generate embeddings using Groq's Nomic Embed model
-async function generateEmbedding(text) {
+async function generateEmbedding(text: string) {
   try {
     const response = await fetch("https://api.groq.com/openai/v1/embeddings", {
       method: "POST",
@@ -126,7 +126,7 @@ async function populateKnowledgeBase() {
           await new Promise((resolve) => setTimeout(resolve, 500));
         }
       } catch (error) {
-        console.error(`  ❌ Error processing document:`, error.message);
+        console.error(`  ❌ Error processing document:`, (error as Error).message);
         errorCount++;
       }
     }
