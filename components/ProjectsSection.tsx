@@ -1,16 +1,18 @@
-import { projects } from "@/app/constants";
 import Link from "next/link";
 import { CARD_BASE, SECTION_TITLE_CLASS } from "@/lib/styles";
+import type { CmsProject } from "@/lib/types/cms";
 
 interface ProjectsSectionProps {
   currentProjectSlug: string;
+  projects: CmsProject[];
 }
 
 export default function ProjectsSection({
   currentProjectSlug,
+  projects,
 }: ProjectsSectionProps) {
   const otherProjects = projects.filter(
-    (project) => project.slug !== currentProjectSlug,
+    (project) => project.slug !== currentProjectSlug
   );
 
   return (

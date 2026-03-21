@@ -5,9 +5,9 @@ import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 
 export default function ContributionCalendar() {
-  const [year, setYear] = useState(2025);
+  const [year, setYear] = useState(2026);
   const username = "NIORSAYSON";
-  const years = [2025, 2024, 2023, 2022];
+  const years = [2026, 2025, 2024, 2023, 2022];
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
 

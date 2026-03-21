@@ -1,6 +1,11 @@
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
+export type Competition = {
+  name: string;
+  detail: string;
+};
+
 interface ExpAndEducProps {
   descText: string;
   shortDescText: string;
@@ -11,6 +16,7 @@ interface ExpAndEducProps {
   gwa?: string;
   showMore: boolean;
   isCollege?: boolean;
+  competitions?: Competition[];
   setShowMore: (value: boolean) => void;
 }
 
@@ -25,6 +31,7 @@ export default function ExpAndEduc({
   date,
   gwa,
   isCollege,
+  competitions,
 }: ExpAndEducProps) {
   return (
     <div className="flex gap-4 px-5 py-4 border-b border-border last:border-b-0">
@@ -47,7 +54,9 @@ export default function ExpAndEduc({
         <h3 className="text-sm font-semibold">{title}</h3>
         <p className="text-sm text-text-muted">{subtitle}</p>
         {isCollege && gwa && (
-          <p className="text-xs text-text-muted mt-0.5">{gwa}</p>
+          <p className="text-xs text-text-muted mt-0.5">
+            {gwa.startsWith("GWA") ? gwa : `GWA: ${gwa}`}
+          </p>
         )}
         <div className="mt-2">
           <AnimatePresence initial={false} mode="wait">
@@ -62,7 +71,7 @@ export default function ExpAndEduc({
             </motion.p>
           </AnimatePresence>
           <AnimatePresence>
-            {showMore && isCollege && (
+            {showMore && isCollege && competitions && competitions.length > 0 && (
               <motion.div
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
@@ -71,22 +80,16 @@ export default function ExpAndEduc({
                 className="mt-3 overflow-hidden">
                 <p className="text-sm font-semibold text-text">Competitions:</p>
                 <ul className="list-disc list-inside ml-3 mt-1 space-y-1">
-                  <li>
-                    <span className="text-sm font-medium text-text">
-                      ICPC Asia Manila Regional Contest – Participant
-                    </span>
-                    <span className="block text-xs text-text-muted ml-4">
-                      Ateneo de Manila University (December 15–16, 2022)
-                    </span>
-                  </li>
-                  <li>
-                    <span className="text-sm font-medium text-text">
-                      2022 Programming Contest – 9th Place
-                    </span>
-                    <span className="block text-xs text-text-muted ml-4">
-                      Camarines Sur Polytechnic Colleges (November 14, 2022)
-                    </span>
-                  </li>
+                  {competitions.map((comp) => (
+                    <li key={comp.name}>
+                      <span className="text-sm font-medium text-text">
+                        {comp.name}
+                      </span>
+                      <span className="block text-xs text-text-muted ml-4">
+                        {comp.detail}
+                      </span>
+                    </li>
+                  ))}
                 </ul>
               </motion.div>
             )}

@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { PenLine } from "lucide-react";
-import { getAllCategories, getAllPosts } from "@/lib/blog";
+import { getAllBlogPosts, getAllCategories } from "@/lib/api/blogs";
 import { SECTION_HEADER_CLASS, SECTION_TITLE_CLASS } from "@/lib/styles";
 import BlogClient from "./BlogClient";
 
@@ -10,9 +10,11 @@ export const metadata = {
     "Thoughts on web development, AI, and software engineering by Nestor Sayson.",
 };
 
-export default function BlogPage() {
-  const posts = getAllPosts();
-  const categories = getAllCategories();
+export default async function BlogPage() {
+  const [posts, categories] = await Promise.all([
+    getAllBlogPosts(),
+    getAllCategories(),
+  ]);
 
   return (
     <main className="min-h-screen w-full">
@@ -33,7 +35,12 @@ export default function BlogPage() {
           <div className="h-px bg-border mx-5 mb-5" />
 
           <div className="px-5 pb-5">
-            <Suspense fallback={<div className="py-12 text-center text-sm text-text-muted">Loading posts…</div>}>
+            <Suspense
+              fallback={
+                <div className="py-12 text-center text-sm text-text-muted">
+                  Loading posts…
+                </div>
+              }>
               <BlogClient posts={posts} categories={categories} />
             </Suspense>
           </div>

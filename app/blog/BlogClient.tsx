@@ -7,10 +7,10 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Calendar, Clock, Tag, ArrowRight } from "lucide-react";
 import { CARD_BASE } from "@/lib/styles";
-import type { PostMeta } from "@/lib/blog";
+import type { CmsBlogPost } from "@/lib/types/cms";
 
 type Props = {
-  posts: PostMeta[];
+  posts: CmsBlogPost[];
   categories: string[];
 };
 
@@ -34,34 +34,60 @@ export default function BlogClient({ posts, categories }: Props) {
 
   const allTags = Array.from(new Set(posts.flatMap((p) => p.tags))).sort();
 
+  const isFiltered = selectedCategory !== "All" || selectedTag !== null;
+
+  // Normalize for comparison: trim + lowercase to guard against whitespace/case mismatch
+  const normCat = (s: unknown) => String(s ?? "").trim().toLowerCase();
+
   const filtered = posts.filter((p) => {
     const catMatch =
-      selectedCategory === "All" || p.category === selectedCategory;
+      selectedCategory === "All" ||
+      normCat(p.category) === normCat(selectedCategory);
     const tagMatch = !selectedTag || p.tags.includes(selectedTag);
     return catMatch && tagMatch;
   });
 
-  const [featured, ...rest] = filtered;
+  // Count per category for the filter buttons
+  const countFor = (cat: string) =>
+    cat === "All"
+      ? posts.length
+      : posts.filter((p) => normCat(p.category) === normCat(cat)).length;
+
+  // Hero card only for the genuinely featured post in the unfiltered "All" view
+  const heroPost = !isFiltered ? (filtered.find((p) => p.featured) ?? null) : null;
+  const gridPosts = heroPost ? filtered.filter((p) => p !== heroPost) : filtered;
 
   return (
     <div className="flex flex-col gap-6">
       {/* Category filter */}
       <div className="flex flex-wrap gap-2 px-1">
-        {["All", ...categories].map((cat) => (
-          <button
-            key={cat}
-            onClick={() => {
-              setSelectedCategory(cat);
-              setSelectedTag(null);
-            }}
-            className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-all duration-200 ${
-              selectedCategory === cat
-                ? "bg-accent text-white border-accent"
-                : "border-border text-text-muted hover:border-accent hover:text-accent"
-            }`}>
-            {cat}
-          </button>
-        ))}
+        {["All", ...categories].map((cat) => {
+          const count = countFor(cat);
+          const active = selectedCategory === cat;
+          return (
+            <button
+              key={cat}
+              onClick={() => {
+                setSelectedCategory(cat);
+                setSelectedTag(null);
+              }}
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium border transition-all duration-200 ${
+                active
+                  ? "bg-accent text-white border-accent"
+                  : "border-border text-text-muted hover:border-accent hover:text-accent"
+              }`}>
+              {cat}
+              <span
+                className={`text-[10px] px-1.5 py-0.5 rounded-full font-semibold ${
+                  active
+                    ? "bg-white/20 text-white"
+                    : "bg-snbackground text-text-muted"
+                }`}>
+                {count}
+              </span>
+            </button>
+          );
+        })}
       </div>
 
       {/* Tag filter */}
@@ -102,16 +128,26 @@ export default function BlogClient({ posts, categories }: Props) {
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.25 }}
             className="flex flex-col gap-5">
-            {/* Featured post */}
-            {featured && (
-              <Link href={`/blog/${featured.slug}`} className="group block">
+
+            {/* Results count */}
+            {isFiltered && (
+              <p className="text-xs text-text-muted px-1">
+                Showing{" "}
+                <span className="font-semibold text-text">{filtered.length}</span>{" "}
+                {filtered.length === 1 ? "post" : "posts"} in{" "}
+                <span className="font-semibold text-accent">{selectedCategory}</span>
+              </p>
+            )}
+            {/* Featured hero post — only in unfiltered "All" view */}
+            {heroPost && (
+              <Link href={`/blog/${heroPost.slug}`} className="group block">
                 <div
                   className={`${CARD_BASE} overflow-hidden flex flex-col md:flex-row`}>
                   <div className="relative w-full md:w-64 shrink-0 aspect-video md:aspect-auto md:h-auto overflow-hidden bg-snbackground">
-                    {featured.image ? (
+                    {heroPost.coverImage?.url ? (
                       <Image
-                        src={featured.image}
-                        alt={featured.title}
+                        src={heroPost.coverImage.url}
+                        alt={heroPost.title}
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-500"
                       />
@@ -130,9 +166,9 @@ export default function BlogClient({ posts, categories }: Props) {
                   <div className="p-5 flex flex-col gap-3 min-w-0 flex-1">
                     <div className="flex items-center gap-2 flex-wrap">
                       <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-accent-muted text-accent border border-accent/20">
-                        {featured.category}
+                        {heroPost.category}
                       </span>
-                      {featured.tags.slice(0, 2).map((tag) => (
+                      {heroPost.tags.slice(0, 2).map((tag) => (
                         <span
                           key={tag}
                           className="text-[11px] text-text-muted bg-snbackground border border-border rounded-md px-2 py-0.5">
@@ -141,20 +177,20 @@ export default function BlogClient({ posts, categories }: Props) {
                       ))}
                     </div>
                     <h2 className="text-lg font-bold text-text leading-snug line-clamp-2 group-hover:text-accent transition-colors duration-200">
-                      {featured.title}
+                      {heroPost.title}
                     </h2>
                     <p className="text-sm text-text-muted line-clamp-2 leading-relaxed">
-                      {featured.excerpt}
+                      {heroPost.excerpt}
                     </p>
                     <div className="flex items-center justify-between mt-auto pt-2 border-t border-border">
                       <div className="flex items-center gap-4 text-[11px] text-text-muted">
                         <span className="flex items-center gap-1">
                           <Calendar className="w-3 h-3" />
-                          {formatDate(featured.date)}
+                          {formatDate(heroPost.date)}
                         </span>
                         <span className="flex items-center gap-1">
                           <Clock className="w-3 h-3" />
-                          {featured.readingTime} min read
+                          {heroPost.readingTime} min read
                         </span>
                       </div>
                       <span className="flex items-center gap-1 text-xs text-accent font-medium group-hover:gap-2 transition-all duration-200">
@@ -166,10 +202,10 @@ export default function BlogClient({ posts, categories }: Props) {
               </Link>
             )}
 
-            {/* Rest of posts grid */}
-            {rest.length > 0 && (
+            {/* Posts grid */}
+            {gridPosts.length > 0 && (
               <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
-                {rest.map((post, i) => (
+                {gridPosts.map((post, i) => (
                   <motion.div
                     key={post.slug}
                     initial={{ opacity: 0, y: 12 }}
@@ -181,9 +217,9 @@ export default function BlogClient({ posts, categories }: Props) {
                       <div
                         className={`${CARD_BASE} overflow-hidden flex flex-col h-full`}>
                         <div className="relative w-full aspect-video overflow-hidden bg-snbackground">
-                          {post.image ? (
+                          {post.coverImage?.url ? (
                             <Image
-                              src={post.image}
+                              src={post.coverImage.url}
                               alt={post.title}
                               fill
                               className="object-cover group-hover:scale-105 transition-transform duration-500"

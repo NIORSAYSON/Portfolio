@@ -2,9 +2,10 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { getAllPosts, getPostBySlug } from "@/lib/blog";
+import { getAllBlogPosts, getBlogBySlug } from "@/lib/api/blogs";
 import { ArrowLeft, Calendar, Clock, Tag, PenLine } from "lucide-react";
 import { CARD_BASE } from "@/lib/styles";
+import RichText from "@/components/RichText";
 import type { Metadata } from "next";
 
 type Props = {
@@ -12,13 +13,13 @@ type Props = {
 };
 
 export async function generateStaticParams() {
-  const posts = getAllPosts();
+  const posts = await getAllBlogPosts();
   return posts.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getBlogBySlug(slug);
   if (!post) return {};
   return {
     title: `${post.title} — Nestor Sayson`,
@@ -36,11 +37,11 @@ function formatDate(dateStr: string) {
 
 export default async function BlogDetailPage({ params }: Props) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getBlogBySlug(slug);
 
   if (!post) notFound();
 
-  const allPosts = getAllPosts();
+  const allPosts = await getAllBlogPosts();
   const related = allPosts
     .filter(
       (p) =>
@@ -74,10 +75,10 @@ export default async function BlogDetailPage({ params }: Props) {
           {/* Article */}
           <article className={`${CARD_BASE} overflow-hidden min-w-0`}>
             {/* Hero image */}
-            {post.image && (
+            {post.coverImage?.url && (
               <div className="relative w-full aspect-video overflow-hidden bg-snbackground">
                 <Image
-                  src={post.image}
+                  src={post.coverImage.url}
                   alt={post.title}
                   fill
                   priority
@@ -129,9 +130,15 @@ export default async function BlogDetailPage({ params }: Props) {
             {/* Divider */}
             <div className="h-px bg-border mx-6" />
 
-          {/* MDX content */}
-          <div className="px-6 py-6 prose">
-              <MDXRemote source={post.content} />
+            {/* Rich text content */}
+            <div className="px-6 py-6">
+              {post.content.raw.children.length > 0 ? (
+                <RichText content={post.content} />
+              ) : post.content.html ? (
+                <div className="prose">
+                  <MDXRemote source={post.content.html} />
+                </div>
+              ) : null}
             </div>
           </article>
 
@@ -222,14 +229,6 @@ export default async function BlogDetailPage({ params }: Props) {
                 </div>
               </div>
             )}
-
-            {/* Back to blog */}
-            {/* <Link
-              href="/blog"
-              className="inline-flex items-center gap-1.5 text-sm text-text-muted hover:text-accent transition-colors duration-200 px-1">
-              <ArrowLeft className="w-4 h-4" />
-              Back to Blog
-            </Link> */}
           </aside>
         </div>
       </div>
