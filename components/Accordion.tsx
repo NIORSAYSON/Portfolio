@@ -1,4 +1,4 @@
-import { MingcuteDownSmallLine } from "@/app/icons";
+import { ChevronDown } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
@@ -35,17 +35,17 @@ export default function Accordion({
       <button
         type="button"
         onClick={() => setExpanded(isOpen ? false : i)}
-        className="w-full flex items-center gap-2.5 py-3 text-left hover:text-[--navtext] transition-colors duration-200 group">
+        className="w-full flex items-center gap-2.5 py-3 text-left hover:text-accent transition-colors duration-200 group">
         {icon && mounted && (
           <span className="shrink-0 opacity-70">{icon}</span>
         )}
         <span className="text-sm font-medium flex-1">{accordionTitle}</span>
         {mounted && (
-          <MingcuteDownSmallLine
+          <ChevronDown
             className={`w-4 h-4 shrink-0 opacity-60 transition-transform duration-300 ${
               isOpen ? "rotate-180" : ""
             }`}
-            fill={theme === "dark" ? "#f0f0f0" : "#0a0a0a"}
+            color={theme === "dark" ? "#f0f0f0" : "#0a0a0a"}
           />
         )}
       </button>

@@ -1,0 +1,66 @@
+---
+title: "Building AI Automations with n8n and OpenAI"
+date: "2026-03-25"
+category: "AI & Automation"
+tags: ["n8n", "Python", "OpenAI", "Automation"]
+excerpt: "How I architect intelligent workflows that connect APIs, process data, and generate insights — without writing a single line of server code."
+image: "/blog-images/automation.png"
+---
+
+## Why Automate with AI?
+
+Repetitive tasks are the enemy of deep work. After spending too many hours manually pulling reports, sending follow-up emails, and copying data between systems, I decided to build a layer of intelligent automation that handles all of it for me.
+
+Enter **n8n** — an open-source, self-hostable workflow automation tool — paired with the **OpenAI API**. Together they form a surprisingly powerful stack for building AI-powered pipelines without a traditional backend.
+
+## The Stack
+
+- **n8n** — visual workflow builder, runs locally or on a VPS
+- **OpenAI GPT-4o** — language model for text summarization, classification, and generation
+- **Python scripts** — for custom data transformations called via the Execute Command node
+- **Webhooks** — for triggering workflows from external services (Notion, GitHub, Gmail)
+
+## A Real Example: Automated Weekly Report
+
+Here's a concrete workflow I built that saves me about 2 hours every Friday:
+
+1. **Trigger**: Cron node fires at 8 AM every Friday
+2. **Fetch data**: HTTP Request nodes pull from GitHub API (commits), Notion API (tasks), and a custom analytics endpoint
+3. **Summarize**: A GPT-4o node receives all the raw JSON and produces a structured Markdown summary using a detailed system prompt
+4. **Format**: A Function node cleans the output and inserts it into an email template
+5. **Send**: Gmail node delivers the report to my inbox
+
+```json
+{
+  "nodes": [
+    { "type": "n8n-nodes-base.cron", "name": "Every Friday 8AM" },
+    { "type": "n8n-nodes-base.httpRequest", "name": "GitHub Commits" },
+    { "type": "@n8n/n8n-nodes-langchain.openAi", "name": "GPT-4o Summary" },
+    { "type": "n8n-nodes-base.gmail", "name": "Send Report" }
+  ]
+}
+```
+
+## Prompt Engineering Matters
+
+The quality of GPT-4o's output depends heavily on the system prompt. Here's the template I use for the weekly summary:
+
+```
+You are a productivity assistant. Given the following raw data from GitHub, Notion, and analytics, produce a weekly summary with these sections:
+1. Top 3 accomplishments (with specific metrics)
+2. Tasks carried over (and why)
+3. One key insight or learning
+4. Priority focus for next week
+
+Format in clean Markdown. Be concise. No filler text.
+```
+
+Structured, specific prompts consistently outperform vague ones by a wide margin.
+
+## Handling Failures Gracefully
+
+Automation workflows break. APIs go down, rate limits hit, malformed data causes parsing errors. In n8n, I handle this with:
+
+- **Error Trigger** nodes that send a Slack notification when a workflow fails
+- **IF** nodes to validate responses before passing them downstream
+- **Retry on fail** enabled on all HTTP Request nodes with exponential backoff

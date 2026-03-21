@@ -1,8 +1,6 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import Sidebar from "./Sidebar";
-import { motion, AnimatePresence } from "framer-motion";
 import TopBar from "./TopBar";
 
 export default function MobileSidebar({
@@ -10,35 +8,8 @@ export default function MobileSidebar({
 }: {
   children: React.ReactNode;
 }) {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [showMenuButton] = useState(true);
   const [showTopBar, setShowTopBar] = useState(true);
   const lastScrollY = useRef(0);
-
-  useEffect(() => {
-    if (sidebarOpen) {
-      const scrollY = window.scrollY;
-      document.body.dataset.scrollY = String(scrollY);
-      document.body.style.position = "fixed";
-      document.body.style.top = `-${scrollY}px`;
-      document.body.style.width = "100%";
-    } else {
-      const scrollY = parseInt(document.body.dataset.scrollY || "0", 10);
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.width = "";
-      delete document.body.dataset.scrollY;
-      window.scrollTo(0, scrollY);
-    }
-    return () => {
-      const scrollY = parseInt(document.body.dataset.scrollY || "0", 10);
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.width = "";
-      delete document.body.dataset.scrollY;
-      if (scrollY) window.scrollTo(0, scrollY);
-    };
-  }, [sidebarOpen]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -59,41 +30,10 @@ export default function MobileSidebar({
 
   return (
     <>
-      {showMenuButton && (
-        <TopBar
-          showMenuButton={showMenuButton}
-          showTopBar={showTopBar}
-          setSidebarOpen={setSidebarOpen}
-        />
-      )}
-      {/* Sidebar drawer */}
-      <AnimatePresence>
-        {sidebarOpen && (
-          <motion.div
-            className="fixed inset-0 z-40 flex"
-            initial={{ backgroundColor: "rgba(0,0,0,0)" }}
-            animate={{ backgroundColor: "rgba(0,0,0,0.4)" }}
-            exit={{ backgroundColor: "rgba(0,0,0,0)" }}
-            transition={{ duration: 0.25 }}>
-            <motion.div
-              className="bg-sbackground w-72 h-full min-h-0 border-r border-border overflow-y-auto overscroll-contain flex flex-col"
-              initial={{ x: "-100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "-100%" }}
-              transition={{ type: "tween", duration: 0.25 }}>
-              <Sidebar />
-            </motion.div>
-            <div
-              className="flex-1"
-              onClick={() => setSidebarOpen(false)}
-              onTouchMove={(e) => e.preventDefault()}
-              aria-label="Close sidebar overlay"
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <TopBar showTopBar={showTopBar} />
       <div className="min-h-full flex flex-col">
-        <main className="flex-1">{children}</main>
+        {/* pb-20 clears the fixed BottomNav (h-16) with breathing room */}
+        <main className="flex-1 pb-20">{children}</main>
       </div>
     </>
   );

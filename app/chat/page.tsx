@@ -4,7 +4,7 @@ import { useTheme } from "next-themes";
 import { useEffect, useState, useRef } from "react";
 import ChatMessage from "@/components/ChatMessage";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface Message {
   id: string;
@@ -12,6 +12,13 @@ interface Message {
   isUser: boolean;
   timestamp: Date;
 }
+
+const SUGGESTED_PROMPTS = [
+  "Summarize Nestor's experience",
+  "Tell me about the POS project",
+  "What technologies does Nestor use?",
+  "Is Nestor available for freelance work?",
+];
 
 export default function ChatPage() {
   const { theme } = useTheme();
@@ -31,29 +38,27 @@ export default function ChatPage() {
   const inputRef = useRef<HTMLInputElement>(null);
   const inputContainerRef = useRef<HTMLDivElement>(null);
 
+  const isEmptyState = messages.length === 1 && !messages[0].isUser;
+
   useEffect(() => {
     setMounted(true);
   }, []);
 
   useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
-
-  const scrollToBottom = () => {
-    window.scrollTo({
-      top: document.body.scrollHeight,
-      behavior: "smooth",
-    });
-  };
+    if (!isEmptyState) {
+      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+    }
+  }, [messages, isEmptyState]);
 
   const isDark = mounted && theme === "dark";
 
-  const handleSendMessage = async () => {
-    if (!inputMessage.trim() || isLoading) return;
+  const handleSendMessage = async (text?: string) => {
+    const messageText = text ?? inputMessage;
+    if (!messageText.trim() || isLoading) return;
 
     const userMessage: Message = {
       id: Date.now().toString(),
-      text: inputMessage,
+      text: messageText,
       isUser: true,
       timestamp: new Date(),
     };
@@ -67,7 +72,7 @@ export default function ChatPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          message: inputMessage,
+          message: messageText,
           chatHistory: messages.map((m) => ({
             role: m.isUser ? "user" : "assistant",
             content: m.text,
@@ -111,62 +116,118 @@ export default function ChatPage() {
 
   return (
     <main className="w-full flex flex-col">
-      {/* Messages */}
+      {/* Messages area */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         ref={messagesContainerRef}
-        className="flex-1 px-5 md:px-10 pt-6 pb-40">
-        <div className="max-w-3xl mx-auto mt-14 md:mt-0">
-          {messages.map((message, idx) => (
-            <ChatMessage
-              key={message.id}
-              message={message.text}
-              isUser={message.isUser}
-              timestamp={message.timestamp}
-              isLast={idx === messages.length - 1}
-            />
-          ))}
-          {isLoading && (
-            <div className="flex gap-3 mb-4">
-              <div className="shrink-0">
+        className="flex-1 px-5 md:px-10 pt-6 pb-48 md:pb-40">
+
+        {/* Empty state — centered welcome */}
+        <AnimatePresence>
+          {isEmptyState && mounted && (
+            <motion.div
+              key="empty-state"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -16 }}
+              transition={{ duration: 0.4 }}
+              className="flex flex-col items-center justify-center min-h-[55vh] text-center max-w-lg mx-auto">
+              <div className="w-16 h-16 rounded-full overflow-hidden ring-2 ring-accent/30 mb-4">
                 <Image
                   src="/profile.jpg"
-                  alt="Assistant"
-                  width={32}
-                  height={32}
-                  className="rounded-full object-cover ring-1 ring-border"
+                  alt="Nestor's assistant"
+                  width={64}
+                  height={64}
+                  className="object-cover w-full h-full"
                 />
               </div>
-              <div
-                className={`rounded-2xl px-4 py-3 border border-border ${
-                  isDark ? "bg-snbackground" : "bg-snbackground"
-                }`}>
-                <div className="flex gap-1.5 items-center">
-                  {[0, 150, 300].map((delay) => (
-                    <div
-                      key={delay}
-                      className="w-1.5 h-1.5 rounded-full bg-text-muted animate-bounce"
-                      style={{ animationDelay: `${delay}ms` }}
-                    />
-                  ))}
+              <h2 className="text-lg font-bold text-text mb-2">
+                Chat with Nestor&rsquo;s AI
+              </h2>
+              <p className="text-sm text-text-muted leading-relaxed mb-1">
+                {messages[0].text}
+              </p>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Conversation messages (shown once chat starts) */}
+        {!isEmptyState && (
+          <div className="max-w-3xl mx-auto mt-14 md:mt-0">
+            {messages.map((message, idx) => (
+              <ChatMessage
+                key={message.id}
+                message={message.text}
+                isUser={message.isUser}
+                timestamp={message.timestamp}
+                isLast={idx === messages.length - 1}
+              />
+            ))}
+            {isLoading && (
+              <div className="flex gap-3 mb-4">
+                <div className="shrink-0">
+                  <Image
+                    src="/profile.jpg"
+                    alt="Assistant"
+                    width={32}
+                    height={32}
+                    className="rounded-full object-cover ring-1 ring-border"
+                  />
+                </div>
+                <div
+                  className={`rounded-2xl px-4 py-3 border border-border ${
+                    isDark ? "bg-snbackground" : "bg-snbackground"
+                  }`}>
+                  <div className="flex gap-1.5 items-center">
+                    {[0, 150, 300].map((delay) => (
+                      <div
+                        key={delay}
+                        className="w-1.5 h-1.5 rounded-full bg-text-muted animate-bounce"
+                        style={{ animationDelay: `${delay}ms` }}
+                      />
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
-          <div ref={messagesEndRef} />
-        </div>
+            )}
+            <div ref={messagesEndRef} />
+          </div>
+        )}
       </motion.div>
 
-      {/* Input Bar */}
+      {/* Input Bar — sits above BottomNav on mobile */}
       <motion.div
         ref={inputContainerRef}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.1 }}
-        className="px-5 md:px-10 py-4 border-t border-border bg-sbackground z-10 fixed bottom-0 left-0 right-0 md:left-72">
+        className="px-5 md:px-10 py-3 border-t border-border bg-sbackground z-10 fixed bottom-16 md:bottom-0 left-0 right-0 md:left-72">
         <div className="max-w-3xl mx-auto">
+          {/* Suggested prompt pills — shown only in empty state */}
+          <AnimatePresence>
+            {isEmptyState && mounted && (
+              <motion.div
+                key="prompts"
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 8 }}
+                transition={{ duration: 0.3 }}
+                className="flex flex-wrap gap-2 mb-3">
+                {SUGGESTED_PROMPTS.map((prompt) => (
+                  <button
+                    key={prompt}
+                    onClick={() => handleSendMessage(prompt)}
+                    className="text-xs px-3 py-1.5 rounded-full border border-accent/40 text-accent bg-accent/5 hover:bg-accent/15 transition-all duration-200">
+                    {prompt}
+                  </button>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Input row */}
           <div className="flex gap-2 items-center">
             <input
               ref={inputRef}
@@ -176,12 +237,12 @@ export default function ChatPage() {
               onKeyPress={handleKeyPress}
               placeholder="Ask me anything..."
               disabled={isLoading}
-              className="flex-1 px-4 py-2.5 rounded-xl border border-border bg-background text-sm text-text placeholder:text-text-muted focus:outline-none focus:border-navtext transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex-1 px-4 py-2.5 rounded-xl border border-border bg-background text-sm text-text placeholder:text-text-muted focus:outline-none focus:border-accent transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             />
             <button
-              onClick={handleSendMessage}
+              onClick={() => handleSendMessage()}
               disabled={!inputMessage.trim() || isLoading}
-              className="px-5 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed bg-navtext text-white hover:opacity-90 active:scale-95">
+              className="px-5 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed bg-accent text-white hover:bg-accent-hover active:scale-95">
               Send
             </button>
           </div>

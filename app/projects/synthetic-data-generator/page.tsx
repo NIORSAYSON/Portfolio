@@ -1,11 +1,12 @@
 "use client";
-import { MaterialSymbolsLightInfoOutlineRounded } from "@/app/icons";
+import { Info } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import ProjectOverview from "@/components/ProjectOverview";
 import ProjectsSection from "@/components/ProjectsSection";
 import { projects } from "@/app/constants";
 import { AnimatePresence, motion } from "framer-motion";
+import { CARD_BASE, SECTION_HEADER_CLASS, SECTION_TITLE_CLASS } from "@/lib/styles";
 
 export default function SyntheticDataGenerator() {
   const [mounted, setMounted] = useState(false);
@@ -36,17 +37,15 @@ export default function SyntheticDataGenerator() {
         {/* Left Column */}
         <div className="xl:col-span-3 w-full text-text flex flex-col gap-5">
           {/* About Section */}
-          <div className="bg-sbackground border border-border rounded-2xl text-text">
-            <div className="px-5 pt-5 pb-2 flex items-center gap-2">
+          <div className={`${CARD_BASE} text-text`}>
+            <div className={SECTION_HEADER_CLASS}>
               {mounted && (
-                <MaterialSymbolsLightInfoOutlineRounded
+                <Info
                   className="w-5 h-5"
-                  fill={mounted && theme === "dark" ? "#9ca3af" : "#6b7280"}
+                  color={mounted && theme === "dark" ? "#9ca3af" : "#6b7280"}
                 />
               )}
-              <span className="text-[15px] font-semibold tracking-wide uppercase text-text-muted">
-                About
-              </span>
+              <span className={SECTION_TITLE_CLASS}>About</span>
             </div>
             <div className="px-5 pb-5 text-sm leading-relaxed">
               <AnimatePresence initial={false} mode="wait">
@@ -64,7 +63,7 @@ export default function SyntheticDataGenerator() {
               </AnimatePresence>
 
               <button
-                className="ml-1.5 text-xs text-[--navtext] hover:underline font-medium inline-block"
+                className="ml-1.5 text-xs text-accent hover:underline font-medium inline-block"
                 onClick={() =>
                   setShowMore((prev) => ({
                     ...prev,
@@ -82,3 +81,4 @@ export default function SyntheticDataGenerator() {
     </main>
   );
 }
+

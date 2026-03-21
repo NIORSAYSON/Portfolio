@@ -1,15 +1,13 @@
 "use client";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import {
-  MaterialSymbolsLightDownloadSharp,
-  SolarDocumentOutline,
-} from "../icons";
+import { Download, FileText } from "lucide-react";
 import { motion } from "framer-motion";
-
-const SECTION_HEADER_CLASS = "flex items-center gap-2 px-5 pt-5 pb-1";
-const SECTION_TITLE_CLASS =
-  "text-[15px] font-semibold tracking-wide uppercase text-text-muted";
+import {
+  CARD_BASE,
+  SECTION_HEADER_CLASS,
+  SECTION_TITLE_CLASS,
+} from "@/lib/styles";
 
 export default function Resume() {
   const [mounted, setMounted] = useState(false);
@@ -26,13 +24,13 @@ export default function Resume() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="bg-sbackground border border-border rounded-2xl text-text">
+        className={`${CARD_BASE} text-text`}>
         <div className="flex items-center justify-between pr-5">
           <div className={SECTION_HEADER_CLASS}>
             {mounted && (
-              <SolarDocumentOutline
+              <FileText
                 className="w-5 h-5"
-                fill={isDark ? "#9ca3af" : "#6b7280"}
+                color={isDark ? "#9ca3af" : "#6b7280"}
               />
             )}
             <span className={SECTION_TITLE_CLASS}>Resume</span>
@@ -41,10 +39,10 @@ export default function Resume() {
             <a
               href="/Nestor B. Sayson Jr - Resume 2025.pdf"
               download
-              className="flex items-center gap-1.5 text-xs font-medium px-4 py-1.5 rounded-lg border border-border hover:border-[--navtext] hover:text-[--navtext] transition-all duration-200">
-              <MaterialSymbolsLightDownloadSharp
+              className="flex items-center gap-1.5 text-xs font-medium px-4 py-1.5 rounded-lg border border-border hover:border-accent hover:text-accent transition-all duration-200">
+              <Download
                 className="w-4 h-4"
-                fill={isDark ? "#f0f0f0" : "#0a0a0a"}
+                color={isDark ? "#f0f0f0" : "#0a0a0a"}
               />
               <span>Download</span>
             </a>
@@ -61,3 +59,4 @@ export default function Resume() {
     </main>
   );
 }
+

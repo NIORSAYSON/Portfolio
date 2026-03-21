@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   aboutText,
   agentGeniusDescText,
@@ -8,24 +8,18 @@ import {
   freelanceDescText,
   internshipText,
   juniorHighText,
-  projects,
   seniorHighText,
+  skillCategories,
 } from "@/app/constants";
-import {
-  BiPersonCheck,
-  CilEducation,
-  MaterialSymbolsLightMailOutline,
-  MdiLightPin,
-} from "../icons";
-import SocialMedia from "@/components/SocialMedia";
+import { Download, GraduationCap, Layers, UserCheck } from "lucide-react";
 import { useTheme } from "next-themes";
-import ProjectCard from "@/components/ProjectCard";
 import ExpAndEduc from "@/components/ExpAndEduc";
 import { AnimatePresence, motion } from "framer-motion";
-
-const SECTION_HEADER_CLASS = "flex items-center gap-2 px-5 pt-5 pb-1";
-const SECTION_TITLE_CLASS =
-  "text-[15px] font-semibold tracking-wide uppercase text-text-muted";
+import {
+  CARD_BASE,
+  SECTION_HEADER_CLASS,
+  SECTION_TITLE_CLASS,
+} from "@/lib/styles";
 
 export default function About() {
   const [showMore, setShowMore] = useState<{
@@ -59,33 +53,6 @@ export default function About() {
   const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
   const isDark = mounted && theme === "dark";
-  const projectsScrollRef = useRef<HTMLDivElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
-
-  const updateScrollState = () => {
-    const el = projectsScrollRef.current;
-    if (!el) return;
-    setCanScrollLeft(el.scrollLeft > 0);
-    setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 1);
-  };
-
-  const scrollProjects = (direction: "left" | "right") => {
-    if (projectsScrollRef.current) {
-      projectsScrollRef.current.scrollBy({
-        left: direction === "right" ? 300 : -300,
-        behavior: "smooth",
-      });
-    }
-  };
-
-  useEffect(() => {
-    const el = projectsScrollRef.current;
-    if (!el) return;
-    updateScrollState();
-    el.addEventListener("scroll", updateScrollState);
-    return () => el.removeEventListener("scroll", updateScrollState);
-  }, [mounted]);
 
   useEffect(() => {
     setMounted(true);
@@ -101,7 +68,7 @@ export default function About() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="bg-sbackground border border-border rounded-2xl overflow-hidden text-text">
+            className={`${CARD_BASE} overflow-hidden text-text`}>
             {/* Banner */}
             <div className="relative h-36 w-full">
               <Image
@@ -121,7 +88,6 @@ export default function About() {
             </div>
             {/* Profile */}
             <div className="px-5 pb-5">
-              {/* Avatar overlaps banner */}
               <div className="relative z-10 -mt-8 mb-3">
                 <div className="w-16 h-16 rounded-full overflow-hidden ring-4 ring-sbackground border border-border">
                   <Image
@@ -134,17 +100,25 @@ export default function About() {
                   />
                 </div>
               </div>
-              {/* Name sits below banner */}
-              <div className="mb-4">
-                <h2 className="text-base font-semibold">
-                  Nestor B. Sayson Jr.
-                </h2>
-                <p className="text-sm text-text-muted">Software Engineer</p>
+              <div className="flex items-start justify-between gap-2 mb-4">
+                <div>
+                  <h2 className="text-base font-semibold">
+                    Nestor B. Sayson Jr.
+                  </h2>
+                  <p className="text-sm text-text-muted">Software Engineer</p>
+                </div>
+                {mounted && (
+                  <a
+                    href="/Nestor B. Sayson Jr - Resume 2025.pdf"
+                    download
+                    className="shrink-0 inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg border border-accent/50 text-accent hover:bg-accent hover:text-white transition-all duration-200">
+                    <Download className="w-3.5 h-3.5" />
+                    Download CV
+                  </a>
+                )}
               </div>
               <div>
                 <h3 className="text-sm font-semibold mb-2">About Me</h3>
-
-                {/* Added AnimatePresence and motion.span for the transition */}
                 <AnimatePresence initial={false} mode="wait">
                   <motion.span
                     key={showMore.about ? "full" : "short"}
@@ -156,18 +130,15 @@ export default function About() {
                     {showMore.about ? aboutText : aboutMeShortText}
                   </motion.span>
                 </AnimatePresence>
-
                 <button
-                  className="ml-1.5 text-xs text-[--navtext] hover:underline font-medium inline-block"
+                  className="ml-1.5 text-xs text-accent hover:underline font-medium inline-block"
                   onClick={() =>
-                    setShowMore((prev) => ({
-                      ...prev,
-                      about: !prev.about,
-                    }))
+                    setShowMore((prev) => ({ ...prev, about: !prev.about }))
                   }>
                   {showMore.about ? "Show less" : "Show more"}
                 </button>
               </div>
+
             </div>
           </motion.div>
 
@@ -176,12 +147,12 @@ export default function About() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="bg-sbackground border border-border rounded-2xl text-text">
+            className={`${CARD_BASE} text-text`}>
             <div className={SECTION_HEADER_CLASS}>
               {mounted && (
-                <BiPersonCheck
+                <UserCheck
                   className="w-5 h-5"
-                  fill={isDark ? "#9ca3af" : "#6b7280"}
+                  color={isDark ? "#9ca3af" : "#6b7280"}
                 />
               )}
               <span className={SECTION_TITLE_CLASS}>Experience</span>
@@ -194,10 +165,10 @@ export default function About() {
                 }
                 descText={agentGeniusDescText}
                 shortDescText={agentGeniusDescShortText}
-                image="/AG-Logo.png"
+                image="/exp-logo/AG-Logo.png"
                 title="AI Automation Engineer"
                 subtitle="AgentGenius.ai"
-                date="August 2025 - Present"
+                date="Aug 2025 - Present"
               />
               <ExpAndEduc
                 showMore={showMore.freelance}
@@ -206,10 +177,10 @@ export default function About() {
                 }
                 descText={freelanceDescText}
                 shortDescText={freelanceDescShortText}
-                image="/freelance-logo.png"
+                image="/exp-logo/freelance-logo.png"
                 title="Independent Software Engineer"
                 subtitle="Freelance"
-                date="June 2025 - Present"
+                date="Jun 2025 - Present"
               />
               <ExpAndEduc
                 showMore={showMore.internship}
@@ -218,126 +189,11 @@ export default function About() {
                 }
                 descText={internshipText}
                 shortDescText={internshipShortText}
-                image="/i7-No BG.png"
+                image="/exp-logo/i7-No BG.png"
                 title="Front-End Developer Intern"
                 subtitle="Intelliseven Technology Solutions Inc."
                 date="Mar 2025 - Jun 2025"
               />
-            </div>
-          </motion.div>
-
-          {/* Projects Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="bg-sbackground border border-border rounded-2xl text-text pb-4">
-            <div className={SECTION_HEADER_CLASS}>
-              {mounted && (
-                <MdiLightPin
-                  className="w-5 h-5"
-                  fill={isDark ? "#9ca3af" : "#6b7280"}
-                />
-              )}
-              <span className={SECTION_TITLE_CLASS}>Projects</span>
-            </div>
-            <div className="px-5 relative">
-              {canScrollLeft && (
-                <button
-                  onClick={() => scrollProjects("left")}
-                  className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-sbackground border border-border rounded-full w-8 h-8 flex items-center justify-center hover:border-[--navtext] transition-all duration-200"
-                  aria-label="Scroll left">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round">
-                    <polyline points="15 18 9 12 15 6" />
-                  </svg>
-                </button>
-              )}
-              <div
-                ref={projectsScrollRef}
-                className="hide-scrollbar flex h-80 w-full items-start justify-start overflow-x-auto">
-                <div className="flex flex-nowrap gap-4 items-center">
-                  <ProjectCard
-                    title={projects[0].title}
-                    subtitle="Personal Project"
-                    image="/Projects/Portfolio.png"
-                    description={projects[0].description}
-                    slug={projects[0].slug}
-                    link="https://niorsayson.vercel.app/"
-                    source="/about"
-                  />
-                  <ProjectCard
-                    title={projects[1].title}
-                    subtitle="Internship Project"
-                    image="/Projects/POS.png"
-                    description={projects[1].description}
-                    slug={projects[1].slug}
-                    source="/about"
-                  />
-                  <ProjectCard
-                    title={projects[2].title}
-                    subtitle="Thesis Project"
-                    image="/Projects/Conversational Agent Project.png"
-                    description={projects[2].description}
-                    slug={projects[2].slug}
-                    link="https://huggingface.co/spaces/Nioooor/CSPC_Conversational_Agent"
-                    source="/about"
-                  />
-                  <ProjectCard
-                    title={projects[5].title}
-                    subtitle="Personal Project"
-                    image="/Projects/FadeFlow Project.png"
-                    description={projects[5].description}
-                    slug={projects[5].slug}
-                    link="https://fadeflow.shop"
-                    source="/about"
-                  />
-                  <ProjectCard
-                    title={projects[6].title}
-                    subtitle="Personal Project"
-                    image="/Projects/VibeNode Project.png"
-                    description={projects[6].description}
-                    slug={projects[6].slug}
-                    link="https://www.vibenode.site"
-                    source="/about"
-                  />
-                  <ProjectCard
-                    title={projects[3].title}
-                    subtitle="Freelance Project"
-                    image="/Projects/AgriMarket Project.png"
-                    description={projects[3].description}
-                    slug={projects[3].slug}
-                    source="/about"
-                  />
-                </div>
-              </div>
-              {canScrollRight && (
-                <button
-                  onClick={() => scrollProjects("right")}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-sbackground border border-border rounded-full w-8 h-8 flex items-center justify-center hover:border-[--navtext] transition-all duration-200"
-                  aria-label="Scroll right">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round">
-                    <polyline points="9 18 15 12 9 6" />
-                  </svg>
-                </button>
-              )}
             </div>
           </motion.div>
         </div>
@@ -349,12 +205,12 @@ export default function About() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="bg-sbackground border border-border rounded-2xl">
+            className={CARD_BASE}>
             <div className={SECTION_HEADER_CLASS}>
               {mounted && (
-                <CilEducation
+                <GraduationCap
                   className="w-5 h-5"
-                  fill={isDark ? "#9ca3af" : "#6b7280"}
+                  color={isDark ? "#9ca3af" : "#6b7280"}
                 />
               )}
               <span className={SECTION_TITLE_CLASS}>Education</span>
@@ -367,7 +223,7 @@ export default function About() {
                 }
                 descText={collegeText}
                 shortDescText={collegeShortText}
-                image="/CSPC.png"
+                image="/educ-logo/CSPC.png"
                 title="BS in Computer Science"
                 subtitle="Camarines Sur Polytechnic Colleges"
                 date="Aug 2021 - Jul 2025"
@@ -381,7 +237,7 @@ export default function About() {
                 }
                 descText={seniorHighText}
                 shortDescText={seniorHighShortText}
-                image="/LICOM-No BG.png"
+                image="/educ-logo/LICOM-No BG.png"
                 title="General Academic Strand (GAS)"
                 subtitle="Libon Community Colleges (SHS)"
                 date="Aug 2019 - Jun 2021"
@@ -393,7 +249,7 @@ export default function About() {
                 }
                 descText={juniorHighText}
                 shortDescText={juniorHighShortText}
-                image="/LAIHS-No BG.png"
+                image="/educ-logo/LAIHS-No BG.png"
                 title="Computer System and Services"
                 subtitle="Libon Agro Industrial High School"
                 date="July 2015 - Jun 2019"
@@ -401,27 +257,47 @@ export default function About() {
             </div>
           </motion.div>
 
-          {/* Connect */}
+          {/* Skills Card */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="bg-sbackground border border-border rounded-2xl pb-5">
+            className={CARD_BASE}>
             <div className={SECTION_HEADER_CLASS}>
               {mounted && (
-                <MaterialSymbolsLightMailOutline
+                <Layers
                   className="w-5 h-5"
-                  fill={isDark ? "#9ca3af" : "#6b7280"}
+                  color={isDark ? "#9ca3af" : "#6b7280"}
                 />
               )}
-              <span className={SECTION_TITLE_CLASS}>Connect</span>
+              <span className={SECTION_TITLE_CLASS}>Skills</span>
             </div>
-            <div className="px-5 mt-2">
-              <SocialMedia />
-              <p className="text-center text-xs text-text-muted leading-relaxed mt-2">
-                Let&rsquo;s create something amazing — reach out through any
-                platform above.
-              </p>
+            <div className="px-5 pb-5 pt-3 flex flex-col gap-5">
+              {skillCategories.map((category) => (
+                <div key={category.name}>
+                  {/* Expertise label */}
+                  <p className="text-[11px] font-semibold uppercase tracking-widest text-accent mb-2.5">
+                    {category.name}
+                  </p>
+                  {/* Skill pills */}
+                  <div className="flex flex-wrap gap-2">
+                    {category.skills.map((skill) => (
+                      <div
+                        key={skill.title}
+                        className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-snbackground border border-border text-xs font-medium hover:border-accent/40 transition-colors duration-200">
+                        <Image
+                          src={skill.src}
+                          alt={skill.title}
+                          width={16}
+                          height={16}
+                          className="object-contain shrink-0"
+                        />
+                        <span>{skill.title}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
           </motion.div>
         </div>
@@ -429,3 +305,4 @@ export default function About() {
     </main>
   );
 }
+

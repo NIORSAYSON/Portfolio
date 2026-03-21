@@ -2,6 +2,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import MobileDeviceFrame from "./MobileDeviceFrame";
+import { CARD_BASE } from "@/lib/styles";
 
 interface ProjectOverviewProps {
   projectName: string;
@@ -55,12 +56,12 @@ export default function ProjectOverview({
 
   return (
     <div className="xl:col-span-6 w-full">
-      <div className="bg-sbackground border border-border rounded-2xl text-text mt-5 md:mt-0">
+      <div className={`${CARD_BASE} text-text mt-5 md:mt-0`}>
         {/* Back Button */}
         <div className="px-5 pt-5">
           <button
             onClick={handleBack}
-            className="flex items-center gap-2 text-sm text-text-muted hover:text-[--navtext] transition-colors duration-200 group">
+            className="flex items-center gap-2 text-sm text-text-muted hover:text-accent transition-colors duration-200 group">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="w-4 h-4"
@@ -96,7 +97,7 @@ export default function ProjectOverview({
                 href={projectLink.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[--navtext] hover:underline">
+                className="text-accent hover:underline">
                 {projectLink.linkName}
               </a>
             </p>

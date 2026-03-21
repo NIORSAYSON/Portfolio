@@ -3,6 +3,7 @@ import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import Sidebar from "../components/Sidebar";
 import MobileSidebar from "../components/MobileSidebar";
+import BottomNav from "../components/BottomNav";
 import { ThemeProvider } from "next-themes";
 
 const inter = Inter({
@@ -56,6 +57,8 @@ export default function RootLayout({
               {/* Desktop main content */}
               <div className="hidden md:block h-full">{children}</div>
             </main>
+            {/* Bottom navigation — mobile only */}
+            <BottomNav />
           </div>
         </ThemeProvider>
       </body>

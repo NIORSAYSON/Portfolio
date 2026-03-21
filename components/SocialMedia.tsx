@@ -1,40 +1,34 @@
-import {
-  BxlGmail,
-  IcBaselineFacebook,
-  MdiGithub,
-  MdiInstagram,
-  MdiLinkedin,
-} from "@/app/icons";
+import { Facebook, Github, Instagram, Linkedin, Mail } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
 const socialLinks = [
   {
-    Icon: IcBaselineFacebook,
+    Icon: Facebook,
     color: "#1877F2",
     label: "Facebook",
     href: "https://www.facebook.com/nioooooor?mibextid=ZbWKwL",
   },
   {
-    Icon: MdiInstagram,
+    Icon: Instagram,
     color: "#E1306C",
     label: "Instagram",
     href: "https://www.instagram.com/neon.nior/",
   },
   {
-    Icon: BxlGmail,
+    Icon: Mail,
     color: "#EA4335",
     label: "Gmail",
     href: "mailto:nessayson@gmail.com",
   },
   {
-    Icon: MdiLinkedin,
+    Icon: Linkedin,
     color: "#0A66C2",
     label: "LinkedIn",
     href: "https://www.linkedin.com/in/nestor-sayson-b8671b292/",
   },
   {
-    Icon: MdiGithub,
+    Icon: Github,
     color: null,
     label: "GitHub",
     href: "https://github.com/NIORSAYSON",
@@ -58,10 +52,10 @@ export default function SocialMedia() {
           target={href.startsWith("mailto") ? undefined : "_blank"}
           rel="noopener noreferrer"
           aria-label={label}
-          className="p-2.5 rounded-full border border-border hover:border-[--navtext] hover:bg-snbackground transition-all duration-200 group">
+          className="p-2.5 rounded-full border border-border hover:border-accent hover:bg-snbackground transition-all duration-200 group">
           <Icon
             className="h-5 w-5 transition-all duration-200"
-            fill={color ?? (isDark ? "#f0f0f0" : "#0a0a0a")}
+            color={color ?? (isDark ? "#f0f0f0" : "#0a0a0a")}
           />
         </a>
       ))}

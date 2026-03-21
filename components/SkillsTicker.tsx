@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import Image from "next/image";
 
 interface SkillIcon {
@@ -8,19 +7,25 @@ interface SkillIcon {
 
 interface SkillsTickerProps {
   images: SkillIcon[];
-  from: string | number;
-  to: string | number;
+  direction?: "left" | "right";
+  duration?: number;
 }
 
-export default function SkillsTicker({ images, from, to }: SkillsTickerProps) {
+export default function SkillsTicker({
+  images,
+  direction = "left",
+  duration = 12,
+}: SkillsTickerProps) {
   return (
     <div className="overflow-hidden w-full">
-      <motion.div
-        initial={{ x: `${from}` }}
-        animate={{ x: `${to}` }}
-        transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+      <div
         className="flex shrink-0 my-2 mx-2"
-        style={{ willChange: "transform" }}>
+        style={{
+          animation: `${direction === "left" ? "ticker-left" : "ticker-right"} ${duration}s linear infinite`,
+          willChange: "transform",
+          width: "max-content",
+        }}>
+        {/* Duplicate images for seamless loop — animation only moves -50% */}
         {[...images, ...images].map((icon, idx) => (
           <Image
             key={idx}
@@ -34,7 +39,7 @@ export default function SkillsTicker({ images, from, to }: SkillsTickerProps) {
             loading="eager"
           />
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 }

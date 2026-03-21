@@ -1,14 +1,15 @@
 "use client";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { MdiLightPin } from "../icons";
+import { Pin } from "lucide-react";
 import { projects, projectCategories } from "../constants";
 import Link from "next/link";
 import { motion } from "framer-motion";
-
-const SECTION_HEADER_CLASS = "flex items-center gap-2 px-5 pt-5 pb-1";
-const SECTION_TITLE_CLASS =
-  "text-[15px] font-semibold tracking-wide uppercase text-text-muted";
+import {
+  CARD_BASE,
+  SECTION_HEADER_CLASS,
+  SECTION_TITLE_CLASS,
+} from "@/lib/styles";
 
 export default function Projects() {
   const [mounted, setMounted] = useState(false);
@@ -40,12 +41,12 @@ export default function Projects() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="bg-sbackground border border-border rounded-2xl text-text">
+          className={`${CARD_BASE} text-text`}>
           <div className={SECTION_HEADER_CLASS}>
             {mounted && (
-              <MdiLightPin
+              <Pin
                 className="w-5 h-5"
-                fill={isDark ? "#9ca3af" : "#6b7280"}
+                color={isDark ? "#9ca3af" : "#6b7280"}
               />
             )}
             <span className={SECTION_TITLE_CLASS}>Projects</span>
@@ -60,8 +61,8 @@ export default function Projects() {
                   onClick={() => setSelectedCategory(category)}
                   className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 ${
                     selectedCategory === category
-                      ? "bg-[--navtext]"
-                      : "border border-border text-text-muted hover:border-[--navtext] hover:text-[--navtext]"
+                      ? "bg-accent text-white"
+                      : "border border-border text-text-muted hover:border-accent hover:text-accent"
                   }`}>
                   {category}
                 </button>
@@ -83,11 +84,11 @@ export default function Projects() {
                       localStorage.setItem("projectSourcePage", "/projects")
                     }
                     className="block group h-full">
-                    <div className="border border-border rounded-xl p-4 hover:border-[--navtext] transition-all duration-200 h-full overflow-hidden">
+                    <div className="border border-border rounded-xl p-4 hover:border-accent transition-all duration-200 h-full overflow-hidden">
                       {/* Header: title + subtitle badge */}
                       <div className="flex items-start justify-between gap-2 mb-2">
                         <div className="min-w-0 flex-1">
-                          <h3 className="text-sm font-semibold leading-snug group-hover:text-[--navtext] transition-colors duration-200 truncate">
+                          <h3 className="text-sm font-semibold leading-snug group-hover:text-accent transition-colors duration-200 truncate">
                             {project.title}
                           </h3>
                           <p className="text-xs text-text-muted mt-0.5">
@@ -99,22 +100,22 @@ export default function Projects() {
                           {project.subtitle}
                         </span>
                       </div>
-                      {/* Category */}
-                      <span className="text-xs px-2.5 py-1 rounded-lg bg-[--navtext]/10 text-[--navtext] inline-block mb-3">
+                      {/* Category pills */}
+                      <div className="flex flex-wrap gap-1.5 mb-3">
                         {Array.isArray(project.category) ? (
                           project.category.map((cat, index) => (
                             <span
                               key={index}
-                              className="text-xs px-2.5 py-1 rounded-lg bg-[--navtext]/10 text-[--navtext] inline-block">
+                              className="text-xs px-2.5 py-1 rounded-lg bg-accent-muted text-accent">
                               {cat}
                             </span>
                           ))
                         ) : (
-                          <span className="text-xs px-2.5 py-1 rounded-lg bg-[--navtext]/10 text-[--navtext] inline-block">
+                          <span className="text-xs px-2.5 py-1 rounded-lg bg-accent-muted text-accent">
                             {project.category}
                           </span>
                         )}
-                      </span>
+                      </div>
                       {/* Tool tags */}
                       <div className="flex flex-wrap gap-1.5">
                         {project.tools.slice(0, 4).map((tool, i) => (
@@ -141,3 +142,4 @@ export default function Projects() {
     </main>
   );
 }
+

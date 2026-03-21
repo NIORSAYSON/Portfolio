@@ -3,18 +3,20 @@
 import { Plus_Jakarta_Sans } from "next/font/google";
 import Image from "next/image";
 import {
-  BiPersonCheck,
-  CarbonMachineLearning,
-  CodiconGithubAlt,
-  GrommetIconsTechnology,
-  LineiconsFigma,
-  MaterialSymbolsLightMailOutline,
-  MdiLightPin,
-  PhDeviceMobileLight,
-  PhOpenAiLogo,
-  SolarCodeLineDuotone,
-  TablerAutomation,
-} from "../icons";
+  Bot,
+  BrainCircuit,
+  ChevronLeft,
+  ChevronRight,
+  Code2,
+  Cpu,
+  Figma,
+  Github,
+  Mail,
+  Pin,
+  Smartphone,
+  UserCheck,
+  Workflow,
+} from "lucide-react";
 import ProjectCard from "@/components/ProjectCard";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
@@ -30,15 +32,16 @@ import ContributionCalendar from "@/components/GithubContributions";
 import { useTheme } from "next-themes";
 import SocialMedia from "@/components/SocialMedia";
 import Link from "next/link";
+import {
+  CARD_BASE,
+  SECTION_HEADER_CLASS,
+  SECTION_TITLE_CLASS,
+} from "@/lib/styles";
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   weight: ["600", "700"],
 });
-
-const SECTION_HEADER_CLASS = "flex items-center gap-2 px-5 pt-5 pb-1";
-const SECTION_TITLE_CLASS =
-  "text-[15px] font-semibold tracking-wide uppercase text-text-muted";
 
 export default function HomePage() {
   const [day, setDay] = useState("");
@@ -120,7 +123,7 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="bg-sbackground border border-border rounded-2xl overflow-hidden">
+            className={`${CARD_BASE} overflow-hidden`}>
             <div className="relative w-full h-[38vh] min-h-[220px]">
               <Image
                 src="/Home Background.png"
@@ -156,12 +159,12 @@ export default function HomePage() {
                   <div className="flex gap-3 mt-4">
                     <Link
                       href="/projects"
-                      className="text-sm font-medium px-4 py-2 rounded-lg bg-white text-[#0a0a0a] hover:bg-white/90 transition-all duration-200">
+                      className="text-sm font-semibold px-5 py-2 rounded-lg bg-accent text-white hover:bg-accent-hover transition-all duration-200">
                       View Projects
                     </Link>
                     <Link
                       href="/chat"
-                      className="text-sm font-medium px-4 py-2 rounded-lg bg-white/15 text-white border border-white/30 hover:bg-white/25 transition-all duration-200">
+                      className="text-sm font-medium px-5 py-2 rounded-lg bg-transparent text-white border border-white/50 hover:bg-white/10 transition-all duration-200">
                       Chat with Me
                     </Link>
                   </div>
@@ -175,12 +178,12 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="bg-sbackground border border-border rounded-2xl text-text">
+            className={`${CARD_BASE} text-text`}>
             <div className={SECTION_HEADER_CLASS}>
               {mounted && (
-                <MdiLightPin
+                <Pin
                   className="w-5 h-5"
-                  fill={isDark ? "#9ca3af" : "#6b7280"}
+                  color={isDark ? "#9ca3af" : "#6b7280"}
                 />
               )}
               <span className={SECTION_TITLE_CLASS}>Pinned Projects</span>
@@ -189,30 +192,19 @@ export default function HomePage() {
               {canScrollLeft && (
                 <button
                   onClick={() => scrollProjects("left")}
-                  className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-sbackground border border-border rounded-full w-8 h-8 flex items-center justify-center hover:border-[--navtext] transition-all duration-200"
+                  className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-sbackground border border-border rounded-full w-8 h-8 flex items-center justify-center hover:border-accent transition-all duration-200"
                   aria-label="Scroll left">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round">
-                    <polyline points="15 18 9 12 15 6" />
-                  </svg>
+                  <ChevronLeft className="w-4 h-4" />
                 </button>
               )}
               <div
                 ref={projectsScrollRef}
-                className="hide-scrollbar flex h-[320px] w-full items-start justify-start overflow-x-auto">
+                className="hide-scrollbar flex h-[270px] w-full items-start justify-start overflow-x-auto">
                 <div className="flex flex-nowrap gap-4">
                   <ProjectCard
                     title={projects[0].title}
                     subtitle="Personal Project"
-                    image="/Projects/Portfolio.png"
+                    image="/project-cover/Portfolio.png"
                     description={projects[0].description}
                     slug={projects[0].slug}
                     link="https://niorsayson.vercel.app/"
@@ -221,7 +213,7 @@ export default function HomePage() {
                   <ProjectCard
                     title={projects[1].title}
                     subtitle="Internship Project"
-                    image="/Projects/POS.png"
+                    image="/project-cover/POS.png"
                     description={projects[1].description}
                     slug={projects[1].slug}
                     source="/"
@@ -229,7 +221,7 @@ export default function HomePage() {
                   <ProjectCard
                     title={projects[2].title}
                     subtitle="Thesis Project"
-                    image="/Projects/Conversational Agent Project.png"
+                    image="/project-cover/Conversational Agent Project.png"
                     description={projects[2].description}
                     slug={projects[2].slug}
                     link="https://huggingface.co/spaces/Nioooor/CSPC_Conversational_Agent"
@@ -238,7 +230,7 @@ export default function HomePage() {
                   <ProjectCard
                     title={projects[5].title}
                     subtitle="Personal Project"
-                    image="/Projects/FadeFlow Project.png"
+                    image="/project-cover/FadeFlow Project.png"
                     description={projects[5].description}
                     slug={projects[5].slug}
                     link="https://fadeflow.shop"
@@ -247,7 +239,7 @@ export default function HomePage() {
                   <ProjectCard
                     title={projects[6].title}
                     subtitle="Personal Project"
-                    image="/Projects/VibeNode Project.png"
+                    image="/project-cover/VibeNode Project.png"
                     description={projects[6].description}
                     slug={projects[6].slug}
                     link="https://www.vibenode.site"
@@ -256,7 +248,7 @@ export default function HomePage() {
                   <ProjectCard
                     title={projects[3].title}
                     subtitle="Freelance Project"
-                    image="/Projects/AgriMarket Project.png"
+                    image="/project-cover/AgriMarket Project.png"
                     description={projects[3].description}
                     slug={projects[3].slug}
                     source="/"
@@ -266,20 +258,9 @@ export default function HomePage() {
               {canScrollRight && (
                 <button
                   onClick={() => scrollProjects("right")}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-sbackground border border-border rounded-full w-8 h-8 flex items-center justify-center hover:border-[--navtext] transition-all duration-200"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-sbackground border border-border rounded-full w-8 h-8 flex items-center justify-center hover:border-accent transition-all duration-200"
                   aria-label="Scroll right">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round">
-                    <polyline points="9 18 15 12 9 6" />
-                  </svg>
+                  <ChevronRight className="w-4 h-4" />
                 </button>
               )}
             </div>
@@ -290,12 +271,12 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="bg-sbackground border border-border rounded-2xl text-text pb-4">
+            className={`${CARD_BASE} text-text pb-4`}>
             <div className={SECTION_HEADER_CLASS}>
               {mounted && (
-                <CodiconGithubAlt
+                <Github
                   className="w-5 h-5"
-                  fill={isDark ? "#9ca3af" : "#6b7280"}
+                  color={isDark ? "#9ca3af" : "#6b7280"}
                 />
               )}
               <span className={SECTION_TITLE_CLASS}>GitHub Contributions</span>
@@ -313,20 +294,20 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="bg-sbackground border border-border rounded-2xl pb-4">
+            className={`${CARD_BASE} pb-4`}>
             <div className={SECTION_HEADER_CLASS}>
               {mounted && (
-                <GrommetIconsTechnology
+                <Cpu
                   className="w-5 h-5"
-                  fill={isDark ? "#9ca3af" : "#6b7280"}
+                  color={isDark ? "#9ca3af" : "#6b7280"}
                 />
               )}
               <span className={SECTION_TITLE_CLASS}>Tech Stack</span>
             </div>
             <div className="px-5 mt-2">
               <div className="w-full h-[200px] overflow-hidden MyGradient">
-                <SkillsTicker images={skillIcons1} from={0} to={"-100%"} />
-                <SkillsTicker images={skillIcons2} from={"-100%"} to={0} />
+                <SkillsTicker images={skillIcons1} direction="left" duration={30} />
+                <SkillsTicker images={skillIcons2} direction="right" duration={30} />
               </div>
             </div>
           </motion.div>
@@ -336,12 +317,12 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="bg-sbackground border border-border rounded-2xl text-text pb-5">
+            className={`${CARD_BASE} text-text pb-5`}>
             <div className={SECTION_HEADER_CLASS}>
               {mounted && (
-                <BiPersonCheck
+                <UserCheck
                   className="w-5 h-5"
-                  fill={isDark ? "#9ca3af" : "#6b7280"}
+                  color={isDark ? "#9ca3af" : "#6b7280"}
                 />
               )}
               <span className={SECTION_TITLE_CLASS}>Expertise</span>
@@ -353,9 +334,9 @@ export default function HomePage() {
                 setExpanded={setExpanded}
                 accordionTitle="Web Development"
                 icon={
-                  <SolarCodeLineDuotone
+                  <Code2
                     className="w-4 h-4"
-                    fill={isDark ? "#f0f0f0" : "#0a0a0a"}
+                    color={isDark ? "#f0f0f0" : "#0a0a0a"}
                   />
                 }>
                 <p className="text-sm text-text-muted px-1 py-2 leading-relaxed">
@@ -370,9 +351,9 @@ export default function HomePage() {
                 setExpanded={setExpanded}
                 accordionTitle="Machine Learning"
                 icon={
-                  <CarbonMachineLearning
+                  <BrainCircuit
                     className="w-4 h-4"
-                    fill={isDark ? "#f0f0f0" : "#0a0a0a"}
+                    color={isDark ? "#f0f0f0" : "#0a0a0a"}
                   />
                 }>
                 <p className="text-sm text-text-muted px-1 py-2 leading-relaxed">
@@ -387,9 +368,9 @@ export default function HomePage() {
                 setExpanded={setExpanded}
                 accordionTitle="Large Language Models"
                 icon={
-                  <PhOpenAiLogo
+                  <Bot
                     className="w-4 h-4"
-                    fill={isDark ? "#f0f0f0" : "#0a0a0a"}
+                    color={isDark ? "#f0f0f0" : "#0a0a0a"}
                   />
                 }>
                 <p className="text-sm text-text-muted px-1 py-2 leading-relaxed">
@@ -404,9 +385,9 @@ export default function HomePage() {
                 setExpanded={setExpanded}
                 accordionTitle="Mobile Development"
                 icon={
-                  <PhDeviceMobileLight
+                  <Smartphone
                     className="w-4 h-4"
-                    fill={isDark ? "#f0f0f0" : "#0a0a0a"}
+                    color={isDark ? "#f0f0f0" : "#0a0a0a"}
                   />
                 }>
                 <p className="text-sm text-text-muted px-1 py-2 leading-relaxed">
@@ -421,9 +402,9 @@ export default function HomePage() {
                 setExpanded={setExpanded}
                 accordionTitle="AI Automation"
                 icon={
-                  <TablerAutomation
+                  <Workflow
                     className="w-4 h-4"
-                    fill={isDark ? "#f0f0f0" : "#0a0a0a"}
+                    color={isDark ? "#f0f0f0" : "#0a0a0a"}
                   />
                 }>
                 <p className="text-sm text-text-muted px-1 py-2 leading-relaxed">
@@ -438,9 +419,9 @@ export default function HomePage() {
                 setExpanded={setExpanded}
                 accordionTitle="UI/UX Design"
                 icon={
-                  <LineiconsFigma
+                  <Figma
                     className="w-4 h-4"
-                    fill={isDark ? "#f0f0f0" : "#0a0a0a"}
+                    color={isDark ? "#f0f0f0" : "#0a0a0a"}
                   />
                 }>
                 <p className="text-sm text-text-muted px-1 py-2 leading-relaxed">
@@ -456,12 +437,12 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.5 }}
-            className="bg-sbackground border border-border rounded-2xl text-text pb-5">
+            className={`${CARD_BASE} text-text pb-5`}>
             <div className={SECTION_HEADER_CLASS}>
               {mounted && (
-                <MaterialSymbolsLightMailOutline
+                <Mail
                   className="w-5 h-5"
-                  fill={isDark ? "#9ca3af" : "#6b7280"}
+                  color={isDark ? "#9ca3af" : "#6b7280"}
                 />
               )}
               <span className={SECTION_TITLE_CLASS}>Connect</span>
@@ -479,3 +460,4 @@ export default function HomePage() {
     </main>
   );
 }
+

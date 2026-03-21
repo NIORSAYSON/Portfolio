@@ -92,7 +92,7 @@ export default function ExpAndEduc({
             )}
           </AnimatePresence>
           <button
-            className="mt-2 text-xs text-[--navtext] hover:underline font-medium"
+            className="mt-2 text-xs text-accent hover:underline font-medium"
             onClick={() => setShowMore(!showMore)}>
             {showMore ? "Show less" : "Show more"}
           </button>

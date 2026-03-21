@@ -1,6 +1,9 @@
+"use client";
+
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { Tag } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { CARD_BASE } from "@/lib/styles";
 
 interface ProjectProps {
   title: string;
@@ -17,16 +20,10 @@ export default function ProjectCard({
   subtitle,
   description,
   image,
-  link,
   slug,
   source = "/projects",
 }: ProjectProps) {
-  const [mounted, setMounted] = useState(false);
   const router = useRouter();
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const handleViewProject = () => {
     localStorage.setItem("projectSourcePage", source);
@@ -34,48 +31,37 @@ export default function ProjectCard({
   };
 
   return (
-    <div className="flex flex-col min-w-[240px] my-3 text-text rounded-xl border border-border hover:border-[--navtext] transition-all duration-200 group overflow-hidden bg-sbackground">
-      <div className="relative w-[240px] h-32">
+    <div
+      onClick={handleViewProject}
+      className={`${CARD_BASE} overflow-hidden group cursor-pointer min-w-[260px] w-[260px]`}>
+      {/* Full-bleed image with gradient overlay */}
+      <div className="relative w-full aspect-16/10 overflow-hidden">
         <Image
           src={image}
-          alt="Project screenshot"
+          alt={title}
           fill
-          sizes="240px"
-          className="object-cover"
+          sizes="260px"
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
+        {/* Bottom gradient — project type label */}
+        <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-black/70 via-black/30 to-transparent px-3 pt-8 pb-2.5">
+          {subtitle && (
+            <div className="flex items-center gap-1.5 text-white/90 text-[11px]">
+              <Tag className="w-3 h-3 shrink-0" />
+              <span className="font-medium">{subtitle}</span>
+            </div>
+          )}
+        </div>
       </div>
-      <div className="w-[240px] flex flex-col flex-1 p-3">
-        <span className="font-semibold text-sm leading-tight">{title}</span>
-        {subtitle && (
-          <span className="text-xs text-text-muted mt-0.5">{subtitle}</span>
-        )}
-        <p className="text-xs text-text-muted mt-2 line-clamp-2 leading-relaxed flex-1">
+
+      {/* Card body */}
+      <div className="p-3 pt-2.5">
+        <h3 className="font-bold text-sm leading-snug line-clamp-2 group-hover:text-accent transition-colors duration-200">
+          {title}
+        </h3>
+        <p className="text-xs text-text-muted mt-1.5 line-clamp-2 leading-relaxed">
           {description}
         </p>
-        {mounted && (
-          <div className="flex gap-2 mt-3">
-            {link ? (
-              <>
-                <button
-                  className="flex-1 text-xs border border-border py-1.5 px-3 rounded-lg hover:border-[--navtext] hover:text-[--navtext] transition-all duration-200"
-                  onClick={() => window.open(link, "_blank")}>
-                  Live Site
-                </button>
-                <button
-                  className="flex-1 text-xs border border-border py-1.5 px-3 rounded-lg hover:border-[--navtext] hover:text-[--navtext] transition-all duration-200"
-                  onClick={handleViewProject}>
-                  Details
-                </button>
-              </>
-            ) : (
-              <button
-                className="w-full text-xs border border-border py-1.5 px-3 rounded-lg hover:border-[--navtext] hover:text-[--navtext] transition-all duration-200"
-                onClick={handleViewProject}>
-                View Project
-              </button>
-            )}
-          </div>
-        )}
       </div>
     </div>
   );
