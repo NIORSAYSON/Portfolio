@@ -59,18 +59,29 @@ export default function AboutClient({ experiences, education }: Props) {
             className={`${CARD_BASE} overflow-hidden text-text`}>
             {/* Banner */}
             <div className="relative h-36 w-full">
+              {/* Light cover — base layer */}
               <Image
-                src="/Home Background.png"
-                alt="Banner"
+                src="/About Light Cover.png"
+                alt="Banner Light"
                 fill
                 className="object-cover"
                 priority
               />
+              {/* Dark cover — crossfades in over light cover in dark mode */}
+              <Image
+                src="/About Dark Cover.png"
+                alt="Banner Dark"
+                fill
+                className="object-cover transition-opacity duration-700 ease-in-out"
+                style={{ opacity: isDark ? 1 : 0 }}
+                priority
+              />
               <div
-                className="absolute inset-0"
+                className="absolute inset-0 transition-all duration-700 ease-in-out"
                 style={{
-                  background:
-                    "linear-gradient(to bottom, rgba(0,0,0,0) 40%, rgba(0,0,0,0.4) 100%)",
+                  background: isDark
+                    ? "linear-gradient(to bottom, rgba(0,0,0,0) 40%, rgba(0,0,0,0.35) 100%)"
+                    : "linear-gradient(to bottom, rgba(0,0,0,0) 40%, rgba(0,0,0,0.25) 100%)",
                 }}
               />
             </div>

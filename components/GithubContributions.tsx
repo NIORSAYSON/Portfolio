@@ -22,10 +22,10 @@ export default function ContributionCalendar() {
         {years.map((yr) => (
           <button
             key={yr}
-            className={`text-xs px-3 py-1.5 rounded-lg font-medium transition-all duration-200 ${
+            className={`text-xs px-3 py-1.5 rounded-lg font-medium transition-all duration-200 border border-transparent ${
               year === yr
-                ? "bg-[--navtext] text-white"
-                : "text-text-muted hover:text-text border border-transparent hover:border-border"
+                ? "bg-accent text-white"
+                : "text-text-muted hover:text-text hover:border-accent"
             }`}
             onClick={() => setYear(yr)}>
             {yr}

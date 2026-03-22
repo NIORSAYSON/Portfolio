@@ -125,19 +125,31 @@ export default function HomeClient({ featuredProjects }: Props) {
             transition={{ duration: 0.5 }}
             className={`${CARD_BASE} overflow-hidden`}>
             <div className="relative w-full h-[38vh] min-h-[220px]">
+              {/* Light cover — base layer */}
               <Image
-                src="/Home Background.png"
-                alt="Home Background"
+                src="/Home Light Cover.png"
+                alt="Home Background Light"
                 fill
                 sizes="(max-width: 768px) 100vw, 66vw"
                 priority
                 className="object-cover"
               />
+              {/* Dark cover — crossfades in over light cover in dark mode */}
+              <Image
+                src="/Home Dark Cover.png"
+                alt="Home Background Dark"
+                fill
+                sizes="(max-width: 768px) 100vw, 66vw"
+                priority
+                className="object-cover transition-opacity duration-700 ease-in-out"
+                style={{ opacity: isDark ? 1 : 0 }}
+              />
               <div
-                className="absolute inset-0"
+                className="absolute inset-0 transition-all duration-700 ease-in-out"
                 style={{
-                  background:
-                    "linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.65) 100%)",
+                  background: isDark
+                    ? "linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.55) 100%)"
+                    : "linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.72) 100%)",
                 }}>
                 <div className="absolute top-4 left-5 text-white/70 text-xs font-medium">
                   {day && date ? (
@@ -187,7 +199,7 @@ export default function HomeClient({ featuredProjects }: Props) {
               )}
               <span className={SECTION_TITLE_CLASS}>Pinned Projects</span>
             </div>
-            <div className="px-5 relative pb-4">
+            <div className="px-5 relative pb-4 mt-3">
               {canScrollLeft && (
                 <button
                   onClick={() => scrollProjects("left")}

@@ -218,7 +218,7 @@ export default function ProjectOverview({
               {total > 1 && (
                 <div
                   ref={thumbsRef}
-                  className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
+                  className="flex gap-2 overflow-x-auto pb-1 hide-scrollbar">
                   {projectImages.map((src, i) => (
                     <button
                       key={i}

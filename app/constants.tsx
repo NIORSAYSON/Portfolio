@@ -570,19 +570,21 @@ export const skillCategories = [
 ];
 
 export const colorTheme = {
+  // Used in dark mode (dark background → cyan ramp peaking at #22d3ee)
   light: [
-    "#ebedf0", // level0
-    "#9be9a8", // level1
-    "#40c463", // level2
-    "#30a14e", // level3
-    "#216e39", // level4
+    "#0a1929", // level0 — empty
+    "#0c4a6e", // level1 — faint
+    "#0891b2", // level2 — cyan-600
+    "#06b6d4", // level3 — cyan-500
+    "#22d3ee", // level4 — accent (dark mode)
   ],
+  // Used in light mode (light background → sky-blue ramp peaking at #0ea5e9)
   dark: [
-    "#161b22", // level0
-    "#0e4429", // level1
-    "#006d32", // level2
-    "#26a641", // level3
-    "#39d353", // level4
+    "#e0f2fe", // level0 — empty
+    "#7dd3fc", // level1 — sky-300
+    "#38bdf8", // level2 — sky-400
+    "#0ea5e9", // level3 — accent (light mode)
+    "#0369a1", // level4 — sky-700
   ],
 };
 

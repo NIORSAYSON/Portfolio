@@ -88,7 +88,7 @@ function FloatingInput({
         onChange={onChange}
         required={required}
         placeholder=" "
-        className="peer block w-full border border-border bg-background rounded-xl px-4 pt-5 pb-2 text-sm text-text placeholder-transparent focus:outline-none focus:border-accent transition-all duration-200"
+        className="peer block w-full border border-border bg-background rounded-xl px-4 pt-5 pb-2 text-sm text-text placeholder-transparent focus:outline-none focus:border-none transition-all duration-200"
       />
       <label
         htmlFor={id}
@@ -130,7 +130,7 @@ function FloatingTextarea({
         required={required}
         placeholder=" "
         rows={rows}
-        className="peer block w-full border border-border bg-background rounded-xl px-4 pt-5 pb-2 text-sm text-text placeholder-transparent resize-none focus:outline-none focus:border-accent transition-all duration-200"
+        className="peer block w-full border border-border bg-background rounded-xl px-4 pt-5 pb-2 text-sm text-text placeholder-transparent resize-none focus:outline-none focus:border-none transition-all duration-200"
       />
       <label
         htmlFor={id}
