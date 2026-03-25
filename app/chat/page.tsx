@@ -123,7 +123,6 @@ export default function ChatPage() {
         transition={{ duration: 0.5 }}
         ref={messagesContainerRef}
         className="flex-1 px-5 md:px-10 pt-6 pb-48 md:pb-40">
-
         {/* Empty state — centered welcome */}
         <AnimatePresence>
           {isEmptyState && mounted && (
@@ -237,7 +236,7 @@ export default function ChatPage() {
               onKeyPress={handleKeyPress}
               placeholder="Ask me anything..."
               disabled={isLoading}
-              className="flex-1 px-4 py-2.5 rounded-xl border border-border bg-background text-sm text-text placeholder:text-text-muted focus:outline-none focus:border-accent transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex-1 px-4 py-2.5 rounded-xl border border-border bg-background text-sm text-text placeholder:text-text-muted focus:outline-none focus:border-none transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             />
             <button
               onClick={() => handleSendMessage()}
