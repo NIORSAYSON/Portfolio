@@ -22,7 +22,7 @@ type Props = {
 export default function AboutClient({ experiences, education }: Props) {
   const allItems = useMemo(
     () => [...experiences, ...education],
-    [experiences, education]
+    [experiences, education],
   );
 
   const [showMore, setShowMore] = useState<Record<string, boolean>>(() => {
@@ -108,7 +108,7 @@ export default function AboutClient({ experiences, education }: Props) {
                 </div>
                 {mounted && (
                   <a
-                    href="/Nestor B. Sayson Jr - Resume 2025.pdf"
+                    href="/SAYSON RESUME 2026 - Software Engineer.pdf"
                     download
                     className="shrink-0 inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg border border-accent/50 text-accent hover:bg-accent hover:text-white transition-all duration-200">
                     <Download className="w-3.5 h-3.5" />

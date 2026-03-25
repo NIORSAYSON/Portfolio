@@ -37,7 +37,7 @@ export default function Resume() {
           </div>
           {mounted && (
             <a
-              href="/Nestor B. Sayson Jr - Resume 2025.pdf"
+              href="/SAYSON RESUME 2026 - Software Engineer.pdf"
               download
               className="flex items-center gap-1.5 text-xs font-medium px-4 py-1.5 rounded-lg border border-border hover:border-accent hover:text-accent transition-all duration-200">
               <Download
@@ -48,9 +48,11 @@ export default function Resume() {
             </a>
           )}
         </div>
-        <div className="m-5 rounded-xl overflow-hidden border border-border" style={{ height: "calc(100vh - 140px)", minHeight: "500px" }}>
+        <div
+          className="m-5 rounded-xl overflow-hidden border border-border"
+          style={{ height: "calc(100vh - 140px)", minHeight: "500px" }}>
           <iframe
-            src="/Nestor B. Sayson Jr - Resume 2025.pdf#toolbar=0&navpanes=0&scrollbar=0"
+            src="/SAYSON RESUME 2026 - Software Engineer.pdf#toolbar=0&navpanes=0&scrollbar=0"
             className="w-full h-full"
             allow="autoplay; fullscreen"
           />
@@ -59,4 +61,3 @@ export default function Resume() {
     </main>
   );
 }
-
