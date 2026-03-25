@@ -154,7 +154,7 @@ export default function Contact() {
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
 
   const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
     setValues((prev) => ({ ...prev, [name]: value }));
@@ -337,11 +337,8 @@ export default function Contact() {
                     Current Status
                   </p>
                   <h3 className="text-base font-bold text-text">
-                    Working & Available
+                    Open to Opportunities
                   </h3>
-                  <p className="text-xs text-text-muted mt-0.5 leading-relaxed">
-                    Employed full-time · open to freelance on the side
-                  </p>
                 </div>
                 {/* Live indicator */}
                 <div className="shrink-0 flex flex-col items-center gap-1 mt-0.5">
@@ -373,10 +370,10 @@ export default function Contact() {
                 {
                   Icon: Handshake,
                   label: "Full-time",
-                  note: "Currently employed",
-                  color: "text-yellow-500",
-                  bg: "bg-yellow-500/10 border-yellow-500/20",
-                  iconColor: "#eab308",
+                  note: "Open to opportunities",
+                  color: "text-green-500",
+                  bg: "bg-green-500/10 border-green-500/20",
+                  iconColor: "#22c55e",
                 },
                 {
                   Icon: Clock,
@@ -564,4 +561,3 @@ export default function Contact() {
     </main>
   );
 }
-
