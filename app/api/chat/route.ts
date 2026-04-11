@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
     if (!message) {
       return NextResponse.json(
         { error: "Message is required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
     // Initialize Supabase client (per-request to avoid build-time errors)
     const supabase = createClient(
       process.env.SUPABASE_URL!,
-      process.env.SUPABASE_SERVICE_KEY!
+      process.env.SUPABASE_SERVICE_KEY!,
     );
 
     // Initialize HF client and embedding helper (per-request)
@@ -78,7 +78,7 @@ export async function POST(request: NextRequest) {
         .slice(-2)
         .map(
           (m: { role: string; content: string }) =>
-            `${m.role === "user" ? "Q" : "A"}: ${m.content}`
+            `${m.role === "user" ? "Q" : "A"}: ${m.content}`,
         )
         .join("\n");
 
@@ -98,7 +98,7 @@ export async function POST(request: NextRequest) {
         query_embedding: queryEmbedding,
         match_threshold: 0.3, // Lowered threshold for better recall
         match_count: 5, // Number of relevant documents to retrieve
-      }
+      },
     );
 
     if (searchError) {
@@ -118,13 +118,13 @@ export async function POST(request: NextRequest) {
       relevantDocs.forEach((doc: RelevantDoc, idx: number) => {
         console.log(
           `  [${idx + 1}] Similarity: ${doc.similarity?.toFixed(
-            3
-          )} - ${doc.content.substring(0, 80)}...`
+            3,
+          )} - ${doc.content.substring(0, 80)}...`,
         );
       });
     } else {
       console.warn(
-        "⚠️ No relevant documents found! Check your embeddings and threshold."
+        "⚠️ No relevant documents found! Check your embeddings and threshold.",
       );
     }
 
@@ -143,7 +143,7 @@ export async function POST(request: NextRequest) {
             .slice(-5) // Only use last 5 messages for context
             .map(
               (m: { role: string; content: string }) =>
-                `${m.role === "user" ? "Human" : "Assistant"}: ${m.content}`
+                `${m.role === "user" ? "Human" : "Assistant"}: ${m.content}`,
             )
             .join("\n")
         : "";
@@ -178,7 +178,7 @@ Your response (plain text, first-person as Nestor):`,
     // Initialize the Groq chat model per-request
     const model = new ChatGroq({
       apiKey: process.env.GROQ_API_KEY!,
-      model: "openai/gpt-oss-20b", // Using gpt-oss-20b for better understanding
+      model: "llama-3.1-8b-instant", // Using gpt-oss-20b for better understanding
       temperature: 0.7,
       maxTokens: 1024,
     });
@@ -229,12 +229,12 @@ Your response (plain text, first-person as Nestor):`,
     console.error("Error type:", error?.constructor?.name);
     console.error(
       "Error message:",
-      error instanceof Error ? error.message : String(error)
+      error instanceof Error ? error.message : String(error),
     );
     console.error("Full error:", error);
     console.error(
       "Stack trace:",
-      error instanceof Error ? error.stack : "No stack"
+      error instanceof Error ? error.stack : "No stack",
     );
 
     return NextResponse.json(
@@ -245,7 +245,7 @@ Your response (plain text, first-person as Nestor):`,
           (error as { constructor?: { name?: string } })?.constructor?.name ||
           "Unknown",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
