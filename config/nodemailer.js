@@ -1,7 +1,11 @@
 import nodemailer from "nodemailer";
 
-const EMAIL = "nessayson@gmail.com";
-const PASS = "ffxvteezgrwnjryj";
+const EMAIL = process.env.SMTP_EMAIL;
+const PASS = process.env.SMTP_PASS;
+
+if (!EMAIL || !PASS) {
+  throw new Error("Missing SMTP_EMAIL or SMTP_PASS environment variables.");
+}
 
 export const transporter = nodemailer.createTransport({
   service: "Gmail",

@@ -8,10 +8,19 @@ interface ContactFormData {
   message: string;
 }
 
+function escapeHtml(value: string) {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/\"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 function dataToHTML(data: ContactFormData) {
   return Object.entries(data).reduce(
-    (html, [k, v]) => html + `<h3>${k}:</h3><p>${v}</p>`,
-    ""
+    (html, [k, v]) => html + `<h3>${escapeHtml(k)}:</h3><p>${escapeHtml(v)}</p>`,
+    "",
   );
 }
 
@@ -20,6 +29,7 @@ export async function POST(request: Request) {
   try {
     await transporter.sendMail({
       ...mailOptions,
+      replyTo: data.email,
       subject: "New contact form submission",
       html: `<div>${dataToHTML(data)}</div>`,
     });
